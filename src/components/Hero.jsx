@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <>
-      <section className="framer-a6uc3n" data-framer-name="Hero">
+      <section className="framer-a6uc3n" data-framer-name="Hero" id="hero">
           <div className="framer-td16qa-container">{/*$*/}<video className="hero-zoom-bg" src="https://framerusercontent.com/assets/6ajeFdRxSwDqS6CW5SSbVh5jhP8.mp4" loop preload="none" poster="https://images.unsplash.com/photo-1683858222142-e5596d680fe3?w=2400&h=1350&fit=crop&q=90&auto=format" muted playsInline style={{ cursor: "auto", width: "100%", height: "100%", borderRadius: "0px", display: "block", objectFit: "cover", backgroundColor: "rgba(0, 0, 0, 0)", objectPosition: "50% 50%" }}></video>{/*/$*/}
           </div>
           <div className="framer-1kzlz1n" data-framer-name="Cover">

@@ -10,7 +10,8 @@ export default function Footer() {
               <div className="framer-mv6lt7" data-framer-name="Main">
                 <div className="framer-1gao15k" data-framer-name="Widget">
                   <div className="framer-mj5kqx-container">{/*$*/}<a as="a" className="framer-A06nM framer-vbre68 framer-v-lrmw9y framer-amvpbf" data-framer-name="White" data-highlight="true" href="./" data-framer-page-link-current="true" tabIndex="0" style={{ height: "100%", width: "100%" }}>
-                      <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" loading="lazy" width="110" height="25" src="https://framerusercontent.com/images/Eqnfhqs2fX7jnfW6JEKYSqdcGQ.svg?width=110&height=25" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
+                      <div style={{ display: "flex", alignItems: "center", height: "100%", padding: "4px 0" }}>
+                        <img src="/mrida-logo.svg" alt="Mrida" style={{ height: "28px", width: "auto", display: "block" }} />
                       </div>
                     </a>{/*/$*/}</div>
                   <div className="framer-zvizy6" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>

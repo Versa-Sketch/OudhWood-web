@@ -4381,8 +4381,9 @@
       height: 340px;
       overflow: var(--overflow-clip-fallback, clip);
       flex-flow: column;
-      place-content: flex-start space-between;
+      place-content: flex-start;
       align-items: flex-start;
+      gap: 16px;
       width: 300px;
       padding: 20px;
       display: flex;
@@ -4391,8 +4392,8 @@
 
     .framer-1SQPW .framer-1en37l2-container {
       flex: none;
-      width: 32px;
-      height: 32px;
+      width: 100%;
+      height: 150px;
       position: relative
     }
 
@@ -6567,4 +6568,287 @@ nav.framer-7EmCy.is-scrolled .framer-A06nM {
 .reveal-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+nav.framer-7EmCy {
+  transition: background-color 0.4s ease;
+}
+
+nav.framer-7EmCy .framer-text {
+  transition: color 0.3s ease;
+}
+
+nav.framer-7EmCy .framer-A06nM {
+  transition: filter 0.4s ease;
+}
+
+nav.framer-7EmCy [data-framer-name="Line"] {
+  transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.2s ease;
+}
+
+.process-section {
+  padding: 100px 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.process-inner {
+  display: flex;
+  align-items: stretch;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.process-image {
+  position: relative;
+  flex: 1 1 45%;
+  min-height: 520px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: rgb(112, 112, 112);
+}
+
+.process-content {
+  flex: 1 1 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.process-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.process-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.process-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgb(112, 112, 112);
+  display: inline-block;
+}
+
+.process-badge-text {
+  font-size: 14px;
+  color: rgb(112, 112, 112);
+  margin: 0;
+}
+
+.process-heading {
+  font-size: 32px;
+  line-height: 1.2;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  font-weight: 500;
+}
+
+.process-subhead {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgb(112, 112, 112);
+  margin: 0;
+  max-width: 480px;
+}
+
+.process-body {
+  display: flex;
+  gap: 32px;
+}
+
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 0 0 180px;
+}
+
+.process-step {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  border-left: 2px solid rgba(0,0,0,0.08);
+  padding-left: 16px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+.process-step-number {
+  font-size: 13px;
+  color: rgb(112, 112, 112);
+  transition: color 0.3s ease;
+}
+
+.process-step-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(112, 112, 112);
+  transition: color 0.3s ease;
+}
+
+.process-step-active {
+  border-left-color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+}
+
+.process-step-active .process-step-number,
+.process-step-active .process-step-title {
+  color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+}
+
+.process-details {
+  flex: 1;
+  background-color: rgb(255, 255, 255);
+  border-radius: 12px;
+  padding: 28px;
+  min-height: 220px;
+}
+
+.process-details-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  margin: 0 0 12px;
+}
+
+.process-details-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgb(112, 112, 112);
+  margin: 0 0 16px;
+}
+
+.process-details-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+}
+
+@media (max-width: 1199px) {
+  .process-inner {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .process-image {
+    min-height: 360px;
+  }
+  .process-body {
+    flex-direction: column;
+  }
+  .process-list {
+    flex: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+  }
+  .process-step {
+    border-left: none;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+    padding-left: 0;
+    padding-bottom: 8px;
+  }
+  .process-step-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+  }
+}
+
+@media (max-width: 809px) {
+  .process-section {
+    padding: 60px 15px;
+  }
+  .process-inner {
+    gap: 30px;
+  }
+  .process-image {
+    min-height: 260px;
+  }
+  .process-heading {
+    font-size: 26px;
+  }
+}
+
+/* ─── Global responsive fixes ────────────────────────────────────────────── */
+
+/* Prevent any section from overflowing viewport horizontally */
+body, #main {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── Tablet (810–1199px) ─────────────────────────────────── */
+@media (max-width: 1199px) {
+  /* Hide the Risk & Mitigation left-col image; it stacks awkwardly above the table */
+  .risk-left-col {
+    display: none !important;
+  }
+
+  /* About section: full-width image is 513px tall by Framer CSS — reduce it */
+  .framer-2mr35 .framer-spesao-container {
+    height: var(--framer-aspect-ratio-supported, 340px) !important;
+  }
+
+  /* Prevent any Framer section from exceeding viewport width */
+  .framer-2mr35 > * {
+    max-width: 100%;
+  }
+
+  /* Testimonial / Blog panoramic images – cap height */
+  .framer-2mr35 .framer-15lychy {
+    height: var(--framer-aspect-ratio-supported, 180px) !important;
+  }
+}
+
+/* ── Mobile (<810px) ─────────────────────────────────────── */
+@media (max-width: 809px) {
+  /* Keep left col hidden on mobile too */
+  .risk-left-col {
+    display: none !important;
+  }
+
+  /* About image – keep Framer's 240px value, just ensure it doesn't stretch */
+  .framer-2mr35 .framer-spesao-container {
+    height: var(--framer-aspect-ratio-supported, 220px) !important;
+    max-height: 220px;
+  }
+
+  /* Blog/panoramic image strip — tighter on mobile */
+  .framer-2mr35 .framer-15lychy {
+    height: var(--framer-aspect-ratio-supported, 120px) !important;
+  }
+
+  /* Why-section card images (framer-1en37l2-container is 150px fixed) */
+  .framer-1SQPW .framer-1en37l2-container {
+    height: 120px !important;
+  }
+
+  /* Process section image – already handled but tighten further */
+  .process-image {
+    min-height: 220px !important;
+    max-height: 280px;
+  }
+
+  /* Achievement table – allow full width and reduce font sizes for readability */
+  .framer-2mr35 .framer-1c1iqr {
+    width: 100% !important;
+  }
+
+  /* General images: never overflow their container */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }

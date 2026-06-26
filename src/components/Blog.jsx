@@ -1,7 +1,7 @@
 export default function Blog() {
   return (
     <>
-      <section className="framer-lvjz7k" data-framer-name="Blog">
+      <section className="framer-lvjz7k" data-framer-name="Blog" id="blog">
           <div className="framer-2h4ozc" data-framer-name="Inner">
             <div className="framer-6s1p7b" data-framer-name="Title Section">
               <div className="framer-1ds6z00" data-framer-name="Title">

@@ -1,7 +1,7 @@
 export default function Why() {
   return (
     <>
-      <section className="framer-14zwjep" data-framer-name="Why">
+      <section className="framer-14zwjep" data-framer-name="Why" id="how-it-works">
           <div className="framer-1x9il50" data-framer-name="Inner">
             <div className="framer-1202p8z" data-framer-name="Title Section">
               <div className="framer-odak6a" data-framer-name="Title">
@@ -42,9 +42,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-11sy77l-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1641188376773-5176cea27a91?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Guaranteed Upfront Payment`}</h6>
@@ -59,9 +57,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-1s4h4x3-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1773691158392-3d6471c18b60?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Zero Inoculation Cost`}</h6>
@@ -76,9 +72,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-bso1pv-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1779884965394-18a5b0ae7c94?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Land Stays With the Farmer`}</h6>
@@ -93,9 +87,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-1ylpder-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1667690237214-54876dc61e39?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`End-to-End Management`}</h6>
@@ -110,9 +102,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-bwzyz1-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1629782184466-0f1261e73e32?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Full Traceability`}</h6>
@@ -127,9 +117,7 @@ export default function Why() {
               <div className="ssr-variant">
                 <div className="framer-12bdahz-container">
                   <div className="framer-1SQPW framer-1EFv6 framer-6c3n9 framer-m1edwg framer-v-m1edwg" data-framer-name="Default" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", height: "100%", width: "100%" }}>
-                    <div className="framer-1en37l2-container">{/*$*/}
-                      <div style={{ display: "contents" }}></div>{/*/$*/}
-                    </div>
+                    <div className="framer-1en37l2-container"><img src="https://images.unsplash.com/photo-1623052553601-ca8c5a3986e4?w=300&h=160&fit=crop&q=80&auto=format" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px', display: 'block' }} /></div>
                     <div className="framer-1urdtrf" data-framer-name="Details">
                       <div className="framer-1ie9v9o" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
                         <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Signed Agreements, No Surprises`}</h6>

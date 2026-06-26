@@ -16,7 +16,7 @@ function App() {
     <div id="main" data-framer-generated-page="">
       <div className="framer-6es6o framer-1rjwmcz" data-layout-template="true" style={{ minHeight: '100vh', width: 'auto' }}>
         <Header />
-        <div data-framer-root="" className="framer-2mr35 framer-4gyze framer-eHfZ5 framer-JHdCe framer-IhwIG framer-Ui72Q framer-S0UiV framer-6c3n9 framer-72rtr7" style={{ minHeight: '100vh', width: 'auto', display: 'contents' }}>
+        <div data-framer-root="" className="framer-2mr35 framer-4gyze framer-eHfZ5 framer-JHdCe framer-IhwIG framer-Ui72Q framer-S0UiV framer-6c3n9 framer-ojchan framer-72rtr7" style={{ minHeight: '100vh', width: 'auto', display: 'contents' }}>
           <Hero />
           <Reveal><About /></Reveal>
           <Reveal><Projects /></Reveal>
