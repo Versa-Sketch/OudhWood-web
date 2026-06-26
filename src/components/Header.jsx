@@ -150,8 +150,8 @@ export default function Header() {
           </nav>
         </div>
         <div className="ssr-variant hidden-1rjwmcz hidden-prcei2">
-          <nav className={`framer-7EmCy framer-1jaxqze framer-v-ctad5o${(scrolled || menuOpen) ? ' is-scrolled' : ''}`} data-framer-name="Phone" style={{ backgroundColor: "var(--token-0f3396d4-4e3f-4d82-8363-11033d788736, rgba(255, 255, 255, 0))", width: "100%", position: 'relative' }}>
-            <div className="framer-1c5gqa0" data-framer-name="Inner">
+          <nav className={`framer-7EmCy framer-1jaxqze framer-v-ctad5o${(scrolled || menuOpen) ? ' is-scrolled' : ''}`} data-framer-name="Phone" style={{ backgroundColor: "var(--token-0f3396d4-4e3f-4d82-8363-11033d788736, rgba(255, 255, 255, 0))", width: "100%", position: 'relative', overflow: 'visible' }}>
+            <div className="framer-1c5gqa0" data-framer-name="Inner" style={{ overflow: 'visible' }}>
               <div className="framer-98nr7" data-framer-name="Logo + Hamburger">
                 <div className="framer-90wi9e-container">{/*$*/}<a as="a" className="framer-A06nM framer-vbre68 framer-v-lrmw9y framer-amvpbf" data-framer-name="White" data-highlight="true" href="./" data-framer-page-link-current="true" tabIndex="0" style={{ height: "100%", width: "100%" }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%' }}>
