@@ -54,7 +54,7 @@ export default function Header() {
               <div className="framer-98nr7" data-framer-name="Logo + Hamburger">
                 <div className="framer-90wi9e-container">{/*$*/}<a as="a" className="framer-A06nM framer-vbre68 framer-v-lrmw9y framer-amvpbf" data-framer-name="White" data-highlight="true" href="./" data-framer-page-link-current="true" tabIndex="0" style={{ height: "100%", width: "100%" }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%' }}>
-                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '28px', width: 'auto', display: 'block' }} />
+                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '36px', width: 'auto', display: 'block' }} />
                     </div>
                   </a>{/*/$*/}</div>
               </div>
@@ -155,7 +155,7 @@ export default function Header() {
               <div className="framer-98nr7" data-framer-name="Logo + Hamburger">
                 <div className="framer-90wi9e-container">{/*$*/}<a as="a" className="framer-A06nM framer-vbre68 framer-v-lrmw9y framer-amvpbf" data-framer-name="White" data-highlight="true" href="./" data-framer-page-link-current="true" tabIndex="0" style={{ height: "100%", width: "100%" }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%' }}>
-                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '28px', width: 'auto', display: 'block' }} />
+                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '36px', width: 'auto', display: 'block' }} />
                     </div>
                   </a>{/*/$*/}</div>
                 <div className="framer-151h0jq-container">
@@ -250,7 +250,7 @@ export default function Header() {
               <div className="framer-98nr7" data-framer-name="Logo + Hamburger">
                 <div className="framer-90wi9e-container">{/*$*/}<a as="a" className="framer-A06nM framer-vbre68 framer-v-lrmw9y framer-amvpbf" data-framer-name="White" data-highlight="true" href="./" data-framer-page-link-current="true" tabIndex="0" style={{ height: "100%", width: "100%" }}>
                     <div style={{ display: 'flex', alignItems: 'center', height: '100%', width: '100%' }}>
-                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '28px', width: 'auto', display: 'block' }} />
+                      <img src="/mrida-logo.svg" alt="Mrida" style={{ height: '36px', width: 'auto', display: 'block' }} />
                     </div>
                   </a>{/*/$*/}</div>
               </div>

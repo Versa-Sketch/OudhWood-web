@@ -6830,9 +6830,77 @@ body, #main {
     height: var(--framer-aspect-ratio-supported, 120px) !important;
   }
 
-  /* Why-section card images (framer-1en37l2-container is 150px fixed) */
+  /* ── Why-section cards: full mobile redesign ──────────────── */
+
+  /* 1. List container: auto-height, 1-column stack, comfortable gap */
+  .framer-2mr35 .framer-1o5wyzq {
+    height: auto !important;
+    gap: 20px !important;
+    padding: 0 16px !important;
+  }
+
+  /* 2. Every grid-item wrapper: auto-height */
+  .framer-2mr35 .framer-11sy77l-container,
+  .framer-2mr35 .framer-1s4h4x3-container,
+  .framer-2mr35 .framer-bso1pv-container,
+  .framer-2mr35 .framer-1ylpder-container,
+  .framer-2mr35 .framer-bwzyz1-container,
+  .framer-2mr35 .framer-12bdahz-container,
+  .framer-2mr35 .framer-16fc9fr-container {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* 3. Card root: remove fixed height & clip so content expands freely */
+  .framer-1SQPW.framer-m1edwg {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    width: 100% !important;
+    padding: 0 0 20px 0 !important;
+    gap: 0 !important;
+  }
+
+  /* 4. Image container: 16:9 aspect-ratio, no fixed height */
   .framer-1SQPW .framer-1en37l2-container {
-    height: 120px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    width: 100% !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    margin-bottom: 20px !important;
+  }
+
+  .framer-1SQPW .framer-1en37l2-container img {
+    position: static !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  /* 5. Text section: comfortable padding & spacing */
+  .framer-1SQPW .framer-1urdtrf {
+    overflow: visible !important;
+    gap: 12px !important;
+    padding: 0 20px !important;
+    align-items: flex-start !important;
+  }
+
+  /* 6. Title & description: never clip, wrap naturally */
+  .framer-1SQPW .framer-1ie9v9o,
+  .framer-1SQPW .framer-jn6ocw {
+    height: auto !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  /* 7. The decorative tall forest image: give it a reasonable height */
+  .framer-2mr35 .framer-16fc9fr-container {
+    height: 200px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
   }
 
   /* Process section image – already handled but tighten further */
