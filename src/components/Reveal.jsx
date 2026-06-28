@@ -47,6 +47,15 @@ export default function Reveal({ children }) {
             item.style.transition = `opacity ${DURATION_MS}ms ${EASING} ${itemDelay}ms, transform ${DURATION_MS}ms ${EASING} ${itemDelay}ms`;
             item.style.opacity = '1';
             item.style.transform = 'translateY(0) scale(1)';
+            // A lingering non-"none" transform on this element — even one
+            // that's visually a no-op — creates a new containing block for
+            // any `position: sticky`/`fixed` descendant, silently breaking
+            // sticky elements nested inside this section. Clear it once the
+            // animation finishes so descendants stick to the real viewport.
+            setTimeout(() => {
+              item.style.transform = '';
+              item.style.willChange = '';
+            }, DURATION_MS + itemDelay + 50);
           });
         }, delay);
 
@@ -65,6 +74,10 @@ export default function Reveal({ children }) {
         item.style.transition = `opacity ${DURATION_MS}ms ${EASING}, transform ${DURATION_MS}ms ${EASING}`;
         item.style.opacity = '1';
         item.style.transform = 'translateY(0) scale(1)';
+        setTimeout(() => {
+          item.style.transform = '';
+          item.style.willChange = '';
+        }, DURATION_MS + 50);
       });
       observer.unobserve(el);
     }, 4000);

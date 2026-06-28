@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Blog() {
   return (
     <>
@@ -43,7 +45,7 @@ export default function Blog() {
             </div>
             <div className="framer-16uz0ql">{/*$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1u91fe5-container">{/*$*/}<a className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" href="./blog/creating-timeless-interiors-for-modern-lifestyles" style={{ width: "100%" }}>
+                <div className="framer-1u91fe5-container">{/*$*/}<Link className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" to="/blog/what-is-agarwood-inoculation" style={{ width: "100%" }}>
                     <div className="framer-94agml" data-framer-name="Post Image">
                       <div className="framer-1i9dfgp" data-framer-name="Image">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="5472" height="3648" sizes="(min-width: 1200px) calc(max((min(max(100vw - 60px, 1px), 1440px) - 40px) / 3, 50px) * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1742544686146-413ae28f0e05?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1742544686146-413ae28f0e05?w=1024&h=683&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1742544686146-413ae28f0e05?w=2048&h=1365&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1742544686146-413ae28f0e05?w=4096&h=2731&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1742544686146-413ae28f0e05?w=5472&h=3648&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -64,17 +66,17 @@ export default function Blog() {
                       </div>
                       <div className="framer-1b6s916" data-framer-name="Post Title">
                         <div className="framer-d745ob" data-framer-component-type="RichTextContainer" style={{ "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto">{`What Is Agarwood Inoculation? And Why Does It Matter for Your Trees`}</h6>
+                          <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto">{`What Is Agarwood Inoculation — And Why Does It Matter for Your Trees?`}</h6>
                         </div>
                         <div className="framer-12k0ycr" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Honest, practical insight — for farmers and investors who want to understand what their trees are worth and how professional inoculation transforms a standard mature tree into a high-value commodity.`}</p>
+                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Agarwood inoculation is what turns a mature tree into a high-value, resin-bearing asset. Learn how it works, why it matters, and how Mrida covers every cost for you.`}</p>
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1u91fe5-container">{/*$*/}<a className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" href="./blog/designing-sustainable-spaces-for-future-living" style={{ width: "100%" }}>
+                <div className="framer-1u91fe5-container">{/*$*/}<Link className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" to="/blog/why-the-global-agarwood-market-is-growing" style={{ width: "100%" }}>
                     <div className="framer-94agml" data-framer-name="Post Image">
                       <div className="framer-1i9dfgp" data-framer-name="Image">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="7360" height="4912" sizes="(min-width: 1200px) max(calc(min(max(100vw - 60px, 1px), 1440px) * 0.55), calc(max((min(max(100vw - 60px, 1px), 1440px) - 40px) / 3, 50px) * 1.05)), (min-width: 810px) and (max-width: 1199.98px) max(calc(max(min(max(100vw - 40px, 1px), 1440px) - 280px, 1px) - 40px), calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05)), (max-width: 809.98px) max(calc(max(min(max(100vw - 30px, 1px), 1440px), 1px) - 104px), calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05))" srcset="https://images.unsplash.com/photo-1636686775076-f0f393323876?w=512&h=342&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1636686775076-f0f393323876?w=1024&h=683&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1636686775076-f0f393323876?w=2048&h=1367&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1636686775076-f0f393323876?w=4096&h=2734&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1636686775076-f0f393323876?w=7360&h=4912&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -98,14 +100,14 @@ export default function Blog() {
                           <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto">{`Why the Global Agarwood Market Is Growing — And What It Means for Investors in India`}</h6>
                         </div>
                         <div className="framer-12k0ycr" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`The global Agarwood market is projected to grow at a strong CAGR through 2035, driven by fragrance, perfumery, and wellness demand — here's what genuinely sets an Agarwood cultivation investment apart.`}</p>
+                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`The global Agarwood market is expanding fast. Explore the demand drivers, the growing supply gap, and why India is strongly positioned for a serious Agarwood cultivation investment.`}</p>
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1u91fe5-container">{/*$*/}<a className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" href="./blog/smart-construction-planning-for-efficient-projects" style={{ width: "100%" }}>
+                <div className="framer-1u91fe5-container">{/*$*/}<Link className="framer-dWkFy framer-riLfm framer-1EFv6 framer-6c3n9 framer-1kpvnzf framer-v-1kpvnzf framer-1wmouwt" data-framer-name="Default" to="/blog/how-to-earn-upfront-income-from-your-mature-agarwood-trees" style={{ width: "100%" }}>
                     <div className="framer-94agml" data-framer-name="Post Image">
                       <div className="framer-1i9dfgp" data-framer-name="Image">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="4000" height="3000" sizes="(min-width: 1200px) calc(max((min(max(100vw - 60px, 1px), 1440px) - 40px) / 3, 50px) * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=512&h=384&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=1024&h=768&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=2048&h=1536&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=4000&h=3000&fit=crop&q=80&auto=format 4000w,https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=4096&h=3072&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1761839259494-71caddcdd6b3?w=4000&h=3000&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -126,14 +128,14 @@ export default function Blog() {
                       </div>
                       <div className="framer-1b6s916" data-framer-name="Post Title">
                         <div className="framer-d745ob" data-framer-component-type="RichTextContainer" style={{ "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto">{`How a Mature Agarwood Tree Earns Income Without You Selling Land`}</h6>
+                          <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto">{`How to Earn Upfront Income from Your Mature Agarwood Trees — Without Selling Your Land`}</h6>
                         </div>
                         <div className="framer-12k0ycr" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Most agricultural investments compete on volume. With Agarwood, a single resin-bearing mature tree can earn upfront income with only a minimum 20% of your trees changing hands — the rest stays farmed for free.`}</p>
+                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Get paid for your mature Agarwood trees while keeping your land fully yours. Learn how the Mrida Agarwood farmer partnership pays you upfront — with zero inoculation cost on the rest.`}</p>
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*/$*/}
             </div>
           </div>

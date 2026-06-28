@@ -1,4 +1,3 @@
-import ProcessSection from './ProcessSection.jsx';
 
 export default function Projects() {
   return (
@@ -496,7 +495,6 @@ export default function Projects() {
             </section>
           </div>
         </div>
-      <ProcessSection />
       <div className="framer-1gl3m2b-container">
           <div className="ssr-variant hidden-ojchan hidden-1h6ujoa">
             <div className="framer-IU7se framer-3nyu9z framer-v-3nyu9z" data-framer-name="Desktop" style={{ width: "100%" }}>
