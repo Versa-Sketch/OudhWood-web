@@ -88,12 +88,14 @@ export default function Header({ activePage = 'home' }) {
               <div className="framer-vhz274" data-framer-name="Navigation">{/*$*/}
                 {visibleLinks.map((link) => (
                   <div key={link.label} className="framer-sh0tz5-container" data-framer-name={link.label} name={link.label}>
-                    {link.href.includes('#') ? (
+                    {link.href.includes('#') || link.key === 'project' ? (
                       <a
                         className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
                         data-framer-name="Default"
                         data-highlight="true"
                         href={link.href}
+                        target={link.key === 'project' ? '_blank' : undefined}
+                        rel={link.key === 'project' ? 'noopener noreferrer' : undefined}
                         tabIndex="0"
                       >
                         <div className="framer-66yo8u" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--variable-reference-fgn0epMCb-c0gKo6pCr)", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", "--variable-reference-fgn0epMCb-c0gKo6pCr": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", opacity: "1", transform: "none" }}>
@@ -213,9 +215,16 @@ export default function Header({ activePage = 'home' }) {
                     fontWeight: 500,
                     textDecoration: 'none',
                   };
-                  if (link.href.includes('#')) {
+                  if (link.href.includes('#') || link.key === 'project') {
                     return (
-                      <a key={link.label} href={link.href} onClick={() => setMenuOpen(false)} style={linkStyle}>
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        target={link.key === 'project' ? '_blank' : undefined}
+                        rel={link.key === 'project' ? 'noopener noreferrer' : undefined}
+                        onClick={() => setMenuOpen(false)}
+                        style={linkStyle}
+                      >
                         {link.label}
                       </a>
                     );
@@ -260,12 +269,14 @@ export default function Header({ activePage = 'home' }) {
               <div className="framer-vhz274" data-framer-name="Navigation">{/*$*/}
                 {visibleLinks.map((link) => (
                   <div key={link.label} className="framer-sh0tz5-container" data-framer-name={link.label} name={link.label}>
-                    {link.href.includes('#') ? (
+                    {link.href.includes('#') || link.key === 'project' ? (
                       <a
                         className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
                         data-framer-name="Default"
                         data-highlight="true"
                         href={link.href}
+                        target={link.key === 'project' ? '_blank' : undefined}
+                        rel={link.key === 'project' ? 'noopener noreferrer' : undefined}
                         tabIndex="0"
                       >
                         <div className="framer-66yo8u" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--variable-reference-fgn0epMCb-c0gKo6pCr)", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", "--variable-reference-fgn0epMCb-c0gKo6pCr": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", opacity: "1", transform: "none" }}>
