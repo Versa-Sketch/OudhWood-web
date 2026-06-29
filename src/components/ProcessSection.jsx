@@ -3,46 +3,25 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 const STEPS = [
   {
-    number: '01',
-    title: 'Survey',
-    description: "Mrida visits your site, assesses your mature Agarwood trees, and tags every eligible tree for the record — at no cost to you.",
+    number: 'Step 1',
+    title: 'Upfront Purchase of a Minimum 20% of Your Mature Agarwood Trees',
+    description: "After a site survey, we purchase at least 20% of your eligible mature Agarwood trees at an agreed price and pay you upfront. These trees transfer fully to us. That income is yours immediately - secured and guaranteed, regardless of what follows.",
     image: 'https://images.unsplash.com/photo-1698025594761-39e52299b9a7?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/survey',
+    ctaHref: '/service',
   },
   {
-    number: '02',
-    title: 'Split & Agree',
-    description: 'We confirm the 20% upfront / 80% shared-return terms — all agreed and signed before any work begins.',
-    image: 'https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/split-and-agree',
-  },
-  {
-    number: '03',
-    title: 'Inoculate',
-    description: 'We fund and manage professional inoculation entirely at our own expense, using proven techniques to support healthy resin development.',
+    number: 'Step 2',
+    title: 'Your Remaining Trees Grow in Value, Entirely at Our Cost',
+    description: "Your other trees stay in your name throughout the partnership. We fund and carry out the full inoculation and monitoring process - every specialist visit, every inspection, every cost. You maintain and protect the trees; we handle everything technical.",
     image: 'https://images.unsplash.com/photo-1681438080729-5c62d90f9416?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/inoculate',
+    ctaHref: '/service',
   },
   {
-    number: '04',
-    title: 'Monitor',
-    description: "Ongoing health and resin-development monitoring through to harvest, with regular updates on your trees' progress.",
-    image: 'https://images.unsplash.com/photo-1761839257870-06874bda71b5?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/monitor',
-  },
-  {
-    number: '05',
-    title: 'Harvest & Settle',
-    description: 'Harvest is coordinated and managed end-to-end; proceeds are shared exactly per your signed agreement.',
+    number: 'Step 3',
+    title: 'Transparent Profit Sharing After Agarwood Harvest and Sale',
+    description: "When the resin matures, we manage harvesting, grading, and sale through our established buyer network. Harvesting expenses are deducted from the proceeds, and the remaining returns are split between you and Mrida at the exact percentage fixed in your signed agreement. Clear, fair, and fully traceable.",
     image: 'https://images.unsplash.com/photo-1550305490-75e5ba3e301c?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/harvest-and-settle',
-  },
-  {
-    number: '06',
-    title: 'Full Traceability',
-    description: 'Every tree is tracked by its unique Site and Tree Number — from tagging through inoculation, harvest, and final sale.',
-    image: 'https://images.unsplash.com/photo-1768846316948-ae43fd739208?w=1400&h=1000&fit=crop&q=80&auto=format',
-    ctaHref: './service/traceability',
+    ctaHref: '/service',
   },
 ];
 
@@ -53,14 +32,12 @@ export default function ProcessSection() {
 
   const active = STEPS[activeIndex];
 
-  // Refs for tracking values within non-passive wheel handler
   const activeIndexRef = useRef(0);
   const isExitingRef = useRef(false);
   const lastTransitionTime = useRef(0);
   const stickyRef = useRef(null);
   const containerRef = useRef(null);
 
-  // Screen resize detection
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 991);
@@ -70,7 +47,6 @@ export default function ProcessSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Discrete Wheel Interception Listener
   useEffect(() => {
     if (isMobile) return;
     const stickyEl = stickyRef.current;
@@ -81,7 +57,6 @@ export default function ProcessSection() {
       const COOLDOWN_MS = 650;
       const direction = e.deltaY;
 
-      // Cooldown prevention logic
       if (now - lastTransitionTime.current < COOLDOWN_MS) {
         if (activeIndexRef.current > 0 && activeIndexRef.current < STEPS.length - 1) {
           e.preventDefault();
@@ -96,7 +71,6 @@ export default function ProcessSection() {
       }
 
       if (direction > 0) {
-        // Scrolling Down
         if (activeIndexRef.current < STEPS.length - 1) {
           e.preventDefault();
           setIsExiting(false);
@@ -108,14 +82,12 @@ export default function ProcessSection() {
           });
           lastTransitionTime.current = now;
         } else if (activeIndexRef.current === STEPS.length - 1 && !isExitingRef.current) {
-          // Pause briefly, lift and fade the content
           e.preventDefault();
           setIsExiting(true);
           isExitingRef.current = true;
           lastTransitionTime.current = now;
         }
       } else if (direction < 0) {
-        // Scrolling Up
         if (isExitingRef.current) {
           e.preventDefault();
           setIsExiting(false);
@@ -193,10 +165,10 @@ export default function ProcessSection() {
             <div className="process-title-section">
               <div className="process-badge">
                 <span className="process-badge-dot" />
-                <p className="process-badge-text">Our Process</p>
+                <p className="process-badge-text">Our Model</p>
               </div>
-              <h2 className="process-heading">Five steps from survey to settlement</h2>
-              <p className="process-subhead">Every Mrida partnership runs through the same clear, fair workflow — from your first site survey to the moment harvest proceeds are settled.</p>
+              <h2 className="process-heading" style={{ fontSize: '2rem', lineHeight: '1.3' }}>How Our Agarwood Farming Partnership Model Works</h2>
+              <p className="process-subhead">We call it the mixed commercial acquisition model - built so farmers benefit from day one, with a clear and transparent share of the upside when harvest arrives.</p>
             </div>
 
             <div className="process-body">
@@ -216,7 +188,7 @@ export default function ProcessSection() {
                     }}
                   >
                     <span className="process-step-number">{step.number}</span>
-                    <span className="process-step-title">{step.title}</span>
+                    <span className="process-step-title" style={{ fontSize: '0.95rem' }}>{step.title.split(' ')[0] + ' ' + step.title.split(' ')[1]}</span>
                   </button>
                 ))}
               </div>
@@ -230,9 +202,9 @@ export default function ProcessSection() {
                     exit={{ opacity: 0, y: -12, scale: 0.98 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <h6 className="process-details-title">{active.title}</h6>
-                    <p className="process-details-desc">{active.description}</p>
-                    <a className="process-details-link" href={active.ctaHref}>More details</a>
+                    <h6 className="process-details-title" style={{ fontSize: '1.25rem', marginBottom: '12px' }}>{active.title}</h6>
+                    <p className="process-details-desc" style={{ lineHeight: '1.6', fontSize: '0.95rem', marginBottom: '20px' }}>{active.description}</p>
+                    <a className="process-details-link" href={active.ctaHref} style={{ fontWeight: '600', color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))' }}>Explore the full Agarwood business model →</a>
                   </motion.div>
                 </AnimatePresence>
               </div>

@@ -27,7 +27,7 @@ export default function Blog() {
               <div className="framer-17zujd7" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
                 <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>{`For farmers and investors who want to understand what their trees are worth, and an inside look at the world of Agarwood, clearly, so you can invest with confidence.`}</p>
               </div>{/*$*/}
-              <div className="framer-19b06ad-container">{/*$*/}<a className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" data-framer-name="Black" data-highlight="true" href="./blog" tabIndex="0" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>
+              <div className="framer-19b06ad-container">{/*$*/}<Link className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" data-framer-name="Black" data-highlight="true" to="/blog" tabIndex="0" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>
                   <div className="framer-k6u0up" data-framer-name="Text">
                     <div className="framer-1faiyqn" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: "1", transform: "none" }}>
                       <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`All Articles`}</p>
@@ -41,7 +41,7 @@ export default function Blog() {
                       </div>
                     </div>
                   </div>
-                </a>{/*/$*/}</div>{/*/$*/}
+                </Link>{/*/$*/}</div>{/*/$*/}
             </div>
             <div className="framer-16uz0ql">{/*$*/}{/*$*/}
               <div className="ssr-variant">

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 
 export default function Projects() {
   return (
@@ -14,37 +15,37 @@ export default function Projects() {
                         </div>
                       </div>
                       <div className="framer-2pahix" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Active Plantation Sites`}</p>
+                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Our Projects`}</p>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="framer-14k29f4" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
-                  <h2 className="framer-text framer-styles-preset-1vb0x0m" data-styles-preset="emYHIiQDN" dir="auto" style={{ "--framer-text-color": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>{`A growing portfolio of managed Agarwood plantation sites`}</h2>
+                  <h2 className="framer-text framer-styles-preset-1vb0x0m" data-styles-preset="emYHIiQDN" dir="auto" style={{ "--framer-text-color": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>{`Our Agarwood Plantation Projects: One Proven Workflow Across Every Site in India`}</h2>
                 </div>
               </div>
               <div className="framer-wivt2h" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
-                <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>{`Our projects span sites across Assam and Tripura — every farmer partnership supported by surveying, professional inoculation, monitoring, and full traceability from tagging to settlement.`}</p>
+                <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>{`Across every active and planned plantation site in India's prime Agarwood-producing belts - including Karnataka, Kerala, Assam and Tripura - every Mrida project follows the same rigorous, five-stage operational workflow: Survey & Assess → Split & Agree → Inoculate → Monitor → Harvest & Settle. Each stage is managed by our professional team, documented tree by tree, and fully accountable at every step. No shortcuts. No ambiguity. A clean, traceable Agarwood farming operation built on long-term, fair-term partnerships.`}</p>
               </div>{/*$*/}
-              <div className="framer-1g7wblp-container">{/*$*/}<a className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" data-framer-name="Black" data-highlight="true" href="./project" tabIndex="0" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>
+              <div className="framer-1g7wblp-container">{/*$*/}<Link className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" data-framer-name="Black" data-highlight="true" to="/project" tabIndex="0" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", width: "auto" }}>
                   <div className="framer-k6u0up" data-framer-name="Text">
                     <div className="framer-1faiyqn" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: "1", transform: "none" }}>
-                      <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`All Projects`}</p>
+                      <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
                     </div>
                     <div className="framer-lypvvb" data-framer-name="Flip">
                       <div className="framer-1yk2hn7" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`All Projects`}</p>
+                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
                       </div>
                       <div className="framer-ee6oh2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`All Projects`}</p>
+                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
                       </div>
                     </div>
                   </div>
-                </a>{/*/$*/}</div>{/*/$*/}
+                </Link>{/*/$*/}</div>{/*/$*/}
             </div>
             <div className="framer-qt949n">{/*$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" href="./project/aureline-house" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="6048" height="4024" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1024&h=681&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=2048&h=1363&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=4096&h=2725&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=6048&h=4024&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -99,10 +100,10 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 6" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" href="./project/vertex-center" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 6" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="6000" height="3869" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=512&h=330&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=1024&h=660&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=2048&h=1321&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=4096&h=2641&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=6000&h=3869&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -157,10 +158,10 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" href="./project/nova-living" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="5472" height="3078" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=512&h=288&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=1024&h=576&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=2048&h=1152&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=4096&h=2304&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=5472&h=3078&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -215,10 +216,10 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" href="./project/elvaré-studio" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="7280" height="4080" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=512&h=287&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=1024&h=574&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=2048&h=1148&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=4096&h=2296&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=7280&h=4080&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -273,10 +274,10 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" href="./project/horizon-pavilion" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="7008" height="3942" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=512&h=288&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=1024&h=576&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=2048&h=1152&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=4096&h=2304&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=7008&h=3942&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -331,10 +332,10 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*$*/}
               <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<a className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" href="./project/celestia-tower" style={{ width: "100%" }}>
+                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" to="/project" style={{ width: "100%" }}>
                     <div className="framer-yu39w4" data-framer-name="Project Image">
                       <div className="framer-biry7z">
                         <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="2301" height="1536" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=512&h=342&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=1024&h=684&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2048&h=1367&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2301&h=1536&fit=crop&q=80&auto=format 2301w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=4096&h=2734&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2301&h=1536&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
@@ -389,7 +390,7 @@ export default function Projects() {
                         </div>
                       </div>
                     </div>
-                  </a>{/*/$*/}</div>
+                  </Link>{/*/$*/}</div>
               </div>{/*/$*/}{/*/$*/}
             </div>
           </div>

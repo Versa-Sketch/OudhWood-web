@@ -11,7 +11,7 @@ export default function Footer() {
               <img src="/mrida-logo.svg" alt="Mrida Logo" />
             </Link>
             <p className="footer-desc">
-              We unlock the value of India's most extraordinary tree by partnering with farmers and landowners through a fair, transparent, and structured Agarwood farming partnership.
+              Building India's most transparent Agarwood farming partnership — one tree at a time.
             </p>
             <Link to="/contact" className="footer-btn-contact">
               Partner With Us →
@@ -20,24 +20,23 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="footer-widget">
-            <h4 className="footer-title">Quick Links</h4>
+            <h4 className="footer-title">Navigate</h4>
             <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
-              <li><Link to="/service">How It Works</Link></li>
+              <li><Link to="/service">Business Model</Link></li>
               <li><Link to="/project">Projects</Link></li>
               <li><Link to="/investors">Investors</Link></li>
-              <li><Link to="/contact">Contact Us</Link></li>
             </ul>
           </div>
 
-          {/* Partnership / Resources */}
+          {/* Resources */}
           <div className="footer-widget">
             <h4 className="footer-title">Resources</h4>
             <ul className="footer-links">
-              <li><Link to="/service">For Farmers</Link></li>
-              <li><Link to="/investors">For Investors</Link></li>
               <li><a href="/#blog">Blog</a></li>
               <li><a href="/#faq">FAQs</a></li>
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
           </div>
 
@@ -65,16 +64,24 @@ export default function Footer() {
         <div className="footer-bottom">
           <div className="footer-line"></div>
           <div className="footer-bottom-content">
-            <p className="copyright">© {new Date().getFullYear()} Mrida. All rights reserved.</p>
+            <p className="copyright">© {new Date().getFullYear()} Mrida Infra and Plantations LLP. All rights reserved.</p>
+            <div className="footer-legal-links">
+              <span>Privacy Policy</span>
+              <span>Terms &amp; Conditions</span>
+              <span>Disclaimer</span>
+            </div>
             <div className="footer-socials">
               <span>Follow us:</span>
               <div className="social-links">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a>
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">Facebook</a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
               </div>
             </div>
           </div>
+          <p className="footer-disclaimer">
+            Market figures referenced on this page are third-party projections provided for informational purposes only. They do not constitute guarantees of future performance or investment returns.
+          </p>
         </div>
       </div>
     </footer>

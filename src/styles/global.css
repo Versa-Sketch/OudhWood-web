@@ -37701,6 +37701,21 @@ body, #main {
   gap: 16px;
 }
 
+.footer-legal-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-disclaimer {
+  margin: 18px 0 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.3);
+  max-width: 900px;
+}
+
 .social-links a {
   color: rgba(255, 255, 255, 0.6);
   text-decoration: none;
@@ -37878,4 +37893,59 @@ body, #main {
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
+}
+
+/* ---------- Blog index page ---------- */
+.blog-index-section { max-width: 1200px; margin: 0 auto 20px; padding: 0 30px; }
+.blog-index-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0 0 24px;
+}
+.blog-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.blog-index-card {
+  display: block;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.blog-index-card:hover { box-shadow: 0 14px 32px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.blog-index-card-img { position: relative; height: 200px; overflow: hidden; }
+.blog-index-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.blog-index-card-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.tag-forfarmers { background: #1f5c3f; }      /* deep green */
+.tag-forinvestors { background: #b8862f; }    /* warm gold */
+.tag-industrymarket { background: #1c5963; }  /* deep teal */
+.blog-index-card-body { padding: 22px 22px 26px; }
+.blog-index-card-meta { font-size: 12px; color: rgb(150,150,150); margin: 0 0 8px; }
+.blog-index-card-body h3 { font-size: 18px; line-height: 1.35; margin: 0 0 10px; }
+.blog-index-card-summary { font-size: 14px; color: rgb(112,112,112); line-height: 1.6; margin: 0 0 14px; }
+.blog-index-card-readmore { font-size: 13px; font-weight: 600; color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54)); }
+
+@media (max-width: 1024px) {
+  .blog-index-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 809px) {
+  .blog-index-grid { grid-template-columns: 1fr; }
 }

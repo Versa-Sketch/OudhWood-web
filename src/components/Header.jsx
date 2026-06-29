@@ -65,8 +65,8 @@ export default function Header({ activePage = 'home' }) {
     { label: 'How It Works', href: '/service', key: 'service' },
     { label: 'Investors', href: '/investors', key: 'investors' },
     { label: 'Projects', href: '/project', key: 'project' },
-    { label: 'Blogs', href: '/#blog', key: 'blog' },
-    { label: 'FAQs', href: '/#faq', key: 'faq' },
+    { label: 'Blogs', href: '/blog', key: 'blog' },
+    { label: 'FAQs', href: '/faqs', key: 'faq' },
     { label: 'Contact Us', href: '/contact', key: 'contact' },
   ];
 

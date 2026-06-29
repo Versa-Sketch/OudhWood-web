@@ -20,8 +20,19 @@ import ProjectPage from './pages/ProjectPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import InvestorsPage from './pages/InvestorsPage.jsx'
 import BlogPostPage from './pages/BlogPostPage.jsx'
+import BlogIndexPage from './pages/BlogIndexPage.jsx'
+import FAQPage from './pages/FAQPage.jsx'
+import WhoWeWorkWith from './components/WhoWeWorkWith.jsx'
 
 function HomePage() {
+  useEffect(() => {
+    document.title = "Agarwood Farming Partnership India | Earn Upfront from Mature Agarwood Trees Mrida Infra";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute("content", "Partner with Mrida Infra for a transparent Agarwood farming partnership in India. Get paid upfront for mature Agarwood trees, pay zero inoculation cost, and share returns fairly. Farmers and investors - start here.");
+    }
+  }, []);
+
   return (
     <div id="main" data-framer-generated-page="">
       <div className="framer-6es6o framer-1rjwmcz" data-layout-template="true" style={{ minHeight: '100vh', width: 'auto' }}>
@@ -33,6 +44,7 @@ function HomePage() {
           <ProcessSection />
           <Reveal><Why /></Reveal>
           <Reveal><Achievement /></Reveal>
+          <Reveal><WhoWeWorkWith /></Reveal>
           <Reveal><Testimonials /></Reveal>
           <Reveal><Blog /></Reveal>
           <Reveal><FAQ /></Reveal>
@@ -83,7 +95,9 @@ export default function App() {
         <Route path="/project" element={<SubPage activePage="project"><ProjectPage /></SubPage>} />
         <Route path="/contact" element={<SubPage activePage="contact"><ContactPage /></SubPage>} />
         <Route path="/investors" element={<SubPage activePage="investors"><InvestorsPage /></SubPage>} />
+        <Route path="/blog" element={<SubPage activePage="blog"><BlogIndexPage /></SubPage>} />
         <Route path="/blog/:slug" element={<SubPage activePage="blog"><BlogPostPage /></SubPage>} />
+        <Route path="/faqs" element={<SubPage activePage="faq"><FAQPage /></SubPage>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
