@@ -63,17 +63,23 @@ export default function Header({ activePage = 'home' }) {
   const navLinks = [
     { label: 'About Us', href: '/about', key: 'about' },
     { label: 'How It Works', href: '/service', key: 'service' },
-    { label: 'Investors', href: '/investors', key: 'investors' },
     { label: 'Projects', href: '/project', key: 'project' },
-    { label: 'Blogs', href: '/blog', key: 'blog' },
+    { label: 'Investors', href: '/investors', key: 'investors' },
     { label: 'FAQs', href: '/faqs', key: 'faq' },
+    { label: 'Blogs', href: '/blog', key: 'blog' },
     { label: 'Contact Us', href: '/contact', key: 'contact' },
   ];
 
-  const visibleLinks = navLinks.filter((link) => link.key !== activePage);
+  const visibleLinks = navLinks;
 
   return (
     <>
+      <style>{`
+        .active-nav-tab p {
+          color: #c36036 !important;
+          --framer-text-color: #c36036 !important;
+        }
+      `}</style>
       <div className="framer-2ahsdz-container">
         <div className="ssr-variant hidden-kde4wg hidden-prcei2">
           <nav className={`framer-7EmCy framer-1jaxqze framer-v-1jaxqze${scrolled ? ' is-scrolled' : ''}${activePage !== 'home' ? ' nav-subpage' : ''}`} data-framer-name="Desktop" style={{ backgroundColor: "var(--token-0f3396d4-4e3f-4d82-8363-11033d788736, rgba(255, 255, 255, 0))", width: "100%" }}>
@@ -90,7 +96,7 @@ export default function Header({ activePage = 'home' }) {
                   <div key={link.label} className="framer-sh0tz5-container" data-framer-name={link.label} name={link.label}>
                     {link.href.includes('#') || link.key === 'project' ? (
                       <a
-                        className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
+                        className={`framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal${activePage === link.key ? ' active-nav-tab' : ''}`}
                         data-framer-name="Default"
                         data-highlight="true"
                         href={link.href}
@@ -112,7 +118,7 @@ export default function Header({ activePage = 'home' }) {
                       </a>
                     ) : (
                       <Link
-                        className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
+                        className={`framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal${activePage === link.key ? ' active-nav-tab' : ''}`}
                         data-framer-name="Default"
                         data-highlight="true"
                         to={link.href}
@@ -210,7 +216,7 @@ export default function Header({ activePage = 'home' }) {
                   const linkStyle = {
                     padding: '14px 0',
                     borderBottom: '1px solid rgba(0,0,0,0.08)',
-                    color: link.key && activePage === link.key ? 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))' : 'rgb(0,0,0)',
+                    color: link.key && activePage === link.key ? '#c36036' : 'rgb(0,0,0)',
                     fontSize: '15px',
                     fontWeight: 500,
                     textDecoration: 'none',
@@ -271,7 +277,7 @@ export default function Header({ activePage = 'home' }) {
                   <div key={link.label} className="framer-sh0tz5-container" data-framer-name={link.label} name={link.label}>
                     {link.href.includes('#') || link.key === 'project' ? (
                       <a
-                        className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
+                        className={`framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal${activePage === link.key ? ' active-nav-tab' : ''}`}
                         data-framer-name="Default"
                         data-highlight="true"
                         href={link.href}
@@ -293,7 +299,7 @@ export default function Header({ activePage = 'home' }) {
                       </a>
                     ) : (
                       <Link
-                        className="framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal"
+                        className={`framer-wpOMa framer-riLfm framer-19q58t framer-v-19q58t framer-1nj5pal${activePage === link.key ? ' active-nav-tab' : ''}`}
                         data-framer-name="Default"
                         data-highlight="true"
                         to={link.href}

@@ -69,6 +69,61 @@ export default function ProjectPage() {
         </div>
       </section>
 
+      {/* Featured Projects Grid */}
+      <section className="featured-projects-section" style={{ padding: "80px 20px", backgroundColor: "#FAF9F6" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <div style={{ marginBottom: "40px", textAlign: "center" }}>
+            <p className="contact-eyebrow">Our Active Sites</p>
+            <h2 style={{ fontSize: "2.25rem", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", fontWeight: "700", marginTop: "8px" }}>Featured Plantation Partnerships</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
+            {PROJECT_SITES.map((site) => (
+              <div 
+                key={site.site}
+                onClick={() => window.open('/', '_blank')}
+                style={{ 
+                  backgroundColor: "white", 
+                  borderRadius: "20px", 
+                  overflow: "hidden", 
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.03)", 
+                  border: "1px solid rgba(0,0,0,0.05)",
+                  cursor: "pointer",
+                  transition: "transform 0.3s ease, box-shadow 0.3s ease"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-6px)";
+                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.08)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "none";
+                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.03)";
+                }}
+              >
+                <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
+                  <img src={site.image} alt={site.location} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", color: "white", padding: "6px 12px", borderRadius: "20px", fontSize: "0.8rem", fontWeight: "600" }}>
+                    {site.status}
+                  </div>
+                </div>
+                <div style={{ padding: "24px" }}>
+                  <p style={{ fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", marginBottom: "8px" }}>
+                    Site {site.site}
+                  </p>
+                  <h3 style={{ fontSize: "1.2rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", marginBottom: "12px" }}>
+                    {site.location}
+                  </h3>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>
+                    <span>{site.trees}</span>
+                    <span>Stage: <strong>{site.stage}</strong></span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
       {/* 4-stat strip, matching About's "Fact Number" row beneath the hero */}
       <div className="proj-stats-strip">
         {METRICS.map((m) => (

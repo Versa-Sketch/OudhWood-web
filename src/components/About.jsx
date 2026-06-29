@@ -272,32 +272,7 @@ export default function About() {
                 />
               </motion.div>
 
-              {/* Floating Badge */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                  position: "absolute",
-                  bottom: "32px",
-                  left: "32px",
-                  backgroundColor: "rgba(255, 255, 255, 0.95)",
-                  backdropFilter: "blur(8px)",
-                  padding: "16px 20px",
-                  borderRadius: "16px",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
-                  border: "1px solid rgba(255, 255, 255, 0.8)",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  zIndex: 3
-                }}
-              >
-                <div style={{ fontSize: "1.5rem" }}>🌱</div>
-                <div>
-                  <h6 style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontWeight: "600", margin: 0 }}>Farmer-First</h6>
-                  <p style={{ fontSize: "0.85rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", margin: 0 }}>Partnership</p>
-                </div>
-              </motion.div>
+
 
             </motion.div>
           </div>
