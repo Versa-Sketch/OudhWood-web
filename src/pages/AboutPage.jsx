@@ -1,227 +1,140 @@
-import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-const CHAPTERS = [
-  {
-    id: 'sets-us-apart',
-    title: 'WHAT SETS US APART',
-    startIndex: 0,
-    items: [
-      {
-        title: 'Guaranteed Upfront Payment',
-        description: 'On a minimum of 20% of your mature Agarwood trees — paid before harvest, not after.',
-        image: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Zero Inoculation Cost',
-        description: 'Your trees, professionally managed — inoculation funded and run entirely at our own expense.',
-        image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Land Stays With the Farmer',
-        description: "Only the minimum 20% of purchased trees transfer to us — the rest stay in the farmer's name.",
-        image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'End-to-End Management',
-        description: 'From survey through harvest, every step is handled and documented by Mrida — at no cost to you.',
-        image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Full Traceability',
-        description: 'Every tree carries a unique Site Number and Tree Number, tracked from tagging through to final settlement.',
-        image: 'https://images.unsplash.com/photo-1519606247872-0440aae9b827?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Signed Agreements',
-        description: 'All prices, sharing ratios, and responsibilities are written into agreement before any work begins.',
-        image: 'https://images.unsplash.com/photo-1681438080729-5c62d90f9416?w=900&h=1200&fit=crop&q=85&auto=format'
-      }
-    ]
-  },
-  {
-    id: 'india-advantage',
-    title: 'INDIA ADVANTAGE',
-    startIndex: 6,
-    items: [
-      {
-        title: 'Prime Production Zones',
-        description: 'Cultivated in Assam and Tripura — prime climate and soil conditions for Agarwood.',
-        image: 'https://images.unsplash.com/photo-1680614038587-9de698612c78?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Government Momentum',
-        description: "India's ₹80 crore Agarwood scheme signals strong institutional commitment to the sector.",
-        image: 'https://images.unsplash.com/photo-1631322342429-5897e52b0f64?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Close to the Source',
-        description: 'Asia Pacific holds roughly 35% of global market share, placing our farms close to both source and buyers.',
-        image: 'https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=900&h=1200&fit=crop&q=85&auto=format'
-      }
-    ]
-  },
-  {
-    id: 'our-process',
-    title: 'OUR PROCESS',
-    startIndex: 9,
-    items: [
-      {
-        title: 'Survey & Tag',
-        description: 'We visit your site, assess every tree for eligibility, and tag every eligible tree with a unique number.',
-        image: 'https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Split & Agree',
-        description: 'We confirm the 20% upfront vs. shared-arrangement terms for every tree, and we both sign before any work begins.',
-        image: 'https://images.unsplash.com/photo-1517200578024-62d131797ec8?w=900&h=1200&fit=crop&q=85&auto=format'
-      },
-      {
-        title: 'Harvest & Settle',
-        description: 'We manage harvesting, grading, sale, and full coordination with buyers, then share returns per your agreement.',
-        image: 'https://images.unsplash.com/photo-1782192496614-d2e98e5f96e0?w=900&h=1200&fit=crop&q=85&auto=format'
-      }
-    ]
-  }
+const EASE = [0.16, 1, 0.3, 1];
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
+const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.1 } } };
+
+/* ── Inline icons, matching the line-icon style already used in Why.jsx ── */
+const IconFarmer = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2 22c3-3 5-8 5-13 0 0 4 0 7 3s3 7 3 7-5 0-8-3" /><line x1="7" y1="22" x2="12" y2="17" />
+  </svg>
+);
+const IconTransparent = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="3" /><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+  </svg>
+);
+const IconSustainable = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+  </svg>
+);
+const IconFairness = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3v18M5 8l-3 6a4 4 0 008 0l-3-6M19 8l-3 6a4 4 0 008 0l-3-6M5 8h14" />
+  </svg>
+);
+const IconTraceability = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </svg>
+);
+const IconPartnership = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+);
+const IconPayment = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="5" width="20" height="14" rx="2" /><line x1="2" y1="10" x2="22" y2="10" />
+  </svg>
+);
+const IconLeaf = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M2 22c3-3 5-8 5-13 0 0 4 0 7 3s3 7 3 7-5 0-8-3" /><line x1="7" y1="22" x2="12" y2="17" />
+  </svg>
+);
+const IconLand = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+  </svg>
+);
+const IconManagement = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+);
+const IconTrace2 = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+  </svg>
+);
+const IconAgreement = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="13" y2="17" />
+  </svg>
+);
+
+const CORE_PRINCIPLES = [
+  { title: 'Farmer-First', description: "We lead with the farmer's benefit: upfront income, zero inoculation cost on shared trees, and a clear share of returns.", icon: <IconFarmer /> },
+  { title: 'Transparent', description: 'Every figure traces back to a tagged tree and a signed agreement. No hidden deductions, no moving terms.', icon: <IconTransparent /> },
+  { title: 'Sustainable', description: 'We build long-term partnerships that strengthen rural livelihoods and create reliable, traceable supply.', icon: <IconSustainable /> },
 ];
 
-const APART_ITEMS = CHAPTERS.flatMap(ch => ch.items.map(item => ({ ...item, chapterId: ch.id })));
-const TOTAL_ITEMS = APART_ITEMS.length;
+const CORE_VALUES = [
+  { title: 'Fairness', description: "We lead with the farmer's benefit, always. Prices, sharing ratios, and responsibilities are agreed in writing before any work begins — so what's promised is exactly what's delivered.", icon: <IconFairness /> },
+  { title: 'Traceability', description: 'Every plantation site carries a unique Site Number, and every eligible tree a unique Tree Number, logged through inoculation, inspection, harvest, and sale. Sold trees and shared trees are flagged separately, so accounting stays clear from tagging to settlement.', icon: <IconTraceability /> },
+  { title: 'Partnership', description: "We don't see farmers as suppliers or investors as outsiders. We see partners. A fair farmer partnership secures reliable supply and strengthens the long-term sustainability of everything we build.", icon: <IconPartnership /> },
+];
 
-// Scroll distance budgeted per item transition. Kept modest (per the brief's
-// "reduce perceived scrolling effort") — total container height is computed
-// exactly from this, so there's no leftover/dead scroll space after the
-// last item: the sticky section releases the instant progress hits 1.
-const VH_PER_ITEM = 26;
-const STICKY_VH = 100;
-const STORY_CONTAINER_VH = STICKY_VH + (TOTAL_ITEMS - 1) * VH_PER_ITEM;
+const MODEL_STEPS = [
+  { number: '01', title: 'The 20% Upfront Purchase', description: 'We buy a minimum of 20% of your eligible mature Agarwood trees at an agreed price, paid upfront. That gives farmers guaranteed income from day one, with zero risk on the trees we purchase.' },
+  { number: '02', title: 'The 80% Shared Arrangement', description: "The remaining trees stay in the farmer's name. We fund and manage the entire inoculation and monitoring process at our own cost. After harvest and sale, harvesting expenses are deducted, and the remaining returns are shared transparently." },
+  { number: '03', title: 'Why It Works for Investors Too', description: 'Because farmers earn upfront and again at harvest, partnerships stay stable and supply stays dependable over the long term — giving investors a scalable, managed, and traceable Agarwood cultivation model rather than a patchwork of moving parts.' },
+];
+
+const APART_CARDS = [
+  { title: 'Upfront Payment, Real Income', description: 'Farmers earn from day one, not just at a distant harvest.', icon: <IconPayment /> },
+  { title: 'Zero Inoculation Cost for Farmers', description: 'We fund and manage inoculation and monitoring on shared trees entirely at our own expense.', icon: <IconLeaf /> },
+  { title: 'Land Stays With the Farmer', description: "Only the minimum 20% of purchased trees transfer to us; the rest stay in the farmer's name.", icon: <IconLand /> },
+  { title: 'End-to-End Management', description: 'We handle survey, tagging, inoculation, monitoring, harvesting, grading, and sale through our buyer network.', icon: <IconManagement /> },
+  { title: 'Full Traceability', description: 'Unique Site and Tree Numbers mean every figure is accountable and every tree is trackable.', icon: <IconTrace2 /> },
+  { title: 'Signed Agreements, No Surprises', description: 'All terms are confirmed in writing before any work begins.', icon: <IconAgreement /> },
+];
+
+const IMPACT_STATS = [
+  { value: '20', suffix: '%+', label: 'Upfront Tree Payment' },
+  { value: '100', suffix: '%', label: 'Tree Traceability' },
+  { value: '5', suffix: '+', label: 'Year Partnership Horizon' },
+  { value: '0', suffix: '', label: 'Inoculation Cost to Farmers' },
+];
 
 export default function AboutPage() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeIndexRef = useRef(0);
-  const containerRef = useRef(null);
-
-  // CSS `position: sticky` doesn't work here — the shared SubPage wrapper
-  // (.framer-PyWJj.framer-1iaudjf) sets `overflow: clip`, which breaks
-  // sticky for any descendant (the nearest scrolling ancestor must be the
-  // viewport). So the pin is computed manually from raw scroll position
-  // instead, switching between absolute (before/after the range) and fixed
-  // (while pinned) — fixed positioning isn't affected by an ancestor's
-  // overflow, only by transform/will-change, which this ancestor doesn't set.
-  const [pinStyle, setPinStyle] = useState({ position: 'absolute', top: 0 });
-
-  const activeItem = APART_ITEMS[activeIndex];
-  const activeChapterIndex = CHAPTERS.findIndex(
-    ch => activeIndex >= ch.startIndex && activeIndex < ch.startIndex + ch.items.length
-  );
-
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 991);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    document.title = 'About Mrida Infra & Plantations Agarwood Farmer Partnership India';
   }, []);
-
-  useEffect(() => {
-    if (isMobile) return;
-    const handlePin = () => {
-      const container = containerRef.current;
-      if (!container) return;
-      const containerTop = container.getBoundingClientRect().top;
-      const containerHeight = container.offsetHeight;
-      const viewportHeight = window.innerHeight;
-      if (containerTop > 0) {
-        setPinStyle({ position: 'absolute', top: 0, left: 0, width: '100%' });
-      } else if (containerTop > -(containerHeight - viewportHeight)) {
-        setPinStyle({ position: 'fixed', top: 0, left: 0, width: '100%' });
-      } else {
-        setPinStyle({ position: 'absolute', top: containerHeight - viewportHeight, left: 0, width: '100%' });
-      }
-    };
-    handlePin();
-    window.addEventListener('scroll', handlePin, { passive: true });
-    window.addEventListener('resize', handlePin);
-    return () => {
-      window.removeEventListener('scroll', handlePin);
-      window.removeEventListener('resize', handlePin);
-    };
-  }, [isMobile]);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useEffect(() => {
-    if (isMobile) return;
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      const index = Math.min(Math.floor(latest * TOTAL_ITEMS), TOTAL_ITEMS - 1);
-      if (index !== activeIndexRef.current) {
-        activeIndexRef.current = index;
-        setActiveIndex(index);
-      }
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress, isMobile]);
-
-  // Used by both chapter-header clicks and item clicks to jump scroll
-  // position to the exact spot that activates a given flat item index.
-  const scrollToItemIndex = (index) => {
-    const container = containerRef.current;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const containerStart = rect.top + scrollTop;
-    const containerScrollableHeight = rect.height - window.innerHeight;
-    const targetProgress = index / TOTAL_ITEMS;
-    const targetScrollY = containerStart + targetProgress * containerScrollableHeight + 2;
-    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
-  };
-
-  const handleChapterClick = (chapIdx) => scrollToItemIndex(CHAPTERS[chapIdx].startIndex);
 
   return (
     <>
-      {/* Hero section */}
+      {/* Hero */}
       <section className="ab-hero-section">
         <div className="ab-hero-inner">
           <div className="ab-hero-title">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              Mrida.
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+              Building a Fairer Future for Agarwood Farmers in India
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-            >
-              (A Fair, Transparent Partnership)
-            </motion.p>
           </div>
           <div className="ab-hero-details">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              For years, landowners and farmers have grown mature Agarwood trees without ever realizing their true value. Mrida changes that — every survey we run, every tree we tag, and every payment we make is designed to keep that trust real.
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+              Mrida Infra and Plantations LLP exists for one reason: to help farmers earn real value from their mature Agarwood trees, while building a transparent, traceable supply for one of the world's most valuable commodities. We put farmers first, share returns fairly, and back every promise with a signed agreement.
             </motion.p>
-            <motion.div
-              className="ab-hero-actions"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-            >
-              <a href="/contact" className="ab-btn ab-btn-primary">
-                Partner With Us
-              </a>
-              <a href="https://cal.com/" target="_blank" rel="noopener noreferrer" className="ab-btn ab-btn-secondary">
+            <motion.div className="ab-hero-actions" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
+              <a href="https://cal.com/" target="_blank" rel="noopener noreferrer" className="ab-btn ab-btn-primary">
                 Talk to Our Team
+                <span className="ab-btn-dot"></span>
               </a>
+              <Link to="/contact" className="ab-btn ab-btn-secondary">
+                Partner With Us
+                <span className="ab-btn-dot"></span>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -230,65 +143,145 @@ export default function AboutPage() {
       {/* Main Banner image */}
       <section className="ab-main-banner">
         <div className="ab-banner-wrap">
-          <img
-            src="https://framerusercontent.com/images/YNUrI3EakUUXrOgSzVcjyA3caZI.jpg?width=2048"
-            alt="Agarwood plantation growth banner"
-          />
+          <img src="https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=2048&h=900&fit=crop&q=85&auto=format" alt="A mature Agarwood plantation in India at golden hour" />
           <div className="ab-banner-overlay" />
         </div>
       </section>
 
-      {/* Mission Section */}
-      <section className="ab-mission-section">
-        <div className="ab-mission-inner">
-          <div className="ab-mission-text">
-            <p>
-              <strong>To unlock the true value of India’s mature Agarwood trees through a farmer-first, transparent, and sustainable partnership model.</strong> We measure our success by the value we deliver to farmers, every survey we run, every tag we lay, and every payment we make on time, every time.
-            </p>
-            <p>
-              We see an India where cultivating Agarwood is a respected, professionally managed path to long-term income for farmers and investors alike. As global demand for Agarwood grows, our cultivation-to-market pipeline gives both sides a fair way to win — without farmers needing to take on the cost or risk of getting there alone.
-            </p>
-          </div>
-          <div className="ab-stats-grid">
-            <div className="ab-stat-card">
-              <div className="ab-stat-num">20<span>+</span></div>
-              <p className="ab-stat-label">Upfront Tree Payment (%)</p>
+      {/* Who We Are — text + image split for visual rhythm */}
+      <motion.section className="ab-section" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={fadeUp}>
+        <div className="ab-section-inner">
+          <div className="ab-split-layout">
+            <div className="ab-split-text">
+              <p className="contact-eyebrow">Who We Are</p>
+              <h2 className="ab-section-heading">A simple belief: the people who own the trees deserve a fair share of the value those trees create</h2>
+              <p className="ab-lead">
+                Mrida is an Agarwood cultivation and acquisition company built around a simple belief: the people who own the trees deserve a fair, honest share of the value those trees create.
+              </p>
+              <p className="ab-body">
+                For years, farmers and landowners across India have held mature Agarwood trees with enormous potential — yet most never saw that value. They lacked the expertise, the inoculation materials, and the market access needed to turn standing trees into resin-bearing assets. We were founded to close that gap.
+              </p>
+              <p className="ab-body">
+                We bring the method, the management, and the buyers. Farmers bring their land and their mature Agarwood trees. Together, we create a partnership that pays from day one and shares returns transparently at harvest.
+              </p>
             </div>
-            <div className="ab-stat-card">
-              <div className="ab-stat-num">100<span>%</span></div>
-              <p className="ab-stat-label">Tree Traceability</p>
-            </div>
-            <div className="ab-stat-card">
-              <div className="ab-stat-num">5<span>+</span></div>
-              <p className="ab-stat-label">Year Partnership Horizon</p>
-            </div>
-            <div className="ab-stat-card">
-              <div className="ab-stat-num">0<span></span></div>
-              <p className="ab-stat-label">Inoculation Cost to Farmers</p>
+            <div className="ab-split-image">
+              <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&h=1100&fit=crop&q=85&auto=format" alt="Agarwood farmland in India" />
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* Mission & Vision — two premium cards */}
+      <motion.section className="ab-section ab-section-tint" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
+        <div className="ab-section-inner">
+          <p className="contact-eyebrow" style={{ textAlign: 'center' }}>Mission &amp; Vision</p>
+          <h2 className="ab-section-heading ab-center">What we're building, and why</h2>
+          <div className="ab-mv-grid">
+            <motion.div className="ab-mv-card" variants={fadeUp}>
+              <span className="ab-mv-card-tag">Our Mission</span>
+              <p className="ab-mv-card-statement">To unlock the true value of India's mature Agarwood trees through a farmer-first, transparent, and sustainable partnership model.</p>
+              <p className="ab-mv-card-body">We measure our success by the trust our partners place in us and the income they earn. Every survey we run, every tree we tag, and every payment we make is designed to keep that trust intact.</p>
+            </motion.div>
+            <motion.div className="ab-mv-card" variants={fadeUp}>
+              <span className="ab-mv-card-tag">Our Vision</span>
+              <p className="ab-mv-card-statement">An India where cultivating Agarwood is a respected, professionally managed path to long-term prosperity.</p>
+              <p className="ab-mv-card-body">For farmers who own the trees and investors who back the harvest alike. As global demand for Agarwood climbs and supply stays scarce, we want managed cultivation to become the credible answer to that gap — a scalable model that grows across India's prime production belts without ever losing the fairness it was built on.</p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Core Principles — lightweight feature blocks, no card backgrounds */}
+      <motion.section className="ab-section" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+        <div className="ab-section-inner">
+          <p className="contact-eyebrow" style={{ textAlign: 'center' }}>Core Principles</p>
+          <h2 className="ab-section-heading ab-center">The three values behind every decision</h2>
+          <div className="ab-feature-row">
+            {CORE_PRINCIPLES.map((p, i) => (
+              <motion.div className="ab-feature-block" key={p.title} variants={fadeUp}>
+                {i > 0 && <span className="ab-feature-divider" />}
+                <span className="ab-feature-block-icon">{p.icon}</span>
+                <h3>{p.title}</h3>
+                <p>{p.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* How We Work — stepper + feature grid + values */}
+      <motion.section className="ab-section ab-section-tint" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={fadeUp}>
+        <div className="ab-section-inner">
+          <p className="contact-eyebrow" style={{ textAlign: 'center' }}>How We Work</p>
+          <h2 className="ab-section-heading ab-center">The story behind our model</h2>
+          <p className="ab-lead ab-center">
+            Most Agarwood arrangements force a hard choice on farmers: sell outright for a one-time sum, or take on heavy inoculation costs and years of risk. We designed a third way — our mixed commercial acquisition model.
+          </p>
+
+          <div className="ab-stepper">
+            {MODEL_STEPS.map((step, i) => (
+              <motion.div className="ab-stepper-item" key={step.number} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: 0.5, ease: EASE, delay: i * 0.1 }}>
+                <div className="ab-stepper-marker">
+                  <span className="ab-stepper-num">{step.number}</span>
+                  {i < MODEL_STEPS.length - 1 && <span className="ab-stepper-line" />}
+                </div>
+                <div className="ab-stepper-body">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <h3 className="ab-subsection-heading">What Sets Mrida Apart</h3>
+          <p className="ab-lead ab-center">Plenty of operations talk about Agarwood. Here's what makes our approach genuinely different.</p>
+          <div className="ab-alt-timeline">
+            {APART_CARDS.map((card, i) => (
+              <motion.div
+                className={`ab-alt-row ${i % 2 === 1 ? 'ab-alt-row-reverse' : ''}`}
+                key={card.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.4 }}
+                transition={{ duration: 0.5, ease: EASE }}
+              >
+                <span className="ab-alt-num">{String(i + 1).padStart(2, '0')}</span>
+                <span className="ab-alt-icon">{card.icon}</span>
+                <div className="ab-alt-body">
+                  <h4>{card.title}</h4>
+                  <p>{card.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <p className="ab-lead ab-center" style={{ marginTop: '32px' }}>
+            One proven model. Fair to farmers. Credible for investors. Built to scale across India.
+          </p>
+
+          <h3 className="ab-subsection-heading">Our Core Values</h3>
+          <div className="ab-value-strip">
+            {CORE_VALUES.map((v) => (
+              <motion.div className="ab-value-strip-item" key={v.title} variants={fadeUp}>
+                <span className="ab-value-strip-icon">{v.icon}</span>
+                <h3>{v.title}</h3>
+                <p>{v.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
 
       {/* Quote Banner */}
       <section className="ab-quote-banner">
-        <div
-          className="ab-quote-wrap"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1781622196320-24a458a02660?w=2048&h=1365&fit=crop&q=80&auto=format')` }}
-        >
+        <div className="ab-quote-wrap" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1781622196320-24a458a02660?w=2048&h=1365&fit=crop&q=80&auto=format')` }}>
           <div className="ab-quote-darken" />
           <div className="ab-quote-inner">
-            <p className="ab-quote-text">
-              “We don’t see farmers as suppliers or investors as outsiders. We see both as partners.”
-            </p>
+            <p className="ab-quote-text">"We don't see farmers as suppliers or investors as outsiders. We see partners."</p>
             <div className="ab-quote-author">
-              <img
-                src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=200&h=200&fit=crop&q=80&auto=format"
-                alt="Our Founding Principle"
-                className="ab-quote-author-img"
-              />
+              <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=200&h=200&fit=crop&q=80&auto=format" alt="Our Founding Principle" className="ab-quote-author-img" />
               <div>
-                <p className="ab-quote-author-name">Mrida Infra & Plantations</p>
+                <p className="ab-quote-author-name">Mrida Infra &amp; Plantations</p>
                 <p className="ab-quote-author-role">Our Founding Principle</p>
               </div>
             </div>
@@ -296,234 +289,47 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What Sets Mrida Apart — sticky scroll-driven storytelling (desktop) */}
-      {!isMobile ? (
-        <div ref={containerRef} className="ab-apart-story-container" style={{ height: `${STORY_CONTAINER_VH}vh` }}>
-          <section className="ab-apart-story-sticky" style={pinStyle}>
-            <div className="ab-apart-story-bg">
-              <motion.div
-                className="ab-apart-story-glow-1"
-                animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="ab-apart-story-glow-2"
-                animate={{ x: [0, -30, 40, 0], y: [0, 20, -30, 0] }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              />
-              <div className="ab-apart-story-texture" />
-            </div>
-
-            <div className="ab-apart-story-inner">
-              <div className="ab-apart-story-header">
-                <div className="ab-apart-badge">
-                  <span className="ab-apart-badge-dot" />
-                  <p className="ab-apart-badge-text">What Sets Mrida Apart</p>
-                </div>
-                <h2 className="ab-apart-heading">What makes our partnership genuinely different</h2>
-              </div>
-
-              <div className="ab-apart-story-grid">
-                {/* Left: chapter-aware accordion + progress timeline */}
-                <div className="ab-story-timeline-layout">
-                  <div className="ab-story-chapters-list">
-                    {CHAPTERS.map((chapter, chapIdx) => {
-                      const isActiveChapter = activeChapterIndex === chapIdx;
-                      const isPastChapter = activeChapterIndex > chapIdx;
-
-                      let lineFill = 0;
-                      if (isPastChapter) {
-                        lineFill = 100;
-                      } else if (isActiveChapter) {
-                        const total = chapter.items.length;
-                        const currentInChap = activeIndex - chapter.startIndex;
-                        lineFill = total > 1 ? (currentInChap / (total - 1)) * 100 : 100;
-                      }
-
-                      return (
-                        <div key={chapter.id} className="ab-story-chapter-group">
-                          <button
-                            className={`ab-story-chapter-header ${isActiveChapter ? 'active' : ''}`}
-                            onClick={() => handleChapterClick(chapIdx)}
-                          >
-                            <div className="ab-story-chapter-header-left">
-                              <div className={`ab-story-chapter-node ${isActiveChapter || isPastChapter ? 'active' : ''}`}>
-                                <span className="node-dot" />
-                                {chapIdx < CHAPTERS.length - 1 && (
-                                  <div className="node-line-container">
-                                    <div className="node-line-bg" />
-                                    <motion.div
-                                      className="node-line-fill"
-                                      animate={{ height: `${lineFill}%` }}
-                                      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                                    />
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                            <div className="ab-story-chapter-header-right">
-                              <span className="chapter-toggle-icon">{isActiveChapter ? '▼' : '▶'}</span>
-                              <h3 className="chapter-title">{chapter.title}</h3>
-                            </div>
-                          </button>
-
-                          <AnimatePresence initial={false}>
-                            {isActiveChapter && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                                style={{ overflow: 'hidden' }}
-                              >
-                                <div className="ab-story-chapter-items">
-                                  {chapter.items.map((item, itemIdx) => {
-                                    const globalIdx = chapter.startIndex + itemIdx;
-                                    const isActiveItem = activeIndex === globalIdx;
-                                    return (
-                                      <button
-                                        key={itemIdx}
-                                        className={`ab-story-item-btn ${isActiveItem ? 'active' : ''}`}
-                                        onClick={() => scrollToItemIndex(globalIdx)}
-                                      >
-                                        <div className="ab-story-item-content">
-                                          {isActiveItem && (
-                                            <motion.div
-                                              layoutId="activeIndicator"
-                                              className="ab-story-active-indicator"
-                                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                                            />
-                                          )}
-                                          <span className="ab-story-item-title">{item.title}</span>
-                                        </div>
-                                      </button>
-                                    );
-                                  })}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Right: crossfading content card */}
-                <div className="ab-story-card-wrap">
-                  <div className="ab-story-card">
-                    <div className="ab-story-card-img">
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={activeItem.image}
-                          src={activeItem.image}
-                          alt={activeItem.title}
-                          initial={{ opacity: 0, scale: 1.06 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          exit={{ opacity: 0, scale: 1.04 }}
-                          transition={{ duration: 0.45, ease: "easeInOut" }}
-                          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                      </AnimatePresence>
-                    </div>
-                    <div className="ab-story-card-body">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={activeIndex}
-                          style={{ display: 'flex', flexDirection: 'column', gap: '12px', height: '100%' }}
-                          initial="initial"
-                          animate="animate"
-                          exit="exit"
-                        >
-                          <motion.h3
-                            className="ab-story-card-title"
-                            variants={{
-                              initial: { opacity: 0, y: 15 },
-                              animate: { opacity: 1, y: 0 },
-                              exit: { opacity: 0, y: -10 },
-                            }}
-                            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                          >
-                            {activeItem.title}
-                          </motion.h3>
-                          <motion.p
-                            className="ab-story-card-desc"
-                            variants={{
-                              initial: { opacity: 0 },
-                              animate: { opacity: 1 },
-                              exit: { opacity: 0 },
-                            }}
-                            transition={{ duration: 0.4, delay: 0.12 }}
-                          >
-                            {activeItem.description}
-                          </motion.p>
-                          <motion.a
-                            href="/contact"
-                            className="ab-story-card-cta"
-                            variants={{
-                              initial: { opacity: 0 },
-                              animate: { opacity: 1 },
-                              exit: { opacity: 0 },
-                            }}
-                            transition={{ duration: 0.4, delay: 0.22 }}
-                          >
-                            Partner With Us →
-                          </motion.a>
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      ) : (
-        /* Mobile fallback: simple grouped static cards, no scroll-jacking */
-        <div className="ab-story-mobile-wrap">
-          <div className="ab-apart-badge">
-            <span className="ab-apart-badge-dot" />
-            <p className="ab-apart-badge-text">What Sets Mrida Apart</p>
-          </div>
-          <h2 className="ab-story-mobile-title">What makes our partnership genuinely different</h2>
-          <div className="ab-story-mobile-list">
-            {CHAPTERS.map((chapter) => (
-              <div key={chapter.id} className="ab-story-mobile-chapter">
-                <h3 className="ab-story-mobile-chapter-title">{chapter.title}</h3>
-                <div className="ab-story-mobile-chapter-cards">
-                  {chapter.items.map((item, i) => (
-                    <div key={i} className="ab-story-mobile-card">
-                      <div className="ab-story-mobile-img">
-                        <img src={item.image} alt={item.title} />
-                      </div>
-                      <div className="ab-story-mobile-body">
-                        <h4 className="ab-story-mobile-card-title">{item.title}</h4>
-                        <p className="ab-story-mobile-desc">{item.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+      {/* Impact — dedicated highlighted band, distinct from the light sections around it */}
+      <motion.section className="ab-section ab-section-dark" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
+        <div className="ab-section-inner">
+          <p className="contact-eyebrow ab-eyebrow-dark" style={{ textAlign: 'center' }}>Our Impact</p>
+          <h2 className="ab-section-heading ab-center ab-heading-dark">Rooted in India's Agarwood Heartland</h2>
+          <p className="ab-lead ab-center ab-lead-dark">
+            India offers some of the best conditions in the world for cultivating mature Agarwood trees — ideal soil, climate, and a long tradition of high-quality resin, especially across prime belts like Assam and Tripura. The sector is gaining momentum too, with growing institutional support for the Agarwood value chain, making our farmer-first model both timely and credible.
+          </p>
+          <div className="ab-impact-grid">
+            {IMPACT_STATS.map((s) => (
+              <motion.div className="ab-impact-card" key={s.label} variants={fadeUp}>
+                <p className="ab-impact-value">{s.value}<span>{s.suffix}</span></p>
+                <p className="ab-impact-label">{s.label}</p>
+              </motion.div>
             ))}
           </div>
+          {/* <p className="ab-heartland-note ab-center">
+            Note: Regional and sector details should be verified before relying on them for decisions.
+          </p> */}
         </div>
-      )}
+      </motion.section>
 
       {/* CTA section */}
       <section className="ab-cta-section">
-        <div
-          className="ab-cta-card"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1781622196320-24a458a02660?w=2048&h=1536&fit=crop&q=80&auto=format')` }}
-        >
+        <div className="ab-cta-card" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1781622196320-24a458a02660?w=2048&h=1536&fit=crop&q=80&auto=format')` }}>
           <div className="ab-cta-darken" />
           <div className="ab-cta-inner">
-            <h2>Ready when you are</h2>
+            <h2>Let's Build Something Valuable Together</h2>
             <p>
-              One message starts everything. Tell us about your mature Agarwood trees or your investment goals, and let's build a partnership worth growing.
+              Whether you own mature Agarwood trees or you're exploring a serious Agarwood cultivation investment, we'd love to tell you more about who we are and how our partnership works. The first step is simply a conversation — clear, honest, and with no pressure.
             </p>
-            <a href="https://cal.com/" target="_blank" rel="noopener noreferrer" className="ab-btn ab-btn-secondary">
-              Partner With Us
-            </a>
+            <div className="ab-cta-actions">
+              <a href="https://cal.com/" target="_blank" rel="noopener noreferrer" className="ab-btn ab-btn-white">
+                Talk to Our Team
+                <span className="ab-btn-dot"></span>
+              </a>
+              <Link to="/contact" className="ab-btn ab-btn-secondary">
+                Partner With Us
+                <span className="ab-btn-dot"></span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
