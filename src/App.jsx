@@ -31,6 +31,10 @@ function HomePage() {
     if (metaDesc) {
       metaDesc.setAttribute("content", "Partner with Mrida Infra for a transparent Agarwood farming partnership in India. Get paid upfront for mature Agarwood trees, pay zero inoculation cost, and share returns fairly. Farmers and investors - start here.");
     }
+    const wrapper = document.querySelector('.framer-1rjwmcz');
+    if (wrapper) {
+      wrapper.style.overflow = 'visible';
+    }
   }, []);
 
   return (
@@ -62,6 +66,13 @@ function HomePage() {
 // CSS is scoped under — is supplied by the page component itself (children),
 // not hardcoded here, since that class differs per page.
 function SubPage({ activePage, children }) {
+  useEffect(() => {
+    const wrapper = document.querySelector('.framer-1iaudjf');
+    if (wrapper) {
+      wrapper.style.overflow = 'visible';
+    }
+  }, [activePage]);
+
   return (
     <div id="main" data-framer-generated-page="">
 

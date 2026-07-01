@@ -13,8 +13,8 @@ export default function Footer() {
             <p className="footer-desc">
               Building India's most transparent Agarwood farming partnership — one tree at a time.
             </p>
-            <Link to="/contact" className="footer-btn-contact">
-              Partner With Us →
+            <Link to="/contact" className="footer-btn-contact" style={{borderRadius:0}}>
+              Partner With Us<span style={{paddingLeft:"10px"}}>→</span>
             </Link>
           </div>
 

@@ -17,6 +17,12 @@ export default function Header({ activePage = 'home' }) {
         --extracted-r6o4lv: #c36036 !important;
         --variable-reference-fgn0epMCb-c0gKo6pCr: #c36036 !important;
       }
+      .framer-7EmCy.is-scrolled .framer-1qjdvxl .framer-text,
+      .framer-7EmCy.is-scrolled .framer-rln1lf-container .framer-text {
+        color: #ffffff !important;
+        --extracted-r6o4lv: #ffffff !important;
+        --variable-reference-fgn0epMCb-c0gKo6pCr: #ffffff !important;
+      }
     `;
     document.head.appendChild(style);
     return () => style.remove();
