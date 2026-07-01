@@ -9,13 +9,18 @@ export default function Header({ activePage = 'home' }) {
   useEffect(() => {
     const style = document.createElement('style');
     style.id = 'active-nav-override';
-    style.textContent = `
-      .framer-7EmCy.nav-subpage .active-nav-tab .framer-text,
+    style.textContent = `  .framer-7EmCy.nav-subpage .active-nav-tab .framer-text,
       .framer-7EmCy.is-scrolled .active-nav-tab .framer-text,
       .framer-7EmCy .active-nav-tab .framer-text {
         color: #c36036 !important;
         --extracted-r6o4lv: #c36036 !important;
         --variable-reference-fgn0epMCb-c0gKo6pCr: #c36036 !important;
+      }
+      .framer-7EmCy.is-scrolled .framer-1qjdvxl .framer-text,
+      .framer-7EmCy.is-scrolled .framer-rln1lf-container .framer-text {
+        color: #ffffff !important;
+        --extracted-r6o4lv: #ffffff !important;
+        --variable-reference-fgn0epMCb-c0gKo6pCr: #ffffff !important;
       }
     `;
     document.head.appendChild(style);
