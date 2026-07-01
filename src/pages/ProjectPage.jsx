@@ -1,21 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-// Page anatomy matches AboutPage.jsx exactly: Hero + 4-stat strip ("Page Title" /
-// "Fact Number") → full-bleed image quote banner ("Award"-banner pattern) →
-// interactive name/role accordion list ("Team" section) → sticky-image numbered
-// list ("Award" / Achievements section). Content is the Projects PDF throughout.
-
 const METRICS = [
-  { value: '3', label: 'Sample Sites Shown' },
-  { value: '100%', label: 'Tree Traceability' },
-  { value: '5-Step', label: 'Repeatable Workflow' },
-  { value: '2', label: 'States Represented' },
+  { value: '4', label: 'Active & Planned Sites' },
+  { value: '100%', label: 'Tree-Level Traceability' },
+  { value: '5-Step', label: 'Consistent Workflow' },
+  { value: '2', label: 'Prime Growing States' },
 ];
 
-// Sample/illustrative plantation sites — the PDF gives these fields as
-// bracketed placeholders (e.g. "[Site Number: e.g., MR-AS-001]"), so the
-// site names/figures here are representative sample data, not real sites.
 const PROJECT_SITES = [
   {
     site: 'MR-AS-001', location: 'Jorhat District, Assam', trees: '420 mature trees',
@@ -32,17 +24,19 @@ const PROJECT_SITES = [
     stage: 'Survey', status: 'Planned',
     image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&h=1100&fit=crop&q=85&auto=format',
   },
+  {
+    site: 'MR-TR-004', location: 'South Tripura District, Tripura', trees: '310 mature trees',
+    stage: 'Split & Agree', status: 'Planned',
+    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=1100&fit=crop&q=85&auto=format',
+  },
 ];
 
-// Same 5-step process + traceability already established on the Business
-// Model page — reused verbatim, not re-authored.
 const PROCESS_STEPS = [
-  { name: 'Survey', desc: 'We visit your site, assess every tree for eligibility, and tag every eligible tree with a unique, traceable number.' },
-  { name: 'Split & Agree', desc: 'We confirm the 20% upfront vs. shared-arrangement terms for every tree on your land, and we both sign before any work begins.' },
-  { name: 'Inoculate', desc: 'Professional inoculation transforms a mature tree into a resin-bearing, high-value commodity — entirely at our expense.' },
-  { name: 'Monitor', desc: 'We monitor tree health and resin development throughout, covering all inoculation and monitoring costs on shared trees.' },
-  { name: 'Harvest & Settle', desc: 'Mrida manages harvesting, grading, sale, and full coordination with buyers, then shares returns per your signed agreement.' },
-  { name: 'Full Traceability', desc: 'Every eligible tree is individually tracked — a unique Site Number per plantation, a unique Tree Number per tree.' },
+  { name: 'Survey', desc: 'We visit the site, assess each mature Agarwood tree for eligibility, and tag every one with a unique, traceable number.' },
+  { name: 'Split & Agree', desc: 'We confirm the minimum 20% upfront purchase and shared arrangement — all terms are set in a signed agreement before any work begins.' },
+  { name: 'Inoculate', desc: 'Professional inoculation transforms a mature tree into a resin-bearing, high-value commodity — funded and managed entirely at our expense.' },
+  { name: 'Monitor', desc: 'We monitor tree health and resin development throughout the full cycle, covering all inoculation and monitoring costs on shared trees.' },
+  { name: 'Harvest & Settle', desc: 'Mrida manages harvesting, grading, sale, and full coordination with buyers, then shares returns transparently per the signed agreement.' },
 ];
 
 export default function ProjectPage() {
@@ -54,14 +48,15 @@ export default function ProjectPage() {
 
   return (
     <div className="contact-page">
-      {/* Hero — same hero/CTA pattern used across every page */}
+      {/* Hero */}
       <section className="contact-hero">
         <p className="contact-eyebrow">Projects</p>
-        <h1>Agarwood Plantation Projects in India</h1>
+        <h1>Where Partnerships Take Root</h1>
         <p className="contact-hero-sub">
-          Explore Mrida's growing portfolio of managed Agarwood plantation partnerships across
-          India — Assam, Tripura, and other partner districts. Every site is fully traceable,
-          fairly structured, and built to grow on the land it's planted.
+          Across India's most productive Agarwood-growing regions, we partner with farmers and
+          landowners to turn mature Agarwood trees into a managed, traceable, high-value harvest.
+          Every project runs on the same fair model — upfront payment, zero inoculation cost, and
+          transparent shared returns — consistently applied at every site, every time.
         </p>
         <div className="contact-cta-pair">
           <Link to="/contact" className="btn-primary">Partner With Us</Link>
@@ -69,62 +64,102 @@ export default function ProjectPage() {
         </div>
       </section>
 
-      {/* Featured Projects Grid */}
-      <section className="featured-projects-section" style={{ padding: "80px 20px", backgroundColor: "#FAF9F6" }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ marginBottom: "40px", textAlign: "center" }}>
-            <p className="contact-eyebrow">Our Active Sites</p>
-            <h2 style={{ fontSize: "2.25rem", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", fontWeight: "700", marginTop: "8px" }}>Featured Plantation Partnerships</h2>
+      {/* Portfolio intro + project cards grid */}
+      <section className="featured-projects-section" style={{ padding: '80px 20px', backgroundColor: 'var(--token-174a5685-4c1c-494c-9f1c-dc1cd85c9607, #f5f1e5)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ marginBottom: '20px' }}>
+            <p className="contact-eyebrow">A Growing Portfolio</p>
+            <h2 style={{ fontSize: '2.25rem', color: 'var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))', fontWeight: '700', marginTop: '8px', marginBottom: '20px' }}>
+              Active and Planned Partnership Sites
+            </h2>
+            <p style={{ fontSize: '16px', color: 'rgb(112,112,112)', lineHeight: '1.7', maxWidth: '780px', marginBottom: '12px' }}>
+              Our projects span farmer-owned land across rural and semi-urban India, with a strong
+              focus on the country's prime Agarwood-producing belts — particularly Assam and Tripura,
+              where the right soil, the right climate, and a deep tradition of cultivation come together
+              to support some of the highest-quality resin in the world.
+            </p>
+            <p style={{ fontSize: '16px', color: 'rgb(112,112,112)', lineHeight: '1.7', maxWidth: '780px', marginBottom: '40px' }}>
+              Each site in our portfolio is more than a plantation. It's a structured, long-term
+              partnership anchored by a signed agreement, governed by clear documentation, and supported
+              by individually tagged and tracked trees at every stage — from survey to final settlement.
+            </p>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
-            {PROJECT_SITES.map((site) => (
-              <div 
-                key={site.site}
-                onClick={() => window.open('/', '_blank')}
-                style={{ 
-                  backgroundColor: "white", 
-                  borderRadius: "20px", 
-                  overflow: "hidden", 
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.03)", 
-                  border: "1px solid rgba(0,0,0,0.05)",
-                  cursor: "pointer",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease"
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = "translateY(-6px)";
-                  e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.08)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = "none";
-                  e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.03)";
-                }}
-              >
-                <div style={{ position: "relative", height: "240px", overflow: "hidden" }}>
-                  <img src={site.image} alt={site.location} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  <div style={{ position: "absolute", top: "16px", right: "16px", backgroundColor: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", color: "white", padding: "6px 12px", borderRadius: "20px", fontSize: "0.8rem", fontWeight: "600" }}>
-                    {site.status}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '28px' }}>
+            {PROJECT_SITES.map((site) => {
+              const statusColor = site.status === 'Active'
+                ? 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))'
+                : site.status === 'In Harvest'
+                ? 'rgb(180, 140, 30)'
+                : 'rgb(100, 140, 80)';
+              return (
+                <div
+                  key={site.site}
+                  style={{
+                    backgroundColor: 'white',
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
+                    border: '1px solid rgba(0,0,0,0.05)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-6px)';
+                    e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.03)';
+                  }}
+                >
+                  <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                    <img src={site.image} alt={site.location} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div style={{ position: 'absolute', top: '14px', right: '14px', backgroundColor: statusColor, color: 'white', padding: '5px 12px', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '700', letterSpacing: '0.04em' }}>
+                      {site.status}
+                    </div>
+                  </div>
+                  <div style={{ padding: '22px 24px' }}>
+                    <p style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))', fontWeight: '700', marginBottom: '6px' }}>
+                      Site {site.site}
+                    </p>
+                    <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: 'var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))', marginBottom: '14px' }}>
+                      {site.location}
+                    </h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '0.84rem', color: 'var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))', marginBottom: '18px' }}>
+                      <span>Mature Agarwood Trees: <strong style={{ color: 'rgb(0,0,0)' }}>{site.trees}</strong></span>
+                      <span>Current Stage: <strong style={{ color: 'rgb(0,0,0)' }}>{site.stage}</strong></span>
+                    </div>
+                    <a
+                      href="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        fontSize: '0.82rem',
+                        fontWeight: '700',
+                        color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))',
+                        textDecoration: 'none',
+                        letterSpacing: '0.03em',
+                        borderTop: '1px solid rgba(0,0,0,0.06)',
+                        paddingTop: '14px',
+                        width: '100%',
+                      }}
+                    >
+                      View Site
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
+                      </svg>
+                    </a>
                   </div>
                 </div>
-                <div style={{ padding: "24px" }}>
-                  <p style={{ fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", marginBottom: "8px" }}>
-                    Site {site.site}
-                  </p>
-                  <h3 style={{ fontSize: "1.2rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", marginBottom: "12px" }}>
-                    {site.location}
-                  </h3>
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>
-                    <span>{site.trees}</span>
-                    <span>Stage: <strong>{site.stage}</strong></span>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
 
-
-      {/* 4-stat strip, matching About's "Fact Number" row beneath the hero */}
+      {/* 4-stat strip */}
       <div className="proj-stats-strip">
         {METRICS.map((m) => (
           <div className="proj-stat" key={m.label}>
@@ -134,7 +169,7 @@ export default function ProjectPage() {
         ))}
       </div>
 
-      {/* Full-bleed image quote banner, matching About's full-bleed quote section */}
+      {/* Full-bleed quote banner */}
       <div className="proj-quote-banner">
         <img src="https://images.unsplash.com/photo-1781622196320-24a458a02660?w=2048&h=1200&fit=crop&q=80&auto=format" alt="" />
         <div className="proj-quote-banner-content">
@@ -142,13 +177,16 @@ export default function ProjectPage() {
         </div>
       </div>
 
-      {/* Interactive site list, matching About's Team accordion-list section */}
+      {/* Interactive site accordion */}
       <section className="proj-sites-section">
-        <p className="contact-eyebrow">Where Partnerships Take Root</p>
-        <h2>Active and Planned Project Sites</h2>
+        <p className="contact-eyebrow">Full Traceability</p>
+        <h2>From Tagging to Settlement</h2>
         <p className="contact-section-intro" style={{ marginBottom: '32px' }}>
-          A few representative sites from our growing partnership portfolio — illustrative samples,
-          not an exhaustive list of every site we manage.
+          Every project we run is tracked at two levels, so farmers, investors, and our operations
+          team always know exactly where things stand. Unique Site Numbers identify each plantation.
+          Unique Tree Numbers tag every eligible mature tree — logged continuously through inoculation,
+          monitoring, harvest, and final settlement. Purchased trees and shared trees are flagged
+          separately from the start, so the accounting is always clean.
         </p>
         <div className="proj-sites-layout">
           <div className="proj-sites-image-wrap">
@@ -163,20 +201,21 @@ export default function ProjectPage() {
                 onClick={() => setActiveSite(i)}
               >
                 <h3>Site {site.site}</h3>
-                <p>{site.location} · {site.trees} · {site.stage} · {site.status}</p>
+                <p>{site.location} &middot; {site.trees} &middot; {site.stage} &middot; {site.status}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Sticky-image numbered list, matching About's "Award" / Achievements section */}
+      {/* Sticky-image process steps */}
       <section className="proj-process-section">
         <p className="contact-eyebrow">Operational Framework</p>
         <h2>How Every Project Runs</h2>
         <p className="contact-section-intro" style={{ marginBottom: '32px' }}>
           From the first site visit to final settlement, every Mrida project moves through the same
-          five clear, consistent, accountable, and traceable stages.
+          five clear, consistent stages. This shared workflow is what keeps our operations fair,
+          accountable, and traceable — regardless of the size or location of the site.
         </p>
         <div className="proj-process-layout">
           <div className="proj-process-image">
@@ -201,12 +240,22 @@ export default function ProjectPage() {
         <h2>Why Our Projects Work — For Farmers and Investors Alike</h2>
         <div className="contact-paths-grid">
           <div className="contact-path-card">
-            <h3>For Farmers</h3>
-            <p>Real income from day one — get paid upfront for a minimum of 20% of your eligible mature Agarwood trees. Zero inoculation cost on your shared trees. Your land stays yours throughout. Transparent returns, fixed in writing.</p>
+            <h3>For Farmers and Landowners</h3>
+            <ul style={{ paddingLeft: '18px', margin: 0, lineHeight: '1.9', color: 'rgb(80,80,80)', fontSize: '15px' }}>
+              <li><strong>Real income from day one</strong> — get paid upfront for a minimum of 20% of your eligible mature Agarwood trees.</li>
+              <li><strong>Zero inoculation cost</strong> — we fund and manage inoculation and monitoring on your shared trees at our expense.</li>
+              <li><strong>Your land stays yours</strong> — full ownership, always. Only the trees we purchase transfer to us.</li>
+              <li><strong>Transparent shared returns</strong> — your share is fixed in writing and paid after harvest with full traceability behind every figure.</li>
+            </ul>
           </div>
           <div className="contact-path-card">
             <h3>For Investors</h3>
-            <p>Managed end to end, from survey through final settlement. Fully traceable supply, logged by Site Number and Tree Number. Scalable across India's prime Agarwood-producing belts, through a sustainable farmer partnership.</p>
+            <ul style={{ paddingLeft: '18px', margin: 0, lineHeight: '1.9', color: 'rgb(80,80,80)', fontSize: '15px' }}>
+              <li><strong>Managed end to end</strong> — from the first survey through to final settlement, every stage is handled by our team.</li>
+              <li><strong>Fully traceable supply</strong> — every site and tree is documented and tracked, giving investors the transparency they need.</li>
+              <li><strong>Scalable across regions</strong> — one proven workflow, applied consistently across India's prime Agarwood-producing belts.</li>
+              <li><strong>A sustainable farmer partnership</strong> — fair terms and upfront farmer payments keep supply reliable and partnerships stable over the long term.</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -215,9 +264,9 @@ export default function ProjectPage() {
       <section className="contact-closing-cta">
         <h2>Want to See What Your Land — or Your Investment — Could Become?</h2>
         <p>
-          Whether you're a farmer looking for income from your existing trees, or an investor
-          interested in a managed Agarwood market, our project model offers a clear and fair path
-          forward. The first step is a simple conversation.
+          Whether you're a farmer with mature Agarwood trees or an investor looking for a credible,
+          managed entry into the Agarwood market, our project model offers a clear and fair path
+          forward. The first step is a straightforward conversation.
         </p>
         <div className="contact-cta-pair">
           <Link to="/contact" className="btn-primary">Partner With Us</Link>

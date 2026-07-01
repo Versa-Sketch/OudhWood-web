@@ -1,3 +1,8 @@
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
 * {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 }
@@ -35323,7 +35328,7 @@ body, #main {
   background-color: var(--token-174a5685-4c1c-494c-9f1c-dc1cd85c9607, #f5f1e5);
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: rgb(0, 0, 0);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .inv-page-redesign .contact-hero-sub {
@@ -38354,3 +38359,277 @@ h3.ab-mission-subhead { font-size: 20px; margin-top: 16px; }
 @media (max-width: 809px) {
   .blog-index-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Opportunity Editorial Section ─────────────────────────────────────── */
+.opp-section {
+  display: flex;
+  align-items: flex-start;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 120px 40px;
+  gap: 80px;
+  position: relative;
+}
+
+/* Left Column - Sticky Panel */
+.opp-left-wrap {
+  width: 35%;
+  flex-shrink: 0;
+  position: relative;
+  align-self: stretch;
+}
+
+.opp-left {
+  position: sticky;
+  top: 120px;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 16px;
+}
+
+.opp-left-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+  margin: 0 0 20px;
+}
+
+.opp-left-headline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: rgb(0, 0, 0);
+  margin: 0 0 20px;
+}
+
+.opp-left-sub {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgb(112, 112, 112);
+  margin: 0 0 40px;
+  max-width: 340px;
+}
+
+/* Progress indicator */
+.opp-progress-wrap {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.opp-progress-track {
+  width: 2px;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.opp-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+  border-radius: 2px;
+}
+
+.opp-progress-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.opp-progress-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
+  color: rgb(112, 112, 112);
+  letter-spacing: 0.01em;
+  transition: color 0.3s ease;
+  display: block;
+}
+
+/* Scroll hint */
+.opp-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+}
+
+.opp-scroll-dot {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid rgb(112, 112, 112);
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.opp-scroll-dot::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgb(112, 112, 112);
+  display: block;
+}
+
+.opp-scroll-hint span {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgb(112, 112, 112);
+}
+
+/* Right Column - Scrolling Story Blocks */
+.opp-right {
+  width: 65%;
+  flex-shrink: 0;
+}
+
+.opp-story-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+  width: 100%;
+}
+
+.opp-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(195, 96, 54, 0.08);
+  color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.opp-card-eyebrow {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54));
+  margin: 0 0 14px;
+}
+
+.opp-card-heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: rgb(0, 0, 0);
+  margin: 0 0 18px;
+}
+
+.opp-card-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: rgb(80, 80, 80);
+  margin: 0;
+}
+
+.opp-card-index {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.24);
+  margin-top: 24px;
+}
+
+/* Responsive constraints */
+@media (max-width: 960px) {
+  .opp-section {
+    flex-direction: column;
+    gap: 48px;
+    padding: 80px 24px;
+  }
+
+  .opp-left-wrap {
+    width: 100%;
+    align-self: auto;
+  }
+
+  .opp-left {
+    position: static !important;
+    width: 100% !important;
+  }
+
+  .opp-progress-wrap {
+    display: none;
+  }
+
+  .opp-scroll-hint {
+    display: none;
+  }
+
+  .opp-right {
+    width: 100%;
+  }
+
+  .opp-story-card {
+    padding: 36px 30px;
+  }
+
+  .opp-card-visual-row {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .opp-story-panel-inner {
+    grid-template-columns: 1fr !important;
+    direction: ltr !important;
+    gap: 32px !important;
+  }
+}
+
+/* ── Global Button Reset (Border Radius & Contrast) ── */
+button,
+input[type="button"],
+input[type="submit"],
+.btn-primary,
+.btn-secondary,
+.ab-btn,
+.ab-btn-primary,
+.ab-btn-secondary,
+.ab-btn-white,
+[role="button"] {
+  border-radius: 0px !important;
+}
+
+/* Ensure white text inside black/dark background buttons */
+button[style*="background: black"],
+button[style*="background: #000"],
+button[style*="background: rgb(0, 0, 0)"],
+button[style*="background-color: black"],
+button[style*="background-color: #000"],
+button[style*="background-color: rgb(0, 0, 0)"],
+.ab-btn-primary {
+  color: #ffffff !important;
+}
+
+

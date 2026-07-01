@@ -205,15 +205,9 @@ export default function ServicePage() {
   }, []);
 
   return (
-    <div className="srv-page-redesign">
+    <div className="contact-page srv-page-redesign">
       {/* 1. HERO SECTION */}
-      <motion.section 
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.1, ease: EASE_CURVE }}
-        className="contact-hero" 
-        style={{ maxWidth: '1200px', margin: '0 auto', padding: '140px 30px 60px' }}
-      >
+      <section className="contact-hero">
         <p className="contact-eyebrow">Business Model</p>
         <h1>How Our Agarwood Farmer Partnership Works</h1>
         <p className="contact-hero-sub">
@@ -225,7 +219,7 @@ export default function ServicePage() {
           <Link to="/contact" className="btn-primary">Partner With Us</Link>
           <a href="https://cal.com/" target="_blank" rel="noopener noreferrer" className="btn-secondary">Talk to Our Team</a>
         </div>
-      </motion.section>
+      </section>
 
       {/* 2. TWO PARTS, ONE PARTNERSHIP & BUSINESS MODEL FLOW */}
       <motion.section 
