@@ -17,12 +17,6 @@ export default function Header({ activePage = 'home' }) {
         --extracted-r6o4lv: #c36036 !important;
         --variable-reference-fgn0epMCb-c0gKo6pCr: #c36036 !important;
       }
-      .framer-7EmCy.is-scrolled .framer-1qjdvxl .framer-text,
-      .framer-7EmCy.is-scrolled .framer-rln1lf-container .framer-text {
-        color: #ffffff !important;
-        --extracted-r6o4lv: #ffffff !important;
-        --variable-reference-fgn0epMCb-c0gKo6pCr: #ffffff !important;
-      }
     `;
     document.head.appendChild(style);
     return () => style.remove();
@@ -172,7 +166,8 @@ export default function Header({ activePage = 'home' }) {
 
               </div>
               <div className="framer-1qjdvxl" data-framer-name="Action">{/*$*/}
-                <div className="framer-rln1lf-container">{/*$*/}<Link className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-1h9x6p framer-lhbnc9" data-framer-name="Primary" data-highlight="true" to="/contact" tabIndex="0" style={{ backgroundColor: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>
+                <div className="framer-rln1lf-container">{/*$*/}
+                  <Link className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-1h9x6p framer-lhbnc9" data-framer-name="Primary" data-highlight="true" to="/contact" tabIndex="0" style={{ backgroundColor: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>
                     <div className="framer-k6u0up" data-framer-name="Text">
                       <div className="framer-1faiyqn" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: "1", transform: "none" }}>
                         <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`Partner With Us`}</p>
