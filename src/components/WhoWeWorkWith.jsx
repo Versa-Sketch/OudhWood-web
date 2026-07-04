@@ -37,7 +37,7 @@ export default function WhoWeWorkWith() {
             padding: "0 16px"
           }}>
             {/* Card 1 */}
-            <div style={{
+            <div className="pw-card" style={{
               backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))",
               borderRadius: "24px",
               padding: "40px",
@@ -56,14 +56,14 @@ export default function WhoWeWorkWith() {
                 </p>
               </div>
               <div style={{ marginTop: "32px" }}>
-                <Link to="/contact" style={{ display: "inline-flex", alignItems: "center", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", textDecoration: "none", fontSize: "0.95rem" }}>
+                <Link className="pw-arrow-link" to="/contact" style={{ display: "inline-flex", alignItems: "center", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", textDecoration: "none", fontSize: "0.95rem" }}>
                   Start Partnership <span style={{ marginLeft: "8px" }}>→</span>
                 </Link>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div style={{
+            <div className="pw-card" style={{
               backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))",
               borderRadius: "24px",
               padding: "40px",
@@ -82,7 +82,7 @@ export default function WhoWeWorkWith() {
                 </p>
               </div>
               <div style={{ marginTop: "32px" }}>
-                <Link to="/investors" style={{ display: "inline-flex", alignItems: "center", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", textDecoration: "none", fontSize: "0.95rem" }}>
+                <Link className="pw-arrow-link" to="/investors" style={{ display: "inline-flex", alignItems: "center", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))", fontWeight: "600", textDecoration: "none", fontSize: "0.95rem" }}>
                   Explore Opportunities <span style={{ marginLeft: "8px" }}>→</span>
                 </Link>
               </div>
