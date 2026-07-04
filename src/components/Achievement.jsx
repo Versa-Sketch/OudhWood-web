@@ -23,7 +23,7 @@ export default function Achievement() {
           {/* Stats Grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px" }}>
             {/* Stat 1 */}
-            <div style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
+            <div className="pw-card pw-stat" style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "3rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>USD 90.56</span>
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>B</span>
@@ -34,7 +34,7 @@ export default function Achievement() {
             </div>
 
             {/* Stat 2 */}
-            <div style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
+            <div className="pw-card pw-stat" style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "3rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>38</span>
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>%</span>
@@ -45,7 +45,7 @@ export default function Achievement() {
             </div>
 
             {/* Stat 3 */}
-            <div style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
+            <div className="pw-card pw-stat" style={{ backgroundColor: "white", padding: "40px", borderRadius: "24px", boxShadow: "0 4px 20px rgba(0,0,0,0.02)", border: "1px solid rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "20px" }}>
                 <span style={{ fontSize: "3rem", fontWeight: "700", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>45</span>
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>%</span>
