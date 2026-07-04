@@ -26,7 +26,7 @@ export default function Hero() {
               </div>
               <div className="framer-258q3o" data-framer-name="Title">
                 <div className="framer-1lfadrn" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
-                  <h1 className="framer-text framer-styles-preset-vcftlz" data-styles-preset="OXdSaWGJm" dir="auto" style={{ "--framer-text-color": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))" }}>{`India's most transparent Agarwood farming partnership — built to pay you first`}</h1>
+                  <h1 className="framer-text framer-styles-preset-vcftlz" data-styles-preset="OXdSaWGJm" dir="auto" style={{ "--framer-text-color": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))" }}>{`India's Most Transparent Agarwood Farming Partnership — Built to Pay You First`}</h1>
                 </div>
                 <div className="framer-1oq58c4" data-framer-name="Action">
                   <div className="framer-jbjoxa-container">{/*$*/}<a className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-1k2u1hf framer-lhbnc9" data-framer-name="White" data-highlight="true" href="https://cal.com/" target="_blank" rel="noopener" tabIndex="0" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))" }}>

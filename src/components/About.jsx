@@ -21,6 +21,16 @@ const IconTraceability = () => (
   </svg>
 );
 
+const IconAgreement = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))' }}>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
+    <polyline points="10 9 9 9 8 9"/>
+  </svg>
+);
+
 export default function About() {
   // Framer Motion variants
   const containerVariants = {
@@ -93,8 +103,18 @@ export default function About() {
               </p>
             </motion.div>
 
+            {/* Additional paragraphs from PDF */}
+            <motion.div variants={itemVariants} style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "600px" }}>
+              <p className="framer-text framer-styles-preset-12akawa" style={{ color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontSize: "1.05rem", lineHeight: "1.75", margin: 0 }}>
+                Mrida was founded on a single conviction — farmers who own mature Agarwood trees shouldn't have to carry the cost, the complexity, or the risk of unlocking their value alone.
+              </p>
+              <p className="framer-text framer-styles-preset-12akawa" style={{ color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontSize: "1.05rem", lineHeight: "1.75", margin: 0 }}>
+                We partner with landowners across India's prime Agarwood-producing regions, bringing professional inoculation, end-to-end monitoring, and access to global buyers — so farmers earn what their trees are truly worth, and investors gain a traceable, professionally managed, high-value agricultural opportunity.
+              </p>
+            </motion.div>
+
             {/* Mission / Philosophy Quote Highlight */}
-            <motion.div 
+            <motion.div
               variants={itemVariants}
               style={{
                 background: "rgba(195, 96, 54, 0.05)",
@@ -175,6 +195,28 @@ export default function About() {
                   <h5 style={{ fontSize: "1rem", fontWeight: "600", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", margin: "0 0 6px 0" }}>Full Traceability</h5>
                   <p style={{ fontSize: "0.88rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", margin: 0, lineHeight: "1.6" }}>
                     Every eligible tree receives a unique Tree Number, tracked securely through harvest and final sale.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Feature Card 4 */}
+              <motion.div
+                whileHover={{ y: -4, boxShadow: "0 8px 30px rgba(0,0,0,0.04)" }}
+                style={{
+                  display: "flex",
+                  gap: "20px",
+                  padding: "20px",
+                  borderRadius: "16px",
+                  border: "1px solid rgba(0,0,0,0.06)",
+                  transition: "border-color 0.3s ease",
+                  backgroundColor: "#FFFFFF"
+                }}
+              >
+                <div style={{ marginTop: "4px" }}><IconAgreement /></div>
+                <div>
+                  <h5 style={{ fontSize: "1rem", fontWeight: "600", color: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", margin: "0 0 6px 0" }}>Signed Agreements Before Any Work Begins</h5>
+                  <p style={{ fontSize: "0.88rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", margin: 0, lineHeight: "1.6" }}>
+                    All prices, sharing ratios, and responsibilities are confirmed in writing. No moving terms. No surprises. No exceptions.
                   </p>
                 </div>
               </motion.div>

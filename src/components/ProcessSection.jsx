@@ -167,8 +167,8 @@ export default function ProcessSection() {
                 <span className="process-badge-dot" />
                 <p className="process-badge-text">Our Model</p>
               </div>
-              <h2 className="process-heading" style={{ fontSize: '2rem', lineHeight: '1.3' }}>How Our Agarwood Farming Partnership Model Works</h2>
-              <p className="process-subhead">We call it the mixed commercial acquisition model - built so farmers benefit from day one, with a clear and transparent share of the upside when harvest arrives.</p>
+              <h2 className="process-heading" style={{ fontSize: '2rem', lineHeight: '1.3' }}>How Our Agarwood Farming Partnership Model Works: Upfront Payment, Zero Cost, Fair Returns</h2>
+              <p className="process-subhead">We call it the <strong>mixed commercial acquisition model</strong> - built so farmers benefit from day one, with a clear and transparent share of the upside when harvest arrives.</p>
             </div>
 
             <div className="process-body">
