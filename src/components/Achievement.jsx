@@ -29,7 +29,7 @@ export default function Achievement() {
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>B</span>
               </div>
               <p className="framer-text framer-styles-preset-12akawa" style={{ color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontSize: "0.95rem", lineHeight: "1.6" }}>
-                The global Agarwood chips market was valued at approximately USD 44.29 billion in 2025, with projections reaching USD 90.56 billion by 2035 at a 7.41% CAGR (Precedence Research, projection).
+                The global Agarwood chips market was valued at approximately <strong>USD 44.29 billion in 2025</strong>, with projections reaching <strong>USD 90.56 billion by 2035</strong> at a <strong>7.41% CAGR</strong> <em>(Precedence Research, projection)</em>.
               </p>
             </div>
 
@@ -40,7 +40,7 @@ export default function Achievement() {
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>%</span>
               </div>
               <p className="framer-text framer-styles-preset-12akawa" style={{ color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontSize: "0.95rem", lineHeight: "1.6" }}>
-                Asia Pacific holds approximately 38% of global market share - placing India-based Agarwood cultivation close to both the source and key buyers.
+                <strong>Asia Pacific holds approximately 38% of global market share</strong> — placing India-based Agarwood cultivation close to both the source and key buyers.
               </p>
             </div>
 
@@ -51,7 +51,7 @@ export default function Achievement() {
                 <span style={{ fontSize: "1.5rem", fontWeight: "600", color: "var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))" }}>%</span>
               </div>
               <p className="framer-text framer-styles-preset-12akawa" style={{ color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", fontSize: "0.95rem", lineHeight: "1.6" }}>
-                Fragrance accounts for approximately 45% of demand - the largest and most enduring driver of Agarwood value worldwide.
+                <strong>Fragrance accounts for approximately 45% of demand</strong> — the largest and most enduring driver of Agarwood value worldwide.
               </p>
             </div>
           </div>
@@ -66,9 +66,9 @@ export default function Achievement() {
               <Link to="/investors" className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", display: "inline-flex", padding: "14px 32px", color: "white", textDecoration: "none", borderRadius: "8px", fontWeight: "600", width: "fit-content" }}>
                 Discover the Agarwood cultivation investment opportunity →
               </Link>
-              <span style={{ fontSize: "0.8rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>
+              <em style={{ fontSize: "0.8rem", color: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>
                 All market figures are third-party projections provided for informational purposes only. They do not constitute guarantees of future performance or investment returns.
-              </span>
+              </em>
             </div>
           </div>
 
