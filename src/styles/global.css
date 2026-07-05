@@ -2348,7 +2348,7 @@ html {
       flex: 1 0 0;
       place-content: center;
       align-items: center;
-      gap: 80px;
+      gap: 20px;
       width: 1px;
       padding: 0;
       display: flex;
@@ -3160,7 +3160,7 @@ html {
       .framer-2mr35 .framer-yje7i4,
       .framer-2mr35 .framer-4st41m,
       .framer-2mr35 .framer-lvjz7k {
-        padding: 80px 20px
+        padding: 20px 20px
       }
 
       .framer-2mr35 .framer-1p2afkf,

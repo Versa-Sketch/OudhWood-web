@@ -1,0 +1,240 @@
+/* =====================================================================
+   Premium polish layer
+   ---------------------------------------------------------------------
+   Loaded AFTER global.css. This file only refines the visual finish of
+   the existing design system — spacing, depth, typography rhythm, and
+   micro-interactions. It does NOT change any content, section order,
+   navigation, colors, or information hierarchy.
+   Brand tokens reused:
+     --token-97443185... = #c36036 (terracotta accent)
+     --token-174a5685... = #f5f1e5 (warm sand)
+     --token-85d98d03... = #000 (ink)
+     --token-5dfb00e3... = #707070 (muted)
+   ===================================================================== */
+
+:root {
+  --pw-accent: #c36036;
+  --pw-accent-soft: rgba(195, 96, 54, 0.08);
+  --pw-accent-border: rgba(195, 96, 54, 0.22);
+  --pw-ink: #1a1512;
+  --pw-line: rgba(26, 21, 18, 0.08);
+  --pw-radius: 18px;
+  --pw-radius-lg: 26px;
+  --pw-shadow-sm: 0 1px 2px rgba(26, 21, 18, 0.04), 0 4px 14px rgba(26, 21, 18, 0.05);
+  --pw-shadow-md: 0 2px 6px rgba(26, 21, 18, 0.05), 0 18px 40px -12px rgba(26, 21, 18, 0.14);
+  --pw-shadow-lg: 0 4px 10px rgba(26, 21, 18, 0.06), 0 34px 70px -20px rgba(26, 21, 18, 0.22);
+  --pw-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Text rendering + selection ----------------------------------------- */
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+::selection { background: rgba(195, 96, 54, 0.22); color: #1a1512; }
+
+/* ---------------------------------------------------------------------
+   1. Buttons — softer corners, refined depth, tactile hover lift
+   ------------------------------------------------------------------- */
+.framer-npbIQ.framer-1h9x6p {
+  border-radius: 12px !important;
+  padding: 16px 30px !important;
+  box-shadow: var(--pw-shadow-sm);
+  transition:
+    transform 0.4s var(--pw-ease),
+    box-shadow 0.4s var(--pw-ease),
+    background-color 0.3s var(--pw-ease),
+    border-color 0.3s var(--pw-ease),
+    filter 0.3s var(--pw-ease);
+  will-change: transform;
+}
+.framer-npbIQ.framer-1h9x6p:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--pw-shadow-md);
+  filter: saturate(1.05);
+}
+.framer-npbIQ.framer-1h9x6p:active {
+  transform: translateY(0);
+  box-shadow: var(--pw-shadow-sm);
+}
+/* Outlined / ghost buttons shouldn't cast a heavy shadow at rest */
+.framer-npbIQ.framer-1h9x6p[style*="transparent"],
+.framer-npbIQ.framer-1h9x6p[style*="rgba(255, 255, 255, 0.15)"] {
+  box-shadow: none;
+}
+/* Crisper letter spacing inside button labels */
+.framer-npbIQ .framer-text { letter-spacing: -0.005em; }
+
+/* Inline "arrow" style CTA links (Achievement / Projects black buttons) */
+a.framer-npbIQ[style*="rgb(0, 0, 0)"],
+a.framer-npbIQ[style*="rgb(195, 96, 54)"] { border-radius: 12px !important; }
+
+/* ---------------------------------------------------------------------
+   2. Section eyebrow badges — unified refined pill
+   ------------------------------------------------------------------- */
+.process-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: var(--pw-accent-soft);
+  border: 1px solid var(--pw-accent-border);
+  backdrop-filter: blur(2px);
+}
+.process-badge-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--pw-accent) !important;
+  box-shadow: 0 0 0 4px rgba(195, 96, 54, 0.12);
+}
+.process-badge-text {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase;
+  color: var(--pw-accent) !important;
+}
+
+/* Framer-native eyebrow pill (Why / Projects / Partners "Grey" badge) */
+.framer-pqt00z {
+  width: fit-content !important;
+  padding: 7px 14px !important;
+  border-radius: 999px !important;
+  background: rgba(26, 21, 18, 0.04);
+  border: 1px solid var(--pw-line);
+}
+.framer-pqt00z .framer-text {
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* ---------------------------------------------------------------------
+   3. Typography rhythm — bigger, calmer headings & readable body
+   ------------------------------------------------------------------- */
+.framer-styles-preset-1vb0x0m:not(.rich-text-wrapper) {
+  text-wrap: balance;
+}
+/* Body copy: gentle rhythm + comfortable measure */
+.framer-6c3n9 .framer-styles-preset-12akawa:not(.rich-text-wrapper),
+.framer-6c3n9 .framer-styles-preset-12akawa.rich-text-wrapper p {
+  --framer-line-height: 1.75em;
+  text-wrap: pretty;
+}
+
+/* ---------------------------------------------------------------------
+   4. "Why" commitment cards — deeper, softer, tactile
+   ------------------------------------------------------------------- */
+.wyc {
+  border-radius: var(--pw-radius) !important;
+  border: 1px solid var(--pw-line) !important;
+  box-shadow: var(--pw-shadow-sm) !important;
+  overflow: hidden;
+  transition: transform 0.5s var(--pw-ease), box-shadow 0.5s var(--pw-ease), border-color 0.5s var(--pw-ease) !important;
+  background: #fff;
+}
+.wyc:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: var(--pw-shadow-lg) !important;
+  border-color: var(--pw-accent-border) !important;
+}
+.wyc-img-wrap { overflow: hidden; }
+.wyc-img { transition: transform 0.7s var(--pw-ease); }
+.wyc:hover .wyc-img { transform: scale(1.06); }
+.wyc-icon {
+  background: var(--pw-accent-soft) !important;
+  color: var(--pw-accent) !important;
+  border: 1px solid var(--pw-accent-border);
+  border-radius: 12px !important;
+}
+
+/* ---------------------------------------------------------------------
+   5. Project gallery cards — cinematic imagery + refined meta
+   ------------------------------------------------------------------- */
+.framer-MWgt8.framer-gkoh32 {
+  border-radius: var(--pw-radius) !important;
+  overflow: hidden;
+  transition: transform 0.5s var(--pw-ease);
+}
+.framer-MWgt8.framer-gkoh32 .framer-yu39w4 {
+  border-radius: var(--pw-radius) !important;
+  overflow: hidden;
+  box-shadow: var(--pw-shadow-sm);
+  transition: box-shadow 0.5s var(--pw-ease);
+}
+.framer-MWgt8.framer-gkoh32 .framer-yu39w4 img {
+  transition: transform 0.8s var(--pw-ease) !important;
+}
+.framer-MWgt8.framer-gkoh32:hover .framer-yu39w4 { box-shadow: var(--pw-shadow-md); }
+.framer-MWgt8.framer-gkoh32:hover .framer-yu39w4 img { transform: scale(1.05); }
+
+/* ---------------------------------------------------------------------
+   6. Reusable premium surface for inline-styled cards
+      (applied via class in About / Achievement / WhoWeWorkWith)
+   ------------------------------------------------------------------- */
+.pw-card {
+  border-radius: var(--pw-radius) !important;
+  border: 1px solid var(--pw-line) !important;
+  box-shadow: var(--pw-shadow-sm) !important;
+  transition: transform 0.45s var(--pw-ease), box-shadow 0.45s var(--pw-ease), border-color 0.45s var(--pw-ease) !important;
+}
+.pw-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--pw-shadow-md) !important;
+  border-color: var(--pw-accent-border) !important;
+}
+/* Stat cards emphasise the number with the accent underline on hover */
+.pw-stat { position: relative; }
+.pw-stat::after {
+  content: "";
+  position: absolute;
+  left: 40px; right: 40px; bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--pw-accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--pw-ease);
+}
+.pw-stat:hover::after { transform: scaleX(1); }
+
+/* ---------------------------------------------------------------------
+   7. Section backgrounds — subtle warm depth & clean dividers
+   ------------------------------------------------------------------- */
+/* Hairline separators between stacked light sections */
+.framer-1utys7j,
+.framer-14zwjep,
+.framer-yje7i4,
+.framer-d8gtoz,
+.framer-4st41m {
+  position: relative;
+}
+
+/* A whisper of warmth on plain-white sections so they don't feel flat */
+.framer-yje7i4 {
+  background:
+    radial-gradient(1200px 500px at 85% -5%, rgba(195, 96, 54, 0.05), transparent 60%),
+    #faf9f6 ;
+}
+
+/* ---------------------------------------------------------------------
+   8. Links with arrows — animated arrow nudge
+   ------------------------------------------------------------------- */
+.process-details-link,
+.pw-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.35s var(--pw-ease), color 0.3s var(--pw-ease);
+}
+.process-details-link:hover,
+.pw-arrow-link:hover { gap: 10px; }
+
+/* ---------------------------------------------------------------------
+   9. Respect reduced motion
+   ------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .framer-npbIQ.framer-1h9x6p,
+  .wyc, .wyc-img, .pw-card,
+  .framer-MWgt8.framer-gkoh32 .framer-yu39w4 img {
+    transition: none !important;
+  }
+}

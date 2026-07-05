@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import './styles/global.css'
+import './styles/premium.css'
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -23,10 +24,11 @@ import BlogPostPage from './pages/BlogPostPage.jsx'
 import BlogIndexPage from './pages/BlogIndexPage.jsx'
 import FAQPage from './pages/FAQPage.jsx'
 import WhoWeWorkWith from './components/WhoWeWorkWith.jsx'
+import FinalCTA from './components/FinalCTA.jsx'
 
 function HomePage() {
   useEffect(() => {
-    document.title = "Agarwood Farming Partnership India | Earn Upfront from Mature Agarwood Trees Mrida Infra";
+    document.title = "Agarwood Farming Partnership India | Earn Upfront from Mature Agarwood Trees | Mrida Infra";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute("content", "Partner with Mrida Infra for a transparent Agarwood farming partnership in India. Get paid upfront for mature Agarwood trees, pay zero inoculation cost, and share returns fairly. Farmers and investors - start here.");
@@ -44,14 +46,15 @@ function HomePage() {
         <div data-framer-root="" className="framer-2mr35 framer-4gyze framer-eHfZ5 framer-JHdCe framer-IhwIG framer-Ui72Q framer-S0UiV framer-6c3n9 framer-ojchan framer-72rtr7" style={{ minHeight: '100vh', width: 'auto', display: 'contents' }}>
           <Hero />
           <Reveal><About /></Reveal>
-          <Reveal><Projects /></Reveal>
-          <ProcessSection />
           <Reveal><Why /></Reveal>
+          <ProcessSection />
           <Reveal><Achievement /></Reveal>
+          <Reveal><Projects /></Reveal>
           <Reveal><WhoWeWorkWith /></Reveal>
-          <Reveal><Testimonials /></Reveal>
-          <Reveal><Blog /></Reveal>
-          <Reveal><FAQ /></Reveal>
+          <Reveal><FinalCTA /></Reveal>
+          {/* <Reveal><Testimonials /></Reveal> */}
+          {/* <Reveal><Blog /></Reveal> */}
+          {/* <Reveal><FAQ /></Reveal> */}
         </div>
         <Reveal><Footer /></Reveal>
       </div>
