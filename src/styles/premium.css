@@ -212,7 +212,7 @@ a.framer-npbIQ[style*="rgb(195, 96, 54)"] { border-radius: 12px !important; }
 .framer-yje7i4 {
   background:
     radial-gradient(1200px 500px at 85% -5%, rgba(195, 96, 54, 0.05), transparent 60%),
-    #faf9f6 !important;
+    #faf9f6 ;
 }
 
 /* ---------------------------------------------------------------------

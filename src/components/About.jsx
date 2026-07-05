@@ -60,6 +60,7 @@ const BENEFITS = [
     icon: <IconPayment />,
     title: 'Upfront Payment',
     text: 'We buy a minimum of 20% of your eligible mature Agarwood trees and pay you immediately.',
+    
   },
   {
     icon: <IconLeaf />,
@@ -99,10 +100,10 @@ export default function About() {
         .about2-inner { max-width: 1180px; margin: 0 auto; }
 
         /* Header */
-        .about2-head { max-width: 760px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+        .about2-head { max-width: 760px; margin: 0 0 48px 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 22px; }
 
         /* Story */
-        .about2-story { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 72px; align-items: start; margin-top: 96px; }
+        .about2-story { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 72px; align-items: start; margin-top: 24px; }
         .about2-sticky { position: sticky; top: 96px; }
         .about2-figure { position: relative; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 70px -30px rgba(60, 30, 15, 0.45); aspect-ratio: 4/5; }
         .about2-figure img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.16,1,0.3,1); }
@@ -134,8 +135,13 @@ export default function About() {
         @media (max-width: 991px) {
           .about2-story { grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
           .about2-sticky { position: static; }
-          .about2-figure { aspect-ratio: 16/11; }
-          .about2-float { top: 16px; left: 16px; }
+          .about2-figure { aspect-ratio: 4/3; }
+          .about2-float { top: 16px; left: 16px; padding: 10px 14px; border-radius: 12px; }
+          .about2-float div { font-size: 1.2rem !important; }
+          .about2-float div + div { font-size: 0.62rem !important; letter-spacing: 0.04em !important; }
+          .about2-figcap { padding: 10px 14px; border-radius: 12px; bottom: 16px; left: 16px; right: 16px; }
+          .about2-figcap p { font-size: 0.82rem !important; }
+          .about2-figcap p + p { font-size: 0.72rem !important; }
           .about2-quote { margin-top: 72px; padding: 56px 26px; }
           .about2-quote-mark { left: 20px; font-size: 130px; }
           .about2-bgrid { grid-template-columns: 1fr; }
@@ -146,7 +152,7 @@ export default function About() {
         }
       `}</style>
 
-      <section className="framer-1utys7j about2" id="about" style={{ padding: '120px 20px' }}>
+      <section className="framer-1utys7j about2" id="about" style={{ padding: '50px 20px' }}>
         <div className="about2-inner">
 
           {/* 1 ── Premium Header ─────────────────────────────── */}

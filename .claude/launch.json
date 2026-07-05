@@ -1,11 +1,1 @@
-{
-  "version": "0.0.1",
-  "configurations": [
-    {
-      "name": "pracheena-web",
-      "runtimeExecutable": "node_modules/.bin/vite",
-      "runtimeArgs": ["--port", "5201"],
-      "port": 5201
-    }
-  ]
-}
+{"version":"0.0.1","configurations":[{"name":"mrida-dev","runtimeExecutable":"npm","runtimeArgs":["run","dev"],"port":5173}]}

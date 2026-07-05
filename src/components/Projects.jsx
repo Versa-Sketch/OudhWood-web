@@ -1,583 +1,541 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const TC = 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195, 96, 54))';
+const TK = 'var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))';
+const TG = 'var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))';
+const BG = 'var(--token-174a5685-4c1c-494c-9f1c-dc1cd85c9607, rgb(245, 241, 229))';
+const EASE = [0.16, 1, 0.3, 1];
+
+const fadeUp = (delay = 0) => ({
+  initial:      { opacity: 0, y: 24 },
+  whileInView:  { opacity: 1, y: 0  },
+  viewport:     { once: true, margin: '-60px' },
+  transition:   { duration: 0.6, ease: EASE, delay },
+});
+
+const PROJECTS = [
+  {
+    id: 'Site MR-AS-001',
+    location: 'Assam',
+    status: 'Active',
+    image: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1600&fit=crop&q=80&auto=format',
+  },
+  {
+    id: 'Site MR-TR-002',
+    location: 'Tripura',
+    status: 'In Harvest',
+    image: 'https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=1600&fit=crop&q=80&auto=format',
+  },
+  {
+    id: 'Site MR-AS-003',
+    location: 'Assam',
+    status: 'Planned',
+    image: 'https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=1600&fit=crop&q=80&auto=format',
+  },
+  {
+    id: 'Site MR-TR-004',
+    location: 'Tripura',
+    status: 'Active',
+    image: 'https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=1600&fit=crop&q=80&auto=format',
+  },
+  {
+    id: 'Site MR-AS-005',
+    location: 'Assam',
+    status: 'In Harvest',
+    image: 'https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=1600&fit=crop&q=80&auto=format',
+  },
+  {
+    id: 'Site MR-TR-006',
+    location: 'Tripura',
+    status: 'Planned',
+    image: 'https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=1600&fit=crop&q=80&auto=format',
+  },
+];
+
+const STYLES = `
+  .proj-section {
+    padding: 50px 24px;
+    background-color: ${BG};
+    width: 100%;
+  }
+  .proj-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ─── Two-Column Header ──────────────────────────────────────────────── */
+  .proj-header {
+    display: grid;
+    grid-template-columns: 55fr 45fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 64px;
+    width: 100%;
+  }
+  .proj-header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .proj-badge-row {
+    margin-bottom: 24px;
+  }
+  .proj-heading {
+    font-size: clamp(2rem, 3.2vw, 2.6rem);
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: ${TK};
+    margin: 0;
+    max-width: 620px;
+    text-wrap: balance;
+  }
+  .proj-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .proj-desc {
+    font-size: 1.05rem;
+    line-height: 1.68;
+    color: ${TG};
+    margin: 0;
+  }
+  .proj-header-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: ${TK};
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    width: fit-content;
+    transition:
+      background-color 0.25s ease,
+      box-shadow       0.25s ease,
+      transform        0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .proj-header-btn:hover {
+    background-color: rgb(30, 25, 22);
+    box-shadow: 0 8px 24px -4px rgba(26,21,18,0.25);
+    transform: translateY(-2px);
+  }
+
+  /* ─── Featured Grid Showcase ────────────────────────────────────────── */
+  .proj-showcase-row {
+    display: grid;
+    grid-template-columns: 65fr 35fr;
+    gap: 32px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+  .proj-showcase-row:last-of-type {
+    margin-bottom: 0;
+  }
+  
+  .proj-secondary-column {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* ─── Plantation Cards Common Styling ───────────────────────────────── */
+  .proj-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--pw-shadow-md);
+    cursor: pointer;
+    box-sizing: border-box;
+    display: block;
+    text-decoration: none;
+  }
+  .proj-card-img-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(200, 196, 188);
+  }
+  .proj-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .proj-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(16, 12, 10, 0.85) 0%, rgba(16, 12, 10, 0.4) 50%, rgba(16, 12, 10, 0.15) 100%);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .proj-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--pw-shadow-lg);
+  }
+  .proj-card:hover .proj-card-img {
+    transform: scale(1.05);
+  }
+
+  .proj-card-project-id {
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 12px 0 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .proj-card-secondary-id {
+    font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin: 8px 0 4px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  
+  .proj-card-detail {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 24px;
+    line-height: 1.4;
+  }
+  
+  .proj-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 750;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: auto;
+  }
+  .proj-card-cta span {
+    transition: transform 0.25s ease;
+  }
+  .proj-card:hover .proj-card-cta span {
+    transform: translateX(4px);
+  }
+
+  /* ─── Premium Editorial Quote Section (Full Width, No Radius, No Padding) ─ */
+  .proj-quote-section {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: ${BG};
+  }
+  .proj-quote-card {
+    position: relative;
+    width: 100%;
+    min-height: 440px;
+    border-radius: 0; /* No border radius */
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .proj-quote-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+  }
+  .proj-quote-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url(https://framerusercontent.com/images/6mcf62RlDfRfU61Yg5vb2pefpi4.png?width=256&height=256);
+    background-repeat: repeat;
+    background-size: 128px auto;
+    opacity: 0.35;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .proj-quote-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,21,18,0.75) 0%, rgba(26,21,18,0.55) 100%);
+    padding: 64px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .proj-quote-content-wrapper {
+    max-width: 1280px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .proj-quote-border-left {
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  .proj-quote-text {
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: #ffffff;
+    margin: 0;
+    text-wrap: balance;
+    font-style: italic;
+  }
+  .proj-quote-author-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .proj-quote-author-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .proj-quote-author-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .proj-quote-author-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
+  }
+  .proj-quote-author-title {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+    margin: 0;
+  }
+
+  /* ─── Responsive ─────────────────────────────────────────────────────── */
+  @media (max-width: 990px) {
+    .proj-header {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .proj-showcase-row {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .proj-secondary-column {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 32px;
+    }
+    .proj-card.featured {
+      height: 480px;
+    }
+    .proj-card.secondary {
+      height: 280px;
+    }
+    .proj-quote-overlay {
+      padding: 48px 24px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .proj-section {
+      padding: 56px 16px 64px;
+    }
+    .proj-header {
+      margin-bottom: 40px;
+    }
+    .proj-secondary-column {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .proj-card.featured {
+      height: 400px;
+    }
+    .proj-card.secondary {
+      height: 250px;
+    }
+    .proj-quote-border-left {
+      padding-left: 20px;
+    }
+    .proj-quote-overlay {
+      padding: 40px 16px;
+    }
+  }
+`;
 
 export default function Projects() {
+  const row1Featured = PROJECTS[0];
+  const row1Secondary = [PROJECTS[1], PROJECTS[2]];
+
+  const row2Featured = PROJECTS[3];
+  const row2Secondary = [PROJECTS[4], PROJECTS[5]];
+
   return (
     <>
-      <section className="framer-d8gtoz" data-framer-name="Projects" id="projects">
-          <div className="framer-l1otvf" data-framer-name="Inner">
-            <div className="framer-1u5wd0x" data-framer-name="Title Section">
-              <div className="framer-7wm1tz" data-framer-name="Title">
-                <div className="ssr-variant">
-                  <div className="framer-125bg9c-container">
-                    <div className="framer-t7M5S framer-riLfm framer-pqt00z framer-v-lg75cy" data-framer-name="Grey" style={{ "--1ejae7j": "flex-start", width: "100%" }}>
-                      <div className="framer-12zpxkc" data-border="true" data-framer-name="Icon" style={{ "--border-bottom-width": "0.5px", "--border-color": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--border-left-width": "0.5px", "--border-right-width": "0.5px", "--border-style": "solid", "--border-top-width": "0.5px", borderBottomLeftRadius: "50px", borderBottomRightRadius: "50px", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}>
-                        <div className="framer-1mlw5gd" data-framer-name="Dot" style={{ backgroundColor: "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", borderBottomLeftRadius: "50px", borderBottomRightRadius: "50px", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}>
-                        </div>
-                      </div>
-                      <div className="framer-2pahix" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Our Projects`}</p>
-                      </div>
-                    </div>
+      <style>{STYLES}</style>
+      
+      {/* ── Our Projects Section ───────────────────────────────────────── */}
+      <section className="proj-section" id="projects">
+        <div className="proj-inner">
+          
+          {/* Two-Column Header */}
+          <div className="proj-header">
+            <div className="proj-header-left">
+              <motion.div className="proj-badge-row" {...fadeUp(0)}>
+                <div className="process-badge">
+                  <span className="process-badge-dot" />
+                  <p className="process-badge-text">Our Projects</p>
+                </div>
+              </motion.div>
+              <motion.h2 className="proj-heading" {...fadeUp(0.05)}>
+                Our Agarwood Plantation Projects: One Proven Workflow Across Every Site in India
+              </motion.h2>
+            </div>
+            
+            <motion.div className="proj-header-right" {...fadeUp(0.1)}>
+              <p className="proj-desc">
+                Across every active and planned plantation site in India's prime Agarwood-producing belts — including <strong>Karnataka, Kerala, Assam</strong> and <strong>Tripura</strong> — every Mrida project follows the same rigorous, five-stage operational workflow: <strong>Survey &amp; Assess → Split &amp; Agree → Inoculate → Monitor → Harvest &amp; Settle</strong>. Each stage is managed by our professional team, documented tree by tree, and fully accountable at every step. No shortcuts. No ambiguity. A clean, traceable Agarwood farming operation built on long-term, fair-term partnerships.
+              </p>
+              <Link to="/project" className="proj-header-btn">
+                See our active Agarwood plantation projects →
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* ROW 1 Grid */}
+          <div className="proj-showcase-row">
+            {/* Featured Project */}
+            <motion.div className="proj-card-wrapper" {...fadeUp(0.15)}>
+              <Link to="/project" className="proj-card featured" style={{ height: '540px' }}>
+                <div className="proj-card-img-wrapper">
+                  <img src={row1Featured.image} alt={row1Featured.id} className="proj-card-img" />
+                </div>
+                <div className="proj-card-overlay">
+                  <h3 className="proj-card-project-id">{row1Featured.id}</h3>
+                  <p className="proj-card-detail">{row1Featured.location}</p>
+                  <div className="proj-card-cta">
+                    Explore Project <span>→</span>
                   </div>
                 </div>
-                <div className="framer-14k29f4" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
-                  <h2 className="framer-text framer-styles-preset-1vb0x0m" data-styles-preset="emYHIiQDN" dir="auto" style={{ "--framer-text-color": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))" }}>{`Our Agarwood Plantation Projects: One Proven Workflow Across Every Site in India`}</h2>
+              </Link>
+            </motion.div>
+
+            {/* Secondary Column */}
+            <div className="proj-secondary-column">
+              {row1Secondary.map((proj, idx) => (
+                <motion.div key={proj.id} {...fadeUp(0.2 + idx * 0.05)}>
+                  <Link to="/project" className="proj-card secondary" style={{ height: '254px' }}>
+                    <div className="proj-card-img-wrapper">
+                      <img src={proj.image} alt={proj.id} className="proj-card-img" />
+                    </div>
+                    <div className="proj-card-overlay">
+                      <h4 className="proj-card-secondary-id">{proj.id}</h4>
+                      <p className="proj-card-detail">{proj.location}</p>
+                      <div className="proj-card-cta">
+                        Explore <span>→</span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* ROW 2 Grid */}
+          <div className="proj-showcase-row">
+            {/* Featured Project */}
+            <motion.div className="proj-card-wrapper" {...fadeUp(0.25)}>
+              <Link to="/project" className="proj-card featured" style={{ height: '540px' }}>
+                <div className="proj-card-img-wrapper">
+                  <img src={row2Featured.image} alt={row2Featured.id} className="proj-card-img" />
                 </div>
-              </div>
-              <div className="framer-wivt2h" data-framer-component-type="RichTextContainer" style={{ transform: "none" }}>
-                <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))" }}>
-                  Across every active and planned plantation site in India's prime Agarwood-producing belts — including <strong>Karnataka, Kerala, Assam</strong> and <strong>Tripura</strong> — every Mrida project follows the same rigorous, five-stage operational workflow: <strong>Survey &amp; Assess → Split &amp; Agree → Inoculate → Monitor → Harvest &amp; Settle</strong>. Each stage is managed by our professional team, documented tree by tree, and fully accountable at every step. No shortcuts. No ambiguity. A clean, traceable Agarwood farming operation built on long-term, fair-term partnerships.
+                <div className="proj-card-overlay">
+                  <h3 className="proj-card-project-id">{row2Featured.id}</h3>
+                  <p className="proj-card-detail">{row2Featured.location}</p>
+                  <div className="proj-card-cta">
+                    Explore Project <span>→</span>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Secondary Column */}
+            <div className="proj-secondary-column">
+              {row2Secondary.map((proj, idx) => (
+                <motion.div key={proj.id} {...fadeUp(0.3 + idx * 0.05)}>
+                  <Link to="/project" className="proj-card secondary" style={{ height: '254px' }}>
+                    <div className="proj-card-img-wrapper">
+                      <img src={proj.image} alt={proj.id} className="proj-card-img" />
+                    </div>
+                    <div className="proj-card-overlay">
+                      <h4 className="proj-card-secondary-id">{proj.id}</h4>
+                      <p className="proj-card-detail">{proj.location}</p>
+                      <div className="proj-card-cta">
+                        Explore <span>→</span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── Premium Editorial Quote Section (Separate, Full Width, No Radius, No Padding) ── */}
+      <section className="proj-quote-section">
+        <div className="proj-quote-card">
+          <img
+            src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&fit=crop&q=80&auto=format"
+            alt="Quotes Background"
+            className="proj-quote-bg-img"
+          />
+          <div className="proj-quote-texture" />
+          <div className="proj-quote-overlay">
+            <div className="proj-quote-content-wrapper">
+              <div className="proj-quote-border-left">
+                <p className="proj-quote-text">
+                  “We don't see farmers as suppliers or investors as outsiders. We see partners. One proven model. Fair to farmers. Credible for investors. Built to scale across India.”
                 </p>
-              </div>{/*$*/}
-              <div className="framer-1g7wblp-container">{/*$*/}<Link className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-14ijzql framer-lhbnc9" data-framer-name="Black" data-highlight="true" to="/project" tabIndex="0" style={{ backgroundColor: "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", width: "auto" }}>
-                  <div className="framer-k6u0up" data-framer-name="Text">
-                    <div className="framer-1faiyqn" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", opacity: "1", transform: "none" }}>
-                      <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
-                    </div>
-                    <div className="framer-lypvvb" data-framer-name="Flip">
-                      <div className="framer-1yk2hn7" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
-                      </div>
-                      <div className="framer-ee6oh2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`See our active Agarwood plantation projects →`}</p>
-                      </div>
-                    </div>
-                  </div>
-                </Link>{/*/$*/}</div>{/*/$*/}
-            </div>
-            <div className="framer-qt949n">{/*$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="6048" height="4024" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=1024&h=681&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=2048&h=1363&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=4096&h=2725&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?w=6048&h=4024&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-AS-001`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Assam`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Active`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 6" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="6000" height="3869" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=512&h=330&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=1024&h=660&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=2048&h=1321&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=4096&h=2641&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1758390286386-87c9d78cf9be?w=6000&h=3869&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-TR-002`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Tripura`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`In Harvest`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 3" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="5472" height="3078" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=512&h=288&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=1024&h=576&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=2048&h=1152&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=4096&h=2304&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1763229759060-50db1e4bf9ad?w=5472&h=3078&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-AS-003`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Assam`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Planned`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-gkoh32 framer-1yd6crl" data-framer-name="Landscape" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="7280" height="4080" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=512&h=287&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=1024&h=574&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=2048&h=1148&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=4096&h=2296&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1730086144061-769be13b08e5?w=7280&h=4080&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-TR-004`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Tripura`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Active`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-f1surv framer-1yd6crl" data-framer-name="Square" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="7008" height="3942" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=512&h=288&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=1024&h=576&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=2048&h=1152&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=4096&h=2304&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1765053257298-a56a929afeec?w=7008&h=3942&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-AS-005`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Assam`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`In Harvest`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*$*/}
-              <div className="ssr-variant">
-                <div className="framer-1s5gyon-container" style={{ "--1q1styz": "span 4" }}>{/*$*/}<Link className="framer-MWgt8 framer-1EFv6 framer-Ui72Q framer-riLfm framer-gkoh32 framer-v-pn36nf framer-1yd6crl" data-framer-name="Small" to="/project" style={{ width: "100%" }}>
-                    <div className="framer-yu39w4" data-framer-name="Project Image">
-                      <div className="framer-biry7z">
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="2301" height="1536" sizes="(min-width: 1200px) calc(100vw * 1.05), (min-width: 810px) and (max-width: 1199.98px) calc(max((min(max(100vw - 40px, 1px), 1440px) - 20px) / 2, 50px) * 1.05), (max-width: 809.98px) calc(max(min(max(100vw - 30px, 1px), 1440px), 50px) * 1.05)" srcset="https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=512&h=342&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=1024&h=684&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2048&h=1367&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2301&h=1536&fit=crop&q=80&auto=format 2301w,https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=4096&h=2734&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1730086146417-7c7524fc95c8?w=2301&h=1536&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="framer-d6jiti" data-framer-name="Project Details">
-                      <div className="framer-192r9lr" data-framer-component-type="RichTextContainer" style={{ "--extracted-1w1cjl5": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                        <h6 className="framer-text framer-styles-preset-r1lh48" data-styles-preset="E0IyvNZa4" dir="auto" style={{ "--framer-text-color": "var(--extracted-1w1cjl5, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Site MR-TR-006`}</h6>
-                      </div>
-                      <div className="framer-1tj9rq2" data-framer-name="Details">
-                        <div className="framer-5nfmeo" data-framer-name="Information">
-                          <div className="framer-1a4y7rw" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`Tripura`}</p>
-                          </div>
-                          <div className="framer-w2gxv2" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112, 112, 112)))" }}>{`/`}</p>
-                          </div>
-                          <div className="framer-1wepnt3" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                            <p className="framer-text framer-styles-preset-176xuhy" data-styles-preset="XRoKQaeZa" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`Planned`}</p>
-                          </div>
-                        </div>
-                        <div className="framer-qwnpvf" data-framer-name="Action">
-                          <div className="framer-mbmh78" data-framer-name="Text">
-                            <div className="framer-1djqzz6" data-framer-name="Spacer" style={{ opacity: "1" }}>
-                              <div className="framer-1umj1a5" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                              </div>
-                              <div className="framer-r8abeb-container">{/*$*/}
-                                <div style={{ display: "contents" }}></div>{/*/$*/}
-                              </div>
-                            </div>
-                            <div className="framer-18gnsmk" data-framer-name="Flip">
-                              <div className="framer-1sosa3v" data-framer-name="Text Icon" style={{ opacity: "1" }}>
-                                <div className="framer-11wh8ls" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1nc4btl-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                              <div className="framer-1m2bjyr" data-framer-name="Text Icon">
-                                <div className="framer-1cczhki" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                                  <p className="framer-text framer-styles-preset-1c0cf2x" data-styles-preset="qEbsElzxw" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0, 0, 0)))" }}>{`View Site`}</p>
-                                </div>
-                                <div className="framer-1xqd2et-container">{/*$*/}
-                                  <div style={{ display: "contents" }}></div>{/*/$*/}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>{/*/$*/}</div>
-              </div>{/*/$*/}{/*/$*/}
-            </div>
-          </div>
-        </section>
-      <div className="framer-ge7j76-container">
-          <div className="ssr-variant hidden-ojchan hidden-1h6ujoa">
-            <section as="section" className="framer-DdP8p framer-HWSpS framer-6c3n9 framer-CXUMy framer-lp51bc framer-v-lp51bc" data-framer-name="Desktop" style={{ width: "100%" }}>
-              <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="3400" height="2267" sizes="(min-width: 1200px) 100vw, (min-width: 810px) and (max-width: 1199.98px) 100vw, (max-width: 809.98px) 100vw" srcset="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1024&h=683&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2048&h=1366&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format 3400w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=4096&h=2731&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-              </div>
-              <div className="framer-1bncf5q" data-framer-name="Bending" style={{ opacity: "0.5" }}>
-                <div data-framer-background-image-wrapper="true" style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0", backgroundImage: "url(https://framerusercontent.com/images/6mcf62RlDfRfU61Yg5vb2pefpi4.png?width=256&height=256)", backgroundRepeat: "repeat", backgroundPosition: "left top", border: "0", backgroundSize: "128px auto" }}>
-                </div>
-              </div>
-              <div className="framer-1n9i15o" data-framer-name="Cover" style={{ backgroundColor: "var(--token-88b7370d-da66-4dea-9b25-a75d885e172f, rgba(0, 0, 0, 0.5))" }}>
-                <div className="framer-svnc0g" data-framer-name="Inner">
-                  <div className="framer-x51fe6" data-border="true" data-framer-name="Quotes" style={{ "--border-bottom-width": "0px", "--border-color": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--border-left-width": "2px", "--border-right-width": "0px", "--border-style": "solid", "--border-top-width": "0px" }}>
-                    <div className="framer-15oj50z" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                      <p className="framer-text framer-styles-preset-17ks0j8" data-styles-preset="qEkYZ9jKA" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`“We don't see farmers as suppliers or investors as outsiders. We see partners. One proven model. Fair to farmers. Credible for investors. Built to scale across India.”`}</p>
-                    </div>
-                    <div className="framer-4orvlg" data-framer-name="Client">
-                      <div className="framer-247zrb" style={{ borderBottomLeftRadius: "100px", borderBottomRightRadius: "100px", borderTopLeftRadius: "100px", borderTopRightRadius: "100px" }}>
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="2156" height="2156" sizes="(min-width: 1200px) 42px, (min-width: 810px) and (max-width: 1199.98px) 42px, (max-width: 809.98px) 42px" srcset="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=512&h=512&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=1024&h=1024&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2048&h=2048&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format 2156w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=4096&h=4096&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                      <div className="framer-5ifs5l" data-framer-name="Name">
-                        <div className="framer-1y91n8m" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`Mrida Infra LLP`}</p>
-                        </div>
-                        <div className="framer-5p44o0" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-mmu269" data-styles-preset="Tigl3Z5BV" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`The Mrida Team`}</p>
-                        </div>
-                      </div>
-                    </div>
+                <div className="proj-quote-author-row">
+                  <img
+                    src="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=100&h=100&fit=crop&q=80&auto=format"
+                    alt="The Mrida Team"
+                    className="proj-quote-author-img"
+                  />
+                  <div className="proj-quote-author-info">
+                    <p className="proj-quote-author-name">Mrida Infra LLP</p>
+                    <p className="proj-quote-author-title">The Mrida Team</p>
                   </div>
                 </div>
-              </div>
-            </section>
-          </div>
-          <div className="ssr-variant hidden-1h6ujoa hidden-72rtr7">
-            <section as="section" className="framer-DdP8p framer-HWSpS framer-6c3n9 framer-CXUMy framer-lp51bc framer-v-1yxkyr8" data-framer-name="Tablet" style={{ width: "100%" }}>
-              <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="3400" height="2267" sizes="(min-width: 1200px) 100vw, (min-width: 810px) and (max-width: 1199.98px) 100vw, (max-width: 809.98px) 100vw" srcset="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1024&h=683&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2048&h=1366&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format 3400w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=4096&h=2731&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-              </div>
-              <div className="framer-1bncf5q" data-framer-name="Bending" style={{ opacity: "0.5" }}>
-                <div data-framer-background-image-wrapper="true" style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0", backgroundImage: "url(https://framerusercontent.com/images/6mcf62RlDfRfU61Yg5vb2pefpi4.png?width=256&height=256)", backgroundRepeat: "repeat", backgroundPosition: "left top", border: "0", backgroundSize: "128px auto" }}>
-                </div>
-              </div>
-              <div className="framer-1n9i15o" data-framer-name="Cover" style={{ backgroundColor: "var(--token-88b7370d-da66-4dea-9b25-a75d885e172f, rgba(0, 0, 0, 0.5))" }}>
-                <div className="framer-svnc0g" data-framer-name="Inner">
-                  <div className="framer-x51fe6" data-border="true" data-framer-name="Quotes" style={{ "--border-bottom-width": "0px", "--border-color": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--border-left-width": "2px", "--border-right-width": "0px", "--border-style": "solid", "--border-top-width": "0px" }}>
-                    <div className="framer-15oj50z" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                      <p className="framer-text framer-styles-preset-17ks0j8" data-styles-preset="qEkYZ9jKA" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`“We don't see farmers as suppliers or investors as outsiders. We see partners. One proven model. Fair to farmers. Credible for investors. Built to scale across India.”`}</p>
-                    </div>
-                    <div className="framer-4orvlg" data-framer-name="Client">
-                      <div className="framer-247zrb" style={{ borderBottomLeftRadius: "100px", borderBottomRightRadius: "100px", borderTopLeftRadius: "100px", borderTopRightRadius: "100px" }}>
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="2156" height="2156" sizes="(min-width: 1200px) 42px, (min-width: 810px) and (max-width: 1199.98px) 42px, (max-width: 809.98px) 42px" srcset="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=512&h=512&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=1024&h=1024&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2048&h=2048&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format 2156w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=4096&h=4096&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                      <div className="framer-5ifs5l" data-framer-name="Name">
-                        <div className="framer-1y91n8m" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`Mrida Infra LLP`}</p>
-                        </div>
-                        <div className="framer-5p44o0" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-mmu269" data-styles-preset="Tigl3Z5BV" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`The Mrida Team`}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div className="ssr-variant hidden-ojchan hidden-72rtr7">
-            <section as="section" className="framer-DdP8p framer-HWSpS framer-6c3n9 framer-CXUMy framer-lp51bc framer-v-jpgzsx" data-framer-name="Phone" style={{ width: "100%" }}>
-              <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="3400" height="2267" sizes="(min-width: 1200px) 100vw, (min-width: 810px) and (max-width: 1199.98px) 100vw, (max-width: 809.98px) 100vw" srcset="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=512&h=341&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1024&h=683&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2048&h=1366&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format 3400w,https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=4096&h=2731&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=3400&h=2267&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-              </div>
-              <div className="framer-1bncf5q" data-framer-name="Bending" style={{ opacity: "0.5" }}>
-                <div data-framer-background-image-wrapper="true" style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0", backgroundImage: "url(https://framerusercontent.com/images/6mcf62RlDfRfU61Yg5vb2pefpi4.png?width=256&height=256)", backgroundRepeat: "repeat", backgroundPosition: "left top", border: "0", backgroundSize: "128px auto" }}>
-                </div>
-              </div>
-              <div className="framer-1n9i15o" data-framer-name="Cover" style={{ backgroundColor: "var(--token-88b7370d-da66-4dea-9b25-a75d885e172f, rgba(0, 0, 0, 0.5))" }}>
-                <div className="framer-svnc0g" data-framer-name="Inner">
-                  <div className="framer-x51fe6" data-border="true" data-framer-name="Quotes" style={{ "--border-bottom-width": "0px", "--border-color": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--border-left-width": "2px", "--border-right-width": "0px", "--border-style": "solid", "--border-top-width": "0px" }}>
-                    <div className="framer-15oj50z" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                      <p className="framer-text framer-styles-preset-17ks0j8" data-styles-preset="qEkYZ9jKA" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`“We don't see farmers as suppliers or investors as outsiders. We see partners. One proven model. Fair to farmers. Credible for investors. Built to scale across India.”`}</p>
-                    </div>
-                    <div className="framer-4orvlg" data-framer-name="Client">
-                      <div className="framer-247zrb" style={{ borderBottomLeftRadius: "100px", borderBottomRightRadius: "100px", borderTopLeftRadius: "100px", borderTopRightRadius: "100px" }}>
-                        <div style={{ position: "absolute", borderRadius: "inherit", cornerShape: "inherit", top: "0", right: "0", bottom: "0", left: "0" }} data-framer-background-image-wrapper="true"><img decoding="async" width="2156" height="2156" sizes="(min-width: 1200px) 42px, (min-width: 810px) and (max-width: 1199.98px) 42px, (max-width: 809.98px) 42px" srcset="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=512&h=512&fit=crop&q=80&auto=format 512w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=1024&h=1024&fit=crop&q=80&auto=format 1024w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2048&h=2048&fit=crop&q=80&auto=format 2048w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format 2156w,https://images.unsplash.com/photo-1700592478407-3981353caecb?w=4096&h=4096&fit=crop&q=80&auto=format 4096w" src="https://images.unsplash.com/photo-1700592478407-3981353caecb?w=2156&h=2156&fit=crop&q=80&auto=format" alt style={{ display: "block", width: "100%", height: "100%", borderRadius: "inherit", cornerShape: "inherit", objectPosition: "center", objectFit: "cover" }} />
-                        </div>
-                      </div>
-                      <div className="framer-5ifs5l" data-framer-name="Name">
-                        <div className="framer-1y91n8m" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-12akawa" data-styles-preset="gJAO4fAFX" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`Mrida Infra LLP`}</p>
-                        </div>
-                        <div className="framer-5p44o0" data-framer-component-type="RichTextContainer" style={{ "--extracted-r6o4lv": "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", "--framer-link-text-color": "rgb(0, 153, 255)", "--framer-link-text-decoration": "underline", transform: "none" }}>
-                          <p className="framer-text framer-styles-preset-mmu269" data-styles-preset="Tigl3Z5BV" dir="auto" style={{ "--framer-text-color": "var(--extracted-r6o4lv, var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255)))" }}>{`The Mrida Team`}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </div>
-      <div className="framer-1gl3m2b-container">
-          <div className="ssr-variant hidden-ojchan hidden-1h6ujoa">
-            <div className="framer-IU7se framer-3nyu9z framer-v-3nyu9z" data-framer-name="Desktop" style={{ width: "100%" }}>
-              <div className="framer-ricxjq" data-framer-name="List">
-                <div className="framer-h9qgc9" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-5dfb2y" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-wdardp" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-15e9om3" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1x7m4yw" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-l8b0kh" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1evnnli" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-13otz81" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-z8qgi7" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1g8zm3u" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-8j0cn3" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-177uwws" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1k6ykbl" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1ac1g86" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1h8oq82" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-wj8hwx" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-10ghe3z" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-114omp7" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1r83e5c" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-jwadnq" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1aav2n5" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-5qxhu1" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-x30nxa" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1g083xo" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-q5hpyd" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-m9zux4" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-55js4x" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-jk2308" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-6f5fba" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1xdtg12" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-              </div>
-            </div>
-          </div>
-          <div className="ssr-variant hidden-1h6ujoa hidden-72rtr7">
-            <div className="framer-IU7se framer-3nyu9z framer-v-126vu58" data-framer-name="Tablet" style={{ width: "100%" }}>
-              <div className="framer-ricxjq" data-framer-name="List">
-                <div className="framer-8j0cn3" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-177uwws" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1k6ykbl" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1ac1g86" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1h8oq82" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-wj8hwx" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-10ghe3z" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-114omp7" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1r83e5c" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-jwadnq" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1aav2n5" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-5qxhu1" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-x30nxa" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1g083xo" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-q5hpyd" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-m9zux4" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-55js4x" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-jk2308" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-6f5fba" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1xdtg12" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-              </div>
-            </div>
-          </div>
-          <div className="ssr-variant hidden-ojchan hidden-72rtr7">
-            <div className="framer-IU7se framer-3nyu9z framer-v-1z9cuw" data-framer-name="Phone" style={{ width: "100%" }}>
-              <div className="framer-ricxjq" data-framer-name="List">
-                <div className="framer-1aav2n5" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-5qxhu1" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-x30nxa" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1g083xo" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-q5hpyd" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-m9zux4" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-55js4x" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-jk2308" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-6f5fba" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
-                <div className="framer-1xdtg12" data-framer-name="Line" style={{ backgroundColor: "var(--token-e5638b81-5e9d-4928-a8e0-45ccb1ddb8c8, rgb(180, 180, 180))" }}></div>
               </div>
             </div>
           </div>
         </div>
+      </section>
     </>
   );
 }

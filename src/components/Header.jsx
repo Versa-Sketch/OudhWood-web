@@ -217,11 +217,11 @@ export default function Header({ activePage = 'home' }) {
                     onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMenuOpen((open) => !open); } }}
                     style={{ height: "100%", width: "100%", cursor: 'pointer' }}
                   >
-                    <div className="framer-16sdbrd" data-framer-name="Line" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", transform: menuOpen ? 'translateY(8.5px) rotate(45deg)' : 'none', transition: 'transform 0.3s ease, background-color 0.3s ease' }}>
+                    <div className="framer-16sdbrd" data-framer-name="Line" style={{ backgroundColor: (scrolled || menuOpen || activePage !== 'home') ? 'rgb(0, 0, 0)' : 'var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))', transform: menuOpen ? 'translateY(8.5px) rotate(45deg)' : 'none', transition: 'transform 0.3s ease, background-color 0.3s ease' }}>
                     </div>
-                    <div className="framer-1pc127o" data-framer-name="Line" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", opacity: menuOpen ? 0 : 1, transition: 'opacity 0.2s ease, background-color 0.3s ease' }}>
+                    <div className="framer-1pc127o" data-framer-name="Line" style={{ backgroundColor: (scrolled || menuOpen || activePage !== 'home') ? 'rgb(0, 0, 0)' : 'var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))', opacity: menuOpen ? 0 : 1, transition: 'opacity 0.2s ease, background-color 0.3s ease' }}>
                     </div>
-                    <div className="framer-1r40d4y" data-framer-name="Line" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))", transform: menuOpen ? 'translateY(-8.5px) rotate(-45deg)' : 'none', transition: 'transform 0.3s ease, background-color 0.3s ease' }}>
+                    <div className="framer-1r40d4y" data-framer-name="Line" style={{ backgroundColor: (scrolled || menuOpen || activePage !== 'home') ? 'rgb(0, 0, 0)' : 'var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))', transform: menuOpen ? 'translateY(-8.5px) rotate(-45deg)' : 'none', transition: 'transform 0.3s ease, background-color 0.3s ease' }}>
                     </div>
                   </div>
                 </div>
@@ -235,10 +235,10 @@ export default function Header({ activePage = 'home' }) {
                 right: 0,
                 background: 'var(--token-174a5685-4c1c-494c-9f1c-dc1cd85c9607, #f5f1e5)',
                 boxShadow: '0 16px 32px rgba(0,0,0,0.12)',
-                overflow: 'hidden',
-                maxHeight: menuOpen ? '420px' : '0px',
                 opacity: menuOpen ? 1 : 0,
-                transition: 'max-height 0.35s ease, opacity 0.3s ease',
+                pointerEvents: menuOpen ? 'auto' : 'none',
+                visibility: menuOpen ? 'visible' : 'hidden',
+                transition: 'opacity 0.3s ease, visibility 0.3s ease',
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column', padding: '10px 20px 24px' }}>

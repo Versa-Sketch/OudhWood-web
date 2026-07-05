@@ -1,6 +1,74 @@
 export default function FinalCTA() {
   return (
     <>
+      <style>{`
+        /* Prevent final CTA content from getting cut off on mobile viewports */
+        @media (max-width: 640px) {
+          .framer-fyz6s.framer-v-s2mlrn.framer-4cr4yc {
+            height: auto !important;
+            min-height: min-content !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-1oumzdz {
+            height: auto !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 72px 20px 80px !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-11tafe0 {
+            height: auto !important;
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 28px !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-3vlij8 {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            text-align: center !important;
+            width: 100% !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-1pe02a7 h2 {
+            font-size: 1.75rem !important;
+            text-align: center !important;
+            line-height: 1.3 !important;
+            margin: 0 0 16px 0 !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-1vv0uzm p {
+            text-align: center !important;
+            font-size: 0.94rem !important;
+            line-height: 1.62 !important;
+            color: #d8d8d8 !important;
+          }
+          
+          /* Target buttons container specifically */
+          .framer-fyz6s.framer-v-s2mlrn .framer-11tafe0 > div:last-child {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            gap: 12px !important;
+            margin-top: 12px !important;
+          }
+          
+          .framer-fyz6s.framer-v-s2mlrn .framer-17zhks-container {
+            width: 100% !important;
+          }
+          .framer-fyz6s.framer-v-s2mlrn .framer-npbIQ {
+            width: 100% !important;
+            justify-content: center !important;
+            display: flex !important;
+            align-items: center !important;
+            box-sizing: border-box !important;
+            padding: 16px 24px !important;
+          }
+        }
+      `}</style>
+
       {/* Desktop */}
       <div className="ssr-variant hidden-ojchan hidden-1h6ujoa">
         <div className="framer-uo82x8-container">
