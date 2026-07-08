@@ -93,7 +93,7 @@ const CORE_VALUES = [
 
 const MODEL_STEPS = [
   { number: '01', title: 'The 20% Upfront Purchase', description: 'We buy a minimum of 20% of your eligible mature Agarwood trees at an agreed price, paid upfront. That gives farmers guaranteed income from day one, with zero risk on the trees we purchase.' },
-  { number: '02', title: 'The 80% Shared Arrangement', description: "The remaining trees stay in the farmer's name. We fund and manage the entire inoculation and monitoring process at our own cost. After harvest and sale, harvesting expenses are deducted, and the remaining returns are shared transparently." },
+  { number: '02', title: 'The 80% Shared Arrangement', description: "The remaining 80% of trees stay in the farmer's name. We fund and manage the entire inoculation and monitoring process at our own cost. After harvest and sale, harvesting expenses are deducted, and the remaining returns are shared transparently." },
   { number: '03', title: 'Why It Works for Investors Too', description: 'Because farmers earn upfront and again at harvest, partnerships stay stable and supply stays dependable over the long term — giving investors a scalable, managed, and traceable Agarwood cultivation model rather than a patchwork of moving parts.' },
 ];
 

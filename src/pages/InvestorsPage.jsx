@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 /* ── Inline SVG Icons for Investors Page ── */
 const IconTrendUp = () => (
@@ -48,27 +48,35 @@ const IconUsers = () => (
   </svg>
 );
 
+const IconArrowRight = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.0" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+    <polyline points="12 5 19 12 12 19"></polyline>
+  </svg>
+);
+
+
 const DEMAND_PILLARS = [
-  { title: 'Fragrance and Perfumery', share: '~45% market share', description: 'The largest demand driver, holding roughly 45% of market share. Oud remains a signature note in luxury and premium scent categories globally.', image: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&h=400&fit=crop&q=80&auto=format' },
-  { title: 'Wellness', share: 'Growing segment', description: 'A growing appetite for natural, premium botanicals across aromatherapy, self-care, and holistic health.', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop&q=80&auto=format' },
-  { title: 'Incense', share: 'Deep-rooted demand', description: 'Deep-rooted cultural and religious demand across Asia and the Middle East, sustained across generations.', image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop&q=80&auto=format' },
-  { title: 'Traditional Medicine', share: 'Consistent demand', description: 'Long-established use in respected healing traditions with consistent, loyal demand.', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=400&fit=crop&q=80&auto=format' },
+  { title: 'Fragrance and perfumery', share: '~45% of market share', description: 'the largest demand driver, holding roughly 45% of market share. Oud remains a signature note in luxury and premium scent categories globally.', image: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&h=400&fit=crop&q=80&auto=format' },
+  { title: 'Wellness', share: 'Growing segment', description: 'a growing appetite for natural, premium botanicals across aromatherapy, self-care, and holistic health.', image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&h=400&fit=crop&q=80&auto=format' },
+  { title: 'Incense', share: 'Deep-rooted demand', description: 'deep-rooted cultural and religious demand across Asia and the Middle East, sustained across generations.', image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=400&fit=crop&q=80&auto=format' },
+  { title: 'Traditional medicine', share: 'Consistent demand', description: 'long-established use in respected healing traditions with consistent, loyal demand.', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=400&fit=crop&q=80&auto=format' },
 ];
 
 const MRIDA_MODEL_PILLARS = [
-  { title: 'Managed End to End', description: 'From the first site survey through inoculation, monitoring, harvesting, and final settlement — every stage is coordinated and run by our team. You back one cohesive operation, not a fragile chain of independent variables.', icon: <IconShield /> },
-  { title: 'Scalable by Design', description: 'Our five-step workflow is identical across every plantation site. As new partnerships come on board, the model repeats cleanly across regions — growing without losing consistency, control, or accountability.', icon: <IconTractor /> },
-  { title: 'Fully Traceable Supply', description: 'Every site carries a unique Site Number. Every eligible mature Agarwood tree carries a unique Tree Number — logged through inoculation, inspection, harvest, and sale. Traceable supply means cleaner accounting and a credible sustainability story.', icon: <IconRefresh /> },
-  { title: 'A Fair Farmer Partnership', description: 'Our farmer-first model isn\'t just ethical — it\'s commercially smart. Farmers earn upfront and again at harvest, which keeps partnerships stable, supply dependable, and the operation sustainable over the long term.', icon: <IconUsers /> },
-  { title: 'Signed Agreements, Always', description: 'All prices, sharing ratios, and responsibilities are fixed in a signed agreement before any work begins. No ambiguous terms, no moving goalposts. What\'s agreed is what happens.', icon: <IconLeaf /> },
+  { title: 'Managed end to end', description: 'From the first site survey through inoculation, monitoring, harvesting, and final settlement — every stage is coordinated and run by our team. You back one cohesive operation, not a fragile chain of independent variables.', icon: <IconShield /> },
+  { title: 'Scalable by design', description: 'Our five-step workflow is identical across every plantation site. As new partnerships come on board, the model repeats cleanly across regions — growing without losing consistency, control, or accountability.', icon: <IconTractor /> },
+  { title: 'Fully traceable supply', description: 'Every site carries a unique Site Number. Every eligible mature Agarwood tree carries a unique Tree Number — logged through inoculation, inspection, harvest, and sale. Traceable supply means cleaner accounting, clearer accountability, and a credible sustainability story.', icon: <IconRefresh /> },
+  { title: 'A fair farmer partnership', description: "Our farmer-first model isn't just ethical — it's commercially smart. Farmers earn upfront and again at harvest, which keeps partnerships stable, supply dependable, and the operation sustainable over the long term.", icon: <IconUsers /> },
+  { title: 'Signed agreements, always', description: "All prices, sharing ratios, and responsibilities are fixed in a signed agreement before any work begins. No ambiguous terms, no moving goalposts. What's agreed is what happens.", icon: <IconLeaf /> },
 ];
 
 const ROI_DRIVERS = [
-  { title: 'Scarcity Supports Pricing', description: 'Limited natural supply against rising demand creates structural support for value over time.', icon: <IconTrendUp /> },
-  { title: 'Inoculation Creates the Asset', description: 'Professional inoculation transforms a standard mature tree into a resin-bearing, high-value commodity ready for premium markets.', icon: <IconLeaf /> },
-  { title: 'Global Market Access', description: 'Our established buyer network connects harvests directly to premium buyers across the Middle East, Asia, and beyond.', icon: <IconTractor /> },
-  { title: 'A Long-Term Horizon', description: 'Agarwood rewards patience. The 5+ year investment timeline aligns naturally with how value is built and realized in this market.', icon: <IconRefresh /> },
-  { title: 'Diversified Demand', description: 'Across fragrance, wellness, incense, and medicine, demand is spread across multiple durable markets — reducing exposure to any single sector.', icon: <IconUsers /> },
+  { title: 'Scarcity supports pricing', description: 'limited natural supply against rising demand creates structural support for value over time.', icon: <IconTrendUp /> },
+  { title: 'Inoculation creates the asset', description: 'professional inoculation transforms a standard mature tree into a resin-bearing, high-value commodity ready for premium markets.', icon: <IconLeaf /> },
+  { title: 'Global market access', description: 'our established buyer network connects harvests directly to premium buyers across the Middle East, Asia, and beyond.', icon: <IconTractor /> },
+  { title: 'A long-term horizon', description: 'Agarwood rewards patience. The 5+ year investment timeline aligns naturally with how value is built and realized in this market.', icon: <IconRefresh /> },
+  { title: 'Diversified demand', description: 'across fragrance, wellness, incense, and medicine, demand is spread across multiple durable markets — reducing exposure to any single sector.', icon: <IconUsers /> },
 ];
 
 
@@ -82,9 +90,9 @@ const RISK_TABLE = [
 ];
 
 const INDIA_ADVANTAGE = [
-  { val: 'Prime Production Heartland', label: 'Assam and Tripura offer the soil, climate, and generations of tradition that favour the growth of high-quality, resin-rich Agarwood.' },
-  { val: '₹80 Crore Government Scheme', label: 'Indian government\'s Agarwood value chain scheme in Tripura (January 2026) signals strong institutional commitment to the sector.' },
-  { val: '~38% Asia Pacific Share', label: 'Asia Pacific leads global demand — India-based cultivation sits close to both the source and the region\'s most active buyers.' },
+  { val: 'Prime production heartland', label: 'Assam and Tripura offer the soil, climate, and generations of tradition that favor the growth of high-quality, resin-rich Agarwood.' },
+  { val: 'Government momentum', label: "the Indian government's ₹80 crore Agarwood value chain scheme in Tripura (January 2026) signals strong institutional commitment to the sector's long-term development." },
+  { val: 'Close to the market', label: "with Asia Pacific leading global demand, India-based cultivation sits close to both the source and the region's most active buyers." },
 ];
 
 const MARKET_STATS = [
@@ -134,218 +142,26 @@ const nodeAnimation = {
   }
 };
 
-/* ── Opportunity Story Cards ── */
-const STORY_CARDS = [
-  {
-    id: 'rare',
-    eyebrow: 'Rare Commodity',
-    heading: 'One of the rarest natural materials on earth',
-    body: 'Few natural commodities combine genuine scarcity, rising demand, and strong longterm pricing the way Agarwood does. The resin that forms inside mature Aquilaria trees is one of the most sought-after raw materials on earth - prized across fine perfumery, wellness, incense, and traditional medicine markets worldwide.',
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-    ),
-    stat: 'USD 44.29B+ Market',
-    image: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&h=600&fit=crop&q=80&auto=format',
-    imageAlt: 'Luxury Perfumery Bottling'
-  },
-  {
-    id: 'demand',
-    eyebrow: 'Growing Demand',
-    heading: 'Global demand is climbing — and accelerating',
-    body: 'Agarwood is not a niche product. It anchors billion-dollar fragrance houses, fuels a booming wellness industry, and sits at the heart of cultural traditions across Asia and the Middle East that have sustained demand for centuries. Multiple high-value markets pull in the same direction — simultaneously.',
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-        <circle cx="9" cy="7" r="4"></circle>
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-      </svg>
-    ),
-    stat: 'Billion-Dollar Scent Industry',
-    image: 'https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=800&h=600&fit=crop&q=80&auto=format',
-    imageAlt: 'Luxury Oils & Incense'
-  },
-  {
-    id: 'supply',
-    eyebrow: 'Supply Constraint',
-    heading: 'Supply cannot keep up — and that gap is the opportunity',
-    body: 'The challenge has always been supply. Wild Agarwood is scarce and slow to form. Most farmers who own suitable trees lack the inoculation expertise, materials, and market connections needed to produce resin at scale. That gap between soaring demand and constrained supply is precisely where the investment value lies.',
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 0 8.5C17 15 15 20 11 20z"></path>
-        <path d="M19 2L9.8 11.2"></path>
-      </svg>
-    ),
-    stat: '5+ Year Resin Maturity Gap',
-    image: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&h=600&fit=crop&q=80&auto=format',
-    imageAlt: 'Farming Inoculated Trees'
-  },
-  {
-    id: 'solution',
-    eyebrow: "Mrida's Solution",
-    heading: 'We bridge the gap — professionally and transparently',
-    body: 'Mrida bridges it - professionally and transparently. We bring the inoculation method, specialist monitoring, harvesting, and a global buyer network. Farmers bring their mature trees and their land. Together, we run a managed, traceable operation built to scale - and investors share in the upside of a market with genuine structural tailwinds.',
-    icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-      </svg>
-    ),
-    stat: 'End-to-End Managed & Traceable',
-    image: 'https://images.unsplash.com/photo-1464241353293-0f15fec31a69?w=800&h=600&fit=crop&q=80&auto=format',
-    imageAlt: 'Managed Plantation'
+const railItemAnimation = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: EASE_CURVE }
   }
-];
+};
 
-function StoryBlock({ card, index, onActive }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: '-35% 0px -35% 0px' });
 
-  useEffect(() => {
-    if (isInView) {
-      onActive(index);
-    }
-  }, [isInView, index, onActive]);
-
-  const isEven = index % 2 === 0;
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 48 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-10% 0px' }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        padding: '80px 0',
-        scrollSnapAlign: 'center',
-        scrollSnapStop: 'always',
-      }}
-      className="opp-right-panel"
-    >
-      <div 
-        className="opp-story-panel-inner"
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1.1fr 0.9fr',
-          gap: '48px',
-          alignItems: 'center',
-          width: '100%',
-          direction: isEven ? 'ltr' : 'rtl'
-        }}
-      >
-        {/* Text Column */}
-        <div style={{ direction: 'ltr', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div className="opp-card-icon" style={{ margin: 0 }}>{card.icon}</div>
-            <span className="opp-card-eyebrow" style={{ margin: 0 }}>{card.eyebrow}</span>
-          </div>
-          <h3 style={{ fontSize: 'clamp(22px, 2.5vw, 32px)', fontWeight: 700, margin: 0, color: 'rgb(0,0,0)', lineHeight: '1.2', letterSpacing: '-0.02em' }}>{card.heading}</h3>
-          <p className="opp-card-body" style={{ margin: 0 }}>{card.body}</p>
-          
-          {card.stat && (
-            <div style={{ alignSelf: 'flex-start', background: 'rgba(195,96,54,0.06)', border: '1px solid rgba(195,96,54,0.12)', borderRadius: '12px', padding: '16px 20px', marginTop: '8px' }}>
-              <p style={{ fontSize: '10px', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--token-97443185-d1fc-462c-b307-21c354347358)', fontWeight: 700, margin: '0 0 4px' }}>Key Metric</p>
-              <p style={{ fontSize: '20px', fontWeight: 700, color: 'rgb(0,0,0)', margin: 0, lineHeight: '1.1' }}>{card.stat}</p>
-            </div>
-          )}
-          
-          <div className="opp-card-index" style={{ marginTop: '12px' }}>{String(index + 1).padStart(2, '0')} / {String(STORY_CARDS.length).padStart(2, '0')}</div>
-        </div>
-
-        {/* Image/Visual Column */}
-        <div style={{ direction: 'ltr', position: 'relative' }}>
-          <div style={{ overflow: 'hidden', borderRadius: '24px', boxShadow: '0 12px 40px rgba(0,0,0,0.05)', aspectRatio: '4/3', width: '100%', background: 'rgb(240,240,240)' }}>
-            <motion.img 
-              src={card.image} 
-              alt={card.imageAlt}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              animate={{ scale: isInView ? 1.05 : 0.98 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-function OpportunitySection() {
-  const [activeCard, setActiveCard] = useState(0);
-  const sectionRef = useRef(null);
-  const leftRef = useRef(null);
-
-  /* Set the subpage wrapper layout overflow to visible to enable smooth native CSS position:sticky */
-  useEffect(() => {
-    const wrapper = document.querySelector('.framer-1iaudjf');
-    if (wrapper) {
-      wrapper.style.overflow = 'visible';
-    }
-  }, []);
-
-  const progress = (activeCard + 1) / STORY_CARDS.length;
-
-  return (
-    <div ref={sectionRef} className="opp-section">
-      {/* LEFT — sticky panel */}
-      <div className="opp-left-wrap">
-        <div ref={leftRef} className="opp-left">
-          <p className="opp-left-label">The Opportunity</p>
-          <h2 className="opp-left-headline">Scarcity,<br/>rising demand,<br/>and strong <br/>long-term pricing.</h2>
-          <p className="opp-left-sub">
-            A market built on structural tailwinds — and a supply gap only managed cultivation can bridge.
-          </p>
-
-          {/* Progress indicator */}
-          <div className="opp-progress-wrap">
-            <div className="opp-progress-track">
-              <motion.div
-                className="opp-progress-fill"
-                animate={{ height: `${progress * 100}%` }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              />
-            </div>
-            <div className="opp-progress-labels">
-              {STORY_CARDS.map((c, i) => (
-                <motion.span
-                  key={c.id}
-                  animate={{ opacity: i === activeCard ? 1 : 0.35, fontWeight: i === activeCard ? 600 : 400 }}
-                  transition={{ duration: 0.3 }}
-                  className="opp-progress-label"
-                  style={{ cursor: 'pointer' }}
-                  onClick={() => {
-                    const els = document.querySelectorAll('.opp-right-panel');
-                    if (els[i]) {
-                      els[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }
-                  }}
-                >
-                  {c.eyebrow}
-                </motion.span>
-              ))}
-            </div>
-          </div>
-
-         
-        </div>
-      </div>
-
-      {/* RIGHT — scrolling cards */}
-      <div className="opp-right">
-        {STORY_CARDS.map((card, i) => (
-          <StoryBlock key={card.id} card={card} index={i} onActive={setActiveCard} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function InvestorsPage() {
   const [activePillar, setActivePillar] = useState(null);
+  const [activeItem, setActiveItem] = useState(1);
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
 
   useEffect(() => {
     document.title = 'Agarwood Cultivation Investment in India | Mrida Infra & Plantations';
@@ -369,8 +185,255 @@ export default function InvestorsPage() {
         </div>
       </section>
 
-      {/* 2. THE OPPORTUNITY — editorial scroll story */}
-      <OpportunitySection />
+      {/* 2. THE OPPORTUNITY */}
+      <motion.section
+        ref={containerRef}
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        className="inv-redesign-section"
+      >
+        <style>{`
+          .opp-editorial-grid {
+            display: grid;
+            grid-template-columns: 5.5fr 4.5fr;
+            gap: 80px;
+            align-items: start;
+            text-align: left;
+            margin-top: 40px;
+          }
+          .opp-left-col {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+          .opp-new-paras {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            margin-top: 48px;
+            max-width: 680px;
+          }
+          .opp-new-para {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112,112,112));
+            margin: 0;
+          }
+          .opp-new-para strong {
+            font-weight: 600;
+            color: var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0,0,0));
+          }
+          .opp-rail-wrapper {
+            position: relative;
+            padding-left: 48px;
+            width: 100%;
+          }
+          .opp-rail-progress-track {
+            position: absolute;
+            left: 8px;
+            top: 24px;
+            bottom: 24px;
+            width: 2px;
+            background: rgba(0, 0, 0, 0.06);
+          }
+          .opp-rail-progress-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54));
+            transform-origin: top;
+          }
+          .opp-right-col {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+          }
+          .opp-rail-item {
+            position: relative;
+            padding: 48px 24px 48px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 280ms ease-out;
+          }
+          .opp-rail-item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54));
+            opacity: 0;
+            transform: scaleY(0);
+            transform-origin: top;
+            transition: opacity 280ms ease-out, transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 2;
+          }
+          .opp-rail-item:hover::before {
+            opacity: 1;
+            transform: scaleY(1);
+          }
+          .opp-rail-item:hover {
+            transform: translateY(-4px);
+          }
+          .opp-rail-num {
+            font-size: 54px;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.08);
+            line-height: 1;
+            margin-bottom: 16px;
+            transition: color 280ms ease-out;
+            font-family: inherit;
+          }
+          .opp-rail-num.active,
+          .opp-rail-item:hover .opp-rail-num {
+            color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54));
+          }
+          .opp-rail-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: rgba(0, 0, 0, 0.4);
+            margin: 0 0 24px 0;
+            transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), color 280ms ease-out;
+          }
+          .opp-rail-title.active,
+          .opp-rail-item:hover .opp-rail-title {
+            color: var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0,0,0));
+          }
+          .opp-rail-item:hover .opp-rail-title {
+            transform: translateX(4px);
+          }
+          .opp-rail-desc {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--token-5dfb00e3-da06-4acf-a66b-903c726763b9, rgb(112,112,112));
+            margin: 0;
+            transition: color 280ms ease-out;
+          }
+          .opp-rail-desc.active,
+          .opp-rail-item:hover .opp-rail-desc {
+            color: var(--token-85d98d03-893a-4262-a7bf-f1c29a1e4abe, rgb(0,0,0));
+          }
+          .opp-rail-arrow {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(-8px);
+            opacity: 0;
+            transition: opacity 280ms ease-out, transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54));
+          }
+          .opp-rail-item:hover .opp-rail-arrow {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+          }
+          .opp-rail-divider {
+            border: 0;
+            height: 1px;
+            background: rgba(0, 0, 0, 0.08);
+            margin: 0;
+            width: 100%;
+          }
+          @media (max-width: 900px) {
+            .opp-editorial-grid {
+              grid-template-columns: 1fr;
+              gap: 64px;
+            }
+            .opp-rail-wrapper {
+              margin-top: 24px;
+            }
+          }
+          @media (max-width: 600px) {
+            .opp-rail-wrapper {
+              padding-left: 36px;
+            }
+            .opp-rail-progress-track {
+              left: 4px;
+            }
+            .opp-rail-item::before {
+              left: -36px;
+            }
+          }
+        `}</style>
+
+        <div className="opp-editorial-grid">
+          {/* Left Column (55%) */}
+          <div className="opp-left-col">
+            <p className="contact-eyebrow" style={{ marginBottom: '14px' }}>The Opportunity</p>
+            <h2 style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 700, margin: 0, letterSpacing: '-0.02em', lineHeight: 1.2, maxWidth: '80%' }}>
+              Scarcity, rising demand, and strong long-term pricing.
+            </h2>
+            <div className="opp-new-paras">
+              <p className="opp-new-para">
+                Few natural commodities combine <strong>genuine scarcity, rising demand, and strong long-term pricing</strong> the way Agarwood does. The resin that forms inside mature Aquilaria trees is one of the most sought-after raw materials on earth — prized across fine perfumery, wellness, incense, and traditional medicine markets worldwide.
+              </p>
+              <p className="opp-new-para">
+                The challenge has always been <strong>supply</strong>. Wild Agarwood is scarce and slow to form. Most farmers who own suitable trees lack the inoculation expertise, materials, and market connections needed to produce resin at scale. That gap between soaring demand and constrained supply is precisely where the investment value lies.
+              </p>
+              <p className="opp-new-para">
+                Mrida bridges it — <strong>professionally and transparently</strong>. We bring the inoculation method, specialist monitoring, harvesting, and a global buyer network. Farmers bring their mature trees and their land. Together, we run a managed, traceable operation built to scale — and investors share in the upside of a market with genuine structural tailwinds.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column (45%) */}
+          <div className="opp-rail-wrapper">
+            <div className="opp-rail-progress-track">
+              <motion.div 
+                className="opp-rail-progress-bar"
+                style={{ scaleY: scrollYProgress, originY: 0 }}
+              />
+            </div>
+            
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className="opp-right-col"
+            >
+              <motion.div 
+                variants={railItemAnimation} 
+                className="opp-rail-item"
+                onViewportEnter={() => setActiveItem(1)}
+              >
+                <span className={`opp-rail-num ${activeItem >= 1 ? 'active' : ''}`}>01</span>
+                <h3 className={`opp-rail-title ${activeItem >= 1 ? 'active' : ''}`}>Rare Commodity</h3>
+                <p className={`opp-rail-desc ${activeItem >= 1 ? 'active' : ''}`}>One of the most sought-after raw materials on earth — prized across fine perfumery, wellness, incense, and traditional medicine markets worldwide.</p>
+                <div className="opp-rail-arrow"><IconArrowRight /></div>
+              </motion.div>
+              <div className="opp-rail-divider" />
+              
+              <motion.div 
+                variants={railItemAnimation} 
+                className="opp-rail-item"
+                onViewportEnter={() => setActiveItem(2)}
+              >
+                <span className={`opp-rail-num ${activeItem >= 2 ? 'active' : ''}`}>02</span>
+                <h3 className={`opp-rail-title ${activeItem >= 2 ? 'active' : ''}`}>Supply Constraint</h3>
+                <p className={`opp-rail-desc ${activeItem >= 2 ? 'active' : ''}`}>Wild Agarwood is scarce and slow to form. That gap between soaring demand and constrained supply is precisely where the investment value lies.</p>
+                <div className="opp-rail-arrow"><IconArrowRight /></div>
+              </motion.div>
+              <div className="opp-rail-divider" />
+              
+              <motion.div 
+                variants={railItemAnimation} 
+                className="opp-rail-item"
+                onViewportEnter={() => setActiveItem(3)}
+              >
+                <span className={`opp-rail-num ${activeItem >= 3 ? 'active' : ''}`}>03</span>
+                <h3 className={`opp-rail-title ${activeItem >= 3 ? 'active' : ''}`}>Mrida's Solution</h3>
+                <p className={`opp-rail-desc ${activeItem >= 3 ? 'active' : ''}`}>A managed, traceable operation built to scale — investors share in the upside of a market with genuine structural tailwinds.</p>
+                <div className="opp-rail-arrow"><IconArrowRight /></div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* 3. A MARKET BUILT ON GROWTH */}
       <motion.section
@@ -407,6 +470,12 @@ export default function InvestorsPage() {
             </motion.div>
           ))}
         </motion.div>
+        <p style={{ fontSize: '13px', color: 'rgb(112,112,112)', fontStyle: 'italic' }}>
+          <strong style={{ color: 'rgb(0,0,0)' }}>USD {MARKET_STATS[0].from}</strong> — global Agarwood chips market in {MARKET_STATS[0].fromYear}, projected to reach <strong style={{ color: 'rgb(0,0,0)' }}>USD {MARKET_STATS[0].to} by {MARKET_STATS[0].toYear}</strong> at a <strong style={{ color: 'rgb(0,0,0)' }}>{MARKET_STATS[0].cagr}</strong> ({MARKET_STATS[0].source} — projection)
+        </p>
+        <p style={{ fontSize: '13px', color: 'rgb(112,112,112)', fontStyle: 'italic', marginTop: '10px', marginBottom: '24px' }}>
+          <strong style={{ color: 'rgb(0,0,0)' }}>USD {MARKET_STATS[1].from}</strong> in {MARKET_STATS[1].fromYear}, projected to reach <strong style={{ color: 'rgb(0,0,0)' }}>USD {MARKET_STATS[1].to} by {MARKET_STATS[1].toYear}</strong> at an <strong style={{ color: 'rgb(0,0,0)' }}>{MARKET_STATS[1].cagr}</strong> ({MARKET_STATS[1].source} — projection)
+        </p>
         <p style={{ fontSize: '13px', color: 'rgb(112,112,112)', fontStyle: 'italic', borderTop: '1px solid rgba(0,0,0,0.07)', paddingTop: '16px' }}>
           All market figures are third-party projections, shared for informational purposes only. They are not guarantees of future performance or investment returns.
         </p>
@@ -420,15 +489,13 @@ export default function InvestorsPage() {
         <p className="contact-eyebrow" style={{ textAlign: 'center', marginBottom: '12px' }}>Demand Sectors</p>
         <h2 style={{ textAlign: 'center', fontSize: '36px', fontWeight: 600, marginBottom: '16px' }}>What's Driving Demand</h2>
         <p className="inv-vision-statement-sub" style={{ textAlign: 'center', margin: '0 auto 48px', maxWidth: '680px' }}>
-          Agarwood's growth isn't built on a single trend. It's supported by several established, durable
-          markets pulling demand forward simultaneously — which makes the opportunity more resilient over the long term.
+          Agarwood's growth isn't built on a single trend. It's supported by several established, durable markets pulling demand forward simultaneously — which makes the opportunity more resilient over the long term.
         </p>
         <motion.div variants={staggerContainer} className="inv-pillars-grid">
           {DEMAND_PILLARS.map((item) => (
             <motion.div key={item.title} variants={cardAnimation} className="inv-pillar-card" style={{ padding: '0', overflow: 'hidden' }}>
               <img src={item.image} alt={item.title} style={{ width: '100%', height: '180px', objectFit: 'cover' }} />
               <div style={{ padding: '28px' }}>
-                <p style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54))', fontWeight: 600, marginBottom: '8px' }}>{item.share}</p>
                 <h3 style={{ fontSize: '17px', fontWeight: 700, margin: '0 0 10px' }}>{item.title}</h3>
                 <p style={{ fontSize: '14px', color: 'rgb(112,112,112)', lineHeight: '1.6', margin: 0 }}>{item.description}</p>
               </div>
@@ -436,11 +503,25 @@ export default function InvestorsPage() {
           ))}
         </motion.div>
         <p style={{ fontSize: '14px', color: 'rgb(112,112,112)', marginTop: '32px', textAlign: 'center' }}>
-          Geographically, Asia Pacific leads the global market with roughly <strong>38% share</strong> — placing India-based cultivation close to both the source and the most active buyers.
+          Geographically, <strong>Asia Pacific leads the global market with roughly 38% share</strong> — placing India-based cultivation close to both the source and the most active buyers.
         </p>
       </motion.section>
 
-      {/* 5. WHY THE MRIDA MODEL WORKS */}
+      {/* 5. THE SUPPLY-DEMAND GAP */}
+      <motion.section
+        variants={sectionReveal} initial="hidden" whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }} className="inv-redesign-section"
+      >
+        <h2 style={{ fontSize: '36px', fontWeight: 600, margin: '0 0 16px' }}>The Supply-Demand Gap</h2>
+        <p className="inv-vision-statement-sub" style={{ marginBottom: '24px', maxWidth: '720px' }}>
+          This is the structural foundation of the investment case. Demand keeps climbing while natural supply stays constrained — and that widening gap supports strong, durable pricing over the long term.
+        </p>
+        <p className="inv-vision-statement-sub" style={{ maxWidth: '720px' }}>
+          Wild Agarwood forms rarely, slowly, and unpredictably. Meeting market demand requires something more reliable — professional inoculation, specialist management, and a scalable cultivation framework. That's exactly what Mrida's model is built to deliver.
+        </p>
+      </motion.section>
+
+      {/* 6. WHY THE MRIDA MODEL WORKS */}
       <motion.section
         variants={sectionReveal} initial="hidden" whileInView="visible"
         viewport={{ once: true, amount: 0.15 }} className="inv-redesign-section"
@@ -449,9 +530,7 @@ export default function InvestorsPage() {
         <p className="contact-eyebrow" style={{ marginBottom: '12px' }}>The Model</p>
         <h2 style={{ fontSize: '36px', fontWeight: 600, margin: '12px 0 16px' }}>Why the Mrida Model Works for Investors</h2>
         <p className="inv-vision-statement-sub" style={{ marginBottom: '48px', maxWidth: '720px' }}>
-          We've built an operation that transforms a slow, uncertain natural event into a planned,
-          accountable, and repeatable process — one that scales consistently across sites without
-          compromising quality, traceability, or farmer fairness.
+          We've built an operation that transforms a slow, uncertain natural event into a planned, accountable, and repeatable process — one that scales consistently across sites without compromising quality, traceability, or farmer fairness.
         </p>
         <motion.div variants={staggerContainer} className="inv-pillars-grid">
           {MRIDA_MODEL_PILLARS.map((pillar, i) => (
@@ -461,20 +540,23 @@ export default function InvestorsPage() {
             >
               <div className="inv-pillar-num">{String(i + 1).padStart(2, '0')}</div>
               <div className="inv-pillar-icon">{pillar.icon}</div>
-              <h3>{pillar.title}</h3>
+              <h3 style={{ fontWeight: 700 }}>{pillar.title}</h3>
               <p>{pillar.description}</p>
             </motion.div>
           ))}
         </motion.div>
       </motion.section>
 
-      {/* 6. ROI LOGIC AND VALUE DRIVERS */}
+      {/* 7. ROI LOGIC AND VALUE DRIVERS */}
       <motion.section
         variants={sectionReveal} initial="hidden" whileInView="visible"
         viewport={{ once: true, amount: 0.15 }} className="inv-redesign-section"
       >
         <p className="contact-eyebrow" style={{ marginBottom: '12px' }}>Returns</p>
-        <h2 style={{ fontSize: '36px', fontWeight: 600, margin: '12px 0 48px' }}>ROI Logic and Value Drivers</h2>
+        <h2 style={{ fontSize: '36px', fontWeight: 600, margin: '12px 0 16px' }}>ROI Logic and Value Drivers</h2>
+        <p className="inv-vision-statement-sub" style={{ marginBottom: '40px', maxWidth: '720px' }}>
+          Several clear, compounding factors shape the long-term return potential of an Agarwood cultivation investment with Mrida.
+        </p>
         <motion.div variants={staggerContainer} style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
           {ROI_DRIVERS.map((driver, i) => (
             <motion.div key={driver.title} variants={cardAnimation}
@@ -483,8 +565,9 @@ export default function InvestorsPage() {
               <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54))', minWidth: '28px', paddingTop: '4px' }}>{String(i + 1).padStart(2, '0')}</div>
               <div style={{ color: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54))', paddingTop: '2px', flexShrink: 0 }}>{driver.icon}</div>
               <div>
-                <h3 style={{ fontSize: '17px', fontWeight: 700, margin: '0 0 8px' }}>{driver.title}</h3>
-                <p style={{ fontSize: '15px', color: 'rgb(112,112,112)', lineHeight: '1.6', margin: 0 }}>{driver.description}</p>
+                <p style={{ fontSize: '15px', color: 'rgb(112,112,112)', lineHeight: '1.7', margin: 0 }}>
+                  <strong style={{ color: 'rgb(0,0,0)', fontWeight: 700 }}>{driver.title}</strong> — {driver.description}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -494,7 +577,7 @@ export default function InvestorsPage() {
         </p>
       </motion.section>
 
-      {/* 7. RISK AND MITIGATION */}
+      {/* 8. RISK AND MITIGATION */}
       <motion.section
         variants={sectionReveal} initial="hidden" whileInView="visible"
         viewport={{ once: true, amount: 0.2 }} className="inv-redesign-section"
@@ -523,7 +606,7 @@ export default function InvestorsPage() {
         </div>
       </motion.section>
 
-      {/* 8. THE INDIA ADVANTAGE */}
+      {/* 9. THE INDIA ADVANTAGE */}
       <motion.section
         variants={sectionReveal} initial="hidden" whileInView="visible"
         viewport={{ once: true, amount: 0.2 }} className="inv-redesign-section"
@@ -531,7 +614,7 @@ export default function InvestorsPage() {
         <p className="contact-eyebrow" style={{ marginBottom: '12px' }}>Geography</p>
         <h2 style={{ fontSize: '36px', fontWeight: 600, margin: '12px 0 16px' }}>The India Advantage</h2>
         <p className="inv-vision-statement-sub" style={{ marginBottom: '48px', maxWidth: '680px' }}>
-          India is one of the world's most favourable environments for Agarwood cultivation — and growing institutional support is reinforcing that position.
+          India is one of the world's most favorable environments for Agarwood cultivation — and growing institutional support is reinforcing that position.
         </p>
         <motion.div variants={staggerContainer} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {INDIA_ADVANTAGE.map((item, i) => (
@@ -540,8 +623,9 @@ export default function InvestorsPage() {
             >
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--token-97443185-d1fc-462c-b307-21c354347358, rgb(195,96,54))', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 700, flexShrink: 0 }}>{i + 1}</div>
               <div>
-                <p style={{ fontSize: '17px', fontWeight: 700, margin: '0 0 8px', color: 'rgb(0,0,0)' }}>{item.val}</p>
-                <p style={{ fontSize: '15px', color: 'rgb(112,112,112)', margin: 0, lineHeight: '1.6' }}>{item.label}</p>
+                <p style={{ fontSize: '15px', color: 'rgb(112,112,112)', margin: 0, lineHeight: '1.7' }}>
+                  <strong style={{ color: 'rgb(0,0,0)', fontWeight: 700 }}>{item.val}</strong> — {item.label}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -551,7 +635,7 @@ export default function InvestorsPage() {
         </p>
       </motion.section>
 
-      {/* 9. CLOSING CTA */}
+      {/* 10. CLOSING CTA */}
       <motion.section
         variants={cardAnimation} initial="hidden" whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
