@@ -250,9 +250,9 @@ export default function Hero() {
                 </div>
 
                 {/* Supporting Description */}
-                <p className="hero-desc">
+                {/* <p className="hero-desc">
                   We partner with landowners across India to manage, inoculate, and harvest high-value Agarwood trees. Earn immediate upfront payouts and secure a fair, signed share of returns at harvest.
-                </p>
+                </p> */}
 
                 <div className="framer-1oq58c4" data-framer-name="Action">
                   <div className="framer-jbjoxa-container">{/*$*/}<a className="framer-npbIQ framer-riLfm framer-Ui72Q framer-1h9x6p framer-v-1k2u1hf framer-lhbnc9" data-framer-name="White" data-highlight="true" href="https://cal.com/" target="_blank" rel="noopener" tabIndex="0" style={{ backgroundColor: "var(--token-7b96a2a6-c774-41aa-9a64-c9f85c5960c2, rgb(255, 255, 255))" }}>

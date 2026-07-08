@@ -17,7 +17,7 @@ const fadeUp = (delay = 0) => ({
 const STYLES = `
   /* ─── Section shell ──────────────────────────────────────────────────── */
   .ach-section {
-    padding: 112px 24px 120px;
+    padding: 60px 24px 60px;
     background-color: ${BG};
   }
   .ach-inner {
@@ -256,18 +256,19 @@ const STYLES = `
   /* ─── Bottom Information Bar ─────────────────────────────────────────── */
   .ach-bottom-bar {
     border-top: 1px solid rgba(26, 21, 18, 0.08);
-    padding-top: 48px;
+    padding-top: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 48px;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 16px;
+    margin-top: 24px;
+    margin-bottom: 24px;
   }
   .ach-bottom-left {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 20px;
     flex: 1;
   }
@@ -358,8 +359,16 @@ const STYLES = `
     }
     .ach-bottom-bar {
       flex-direction: column;
-      align-items: flex-start;
-      gap: 32px;
+      align-items: stretch;
+      gap: 28px;
+      padding: 32px 0 0;
+    }
+    .ach-bottom-right {
+      width: 100%;
+    }
+    .ach-cta-btn {
+      width: 100%;
+      justify-content: center;
     }
   }
 
@@ -390,13 +399,12 @@ const STYLES = `
       flex-direction: column;
       gap: 16px;
     }
+    .ach-bottom-bar {
+      padding: 24px 0 0;
+    }
     .ach-bottom-left {
       flex-direction: column;
       gap: 16px;
-    }
-    .ach-cta-btn {
-      width: 100%;
-      justify-content: center;
     }
   }
 `;

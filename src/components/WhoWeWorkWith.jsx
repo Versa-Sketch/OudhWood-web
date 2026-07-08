@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -35,7 +36,7 @@ const STYLES = `
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 56px;
+    margin-bottom: 10px;
     max-width: 720px;
   }
   .www-badge-row {
@@ -147,6 +148,7 @@ const STYLES = `
   }
 
   /* Bullet Lists */
+  /* Bullet Lists */
   .www-bullet-list {
     display: flex;
     flex-direction: column;
@@ -156,13 +158,32 @@ const STYLES = `
   }
   .www-bullet-item {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     font-size: 0.92rem;
     line-height: 1.45;
     color: rgb(70, 65, 60);
-    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-12px);
+    will-change: transform, opacity;
+    transition: transform 200ms ease-out;
   }
+  .www-bullet-list.animate-in .www-bullet-item {
+    animation: revealItem 550ms ease-out forwards;
+    animation-delay: calc(var(--item-idx) * 250ms);
+  }
+  .www-bullet-list.animate-in .www-bullet-item:hover {
+    transform: translateX(4px) !important;
+    cursor: pointer;
+  }
+
+  @keyframes revealItem {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   .www-bullet-check {
     width: 18px;
     height: 18px;
@@ -171,15 +192,83 @@ const STYLES = `
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-top: 1px;
+    opacity: 0;
+    transform: scale(0.85);
+    will-change: transform, opacity;
+    transition:
+      background-color 200ms ease,
+      color 200ms ease,
+      transform 200ms ease;
   }
+  .www-bullet-list.animate-in .www-bullet-item .www-bullet-check {
+    animation: scaleCheck 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(var(--item-idx) * 250ms);
+  }
+
+  @keyframes scaleCheck {
+    0% {
+      opacity: 0;
+      transform: scale(0.85);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   .www-bullet-check.farmers {
     background: rgba(86, 112, 63, 0.08);
     color: #4b6b30;
   }
+  .www-bullet-list.animate-in .www-bullet-item:hover .www-bullet-check.farmers {
+    background-color: #4b6b30;
+    color: #ffffff;
+  }
+
   .www-bullet-check.investors {
     background: rgba(195, 96, 54, 0.08);
     color: ${TC};
+  }
+  .www-bullet-list.animate-in .www-bullet-item:hover .www-bullet-check.investors {
+    background-color: ${TC};
+    color: #ffffff;
+  }
+
+  .www-bullet-text {
+    opacity: 0;
+    transform: translateX(-6px);
+    display: inline-block;
+    font-weight: 500;
+    transition: font-weight 200ms ease, transform 200ms ease;
+  }
+  .www-bullet-list.animate-in .www-bullet-item .www-bullet-text {
+    animation: revealText 550ms ease-out forwards;
+    animation-delay: calc((var(--item-idx) * 250ms) + 80ms);
+  }
+  .www-bullet-list.animate-in .www-bullet-item:hover .www-bullet-text {
+    font-weight: 600;
+  }
+
+  @keyframes revealText {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Respect prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .www-bullet-item,
+    .www-bullet-item .www-bullet-check,
+    .www-bullet-text {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+    }
   }
 
   /* Pill Buttons */
@@ -372,6 +461,39 @@ const STYLES = `
 `;
 
 export default function WhoWeWorkWith() {
+  const card1Ref = useRef(null);
+  const card2Ref = useRef(null);
+  const [animateCard1, setAnimateCard1] = useState(false);
+  const [animateCard2, setAnimateCard2] = useState(false);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      threshold: 0.25,
+    };
+
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === card1Ref.current) {
+            setAnimateCard1(true);
+            observer.unobserve(entry.target);
+          } else if (entry.target === card2Ref.current) {
+            setAnimateCard2(true);
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    if (card1Ref.current) observer.observe(card1Ref.current);
+    if (card2Ref.current) observer.observe(card2Ref.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <style>{STYLES}</style>
@@ -390,17 +512,13 @@ export default function WhoWeWorkWith() {
             <motion.h2 className="www-heading" {...fadeUp(0.05)}>
               Who We Work With
             </motion.h2>
-            
-            <motion.p className="www-desc" {...fadeUp(0.1)}>
-              Two powerful partnership models. One shared mission – to grow value from India’s most precious natural asset.
-            </motion.p>
           </div>
 
           {/* Cards Grid */}
           <div className="www-grid">
             
             {/* Card 1: Farmers & Landowners */}
-            <motion.div className="www-card" {...fadeUp(0.15)}>
+            <motion.div ref={card1Ref} className="www-card" {...fadeUp(0.15)}>
               <div className="www-content-col">
                 <div className="www-card-icon-container farmers">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -416,22 +534,22 @@ export default function WhoWeWorkWith() {
                   We partner with you to maximize the value of your mature Agarwood trees with zero upfront cost.
                 </p>
 
-                <div className="www-bullet-list">
-                  <div className="www-bullet-item">
+                <div className={`www-bullet-list ${animateCard1 ? 'animate-in' : ''}`}>
+                  <div className="www-bullet-item" style={{ '--item-idx': 0 }}>
                     <span className="www-bullet-check farmers">✓</span>
-                    <span>Upfront payment of minimum 20% of tree value</span>
+                    <span className="www-bullet-text">Upfront payment of minimum 20% of tree value</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 1 }}>
                     <span className="www-bullet-check farmers">✓</span>
-                    <span>No cost for inoculation or cultivation</span>
+                    <span className="www-bullet-text">No cost for inoculation or cultivation</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 2 }}>
                     <span className="www-bullet-check farmers">✓</span>
-                    <span>Fair, transparent share of returns at harvest</span>
+                    <span className="www-bullet-text">Fair, transparent share of returns at harvest</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 3 }}>
                     <span className="www-bullet-check farmers">✓</span>
-                    <span>You retain full ownership of your land</span>
+                    <span className="www-bullet-text">You retain full ownership of your land</span>
                   </div>
                 </div>
 
@@ -467,7 +585,7 @@ export default function WhoWeWorkWith() {
             </motion.div>
 
             {/* Card 2: Investors & Agri-Partners */}
-            <motion.div className="www-card" {...fadeUp(0.2)}>
+            <motion.div ref={card2Ref} className="www-card" {...fadeUp(0.2)}>
               <div className="www-content-col">
                 <div className="www-card-icon-container investors">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -484,22 +602,22 @@ export default function WhoWeWorkWith() {
                   A professionally managed Agarwood cultivation investment with full transparency and security.
                 </p>
 
-                <div className="www-bullet-list">
-                  <div className="www-bullet-item">
+                <div className={`www-bullet-list ${animateCard2 ? 'animate-in' : ''}`}>
+                  <div className="www-bullet-item" style={{ '--item-idx': 0 }}>
                     <span className="www-bullet-check investors">✓</span>
-                    <span>Managed end-to-end cultivation process</span>
+                    <span className="www-bullet-text">Managed end-to-end cultivation process</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 1 }}>
                     <span className="www-bullet-check investors">✓</span>
-                    <span>High-value, high-demand global market</span>
+                    <span className="www-bullet-text">High-value, high-demand global market</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 2 }}>
                     <span className="www-bullet-check investors">✓</span>
-                    <span>Full traceability with regular monitoring</span>
+                    <span className="www-bullet-text">Full traceability with regular monitoring</span>
                   </div>
-                  <div className="www-bullet-item">
+                  <div className="www-bullet-item" style={{ '--item-idx': 3 }}>
                     <span className="www-bullet-check investors">✓</span>
-                    <span>Secure agreements & transparent returns</span>
+                    <span className="www-bullet-text">Secure agreements & transparent returns</span>
                   </div>
                 </div>
 
@@ -536,17 +654,6 @@ export default function WhoWeWorkWith() {
 
           </div>
 
-          {/* Bottom Info Bar */}
-          <motion.div className="www-bottom-bar" {...fadeUp(0.25)}>
-            <div className="www-bottom-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <p className="www-bottom-text">
-              Whether you own trees or invest in growth – we ensure <strong>trust, transparency, and long-term value</strong> for every partner.
-            </p>
-          </motion.div>
 
         </div>
       </section>

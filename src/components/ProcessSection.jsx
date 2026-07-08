@@ -353,7 +353,12 @@ export default function ProcessSection() {
       justify-content: center;
       backface-visibility: hidden;
       transform-style: preserve-3d;
-      overflow: hidden;
+      overflow-y: auto;
+      max-height: 100%;
+    }
+
+    .proc3-card-mobile-visual {
+      display: none;
     }
 
     .proc3-card-eyebrow {
@@ -397,6 +402,54 @@ export default function ProcessSection() {
       transform: translateX(4px);
     }
 
+    /* ── Height-based responsiveness for Desktop ────────────────────── */
+    @media (min-width: 991px) and (max-height: 850px) {
+      .proc3-stage {
+        padding: 40px 60px 48px;
+      }
+      .proc3-intro {
+        margin-bottom: 20px;
+      }
+      .proc3-heading-block {
+        gap: 12px;
+      }
+      .proc3-card {
+        padding: 32px;
+      }
+      .proc3-card-desc {
+        margin: 0 0 20px;
+      }
+      .proc3-tabs {
+        padding: 8px;
+      }
+      .proc3-tab {
+        padding: 10px 14px;
+      }
+    }
+    @media (min-width: 991px) and (max-height: 720px) {
+      .proc3-stage {
+        padding: 24px 40px 32px;
+      }
+      .proc3-intro {
+        margin-bottom: 12px;
+      }
+      .proc3-heading-block {
+        gap: 8px;
+      }
+      .proc3-card {
+        padding: 20px 24px;
+      }
+      .proc3-card-desc {
+        margin: 0 0 12px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+      .proc3-card-title {
+        font-size: 1.5rem;
+        margin: 0 0 12px;
+      }
+    }
+
     /* ── Mobile / tablet ─────────────────────────────────────────── */
     @media (max-width: 990px) {
       .proc3-wrap {
@@ -405,7 +458,7 @@ export default function ProcessSection() {
       .proc3-stage {
         position: relative !important;
         height: auto !important;
-        padding: 32px 24px 64px !important;
+        padding: 48px 24px 64px !important;
         align-items: stretch !important;
       }
       .proc3-intro {
@@ -420,46 +473,72 @@ export default function ProcessSection() {
       }
       .proc3-left,
       .proc3-right {
-        display: contents !important;
+        display: block !important;
+        height: auto !important;
       }
       .proc3-heading-block {
-        order: 1 !important;
         gap: 12px !important;
-        margin-bottom: 24px !important;
+        margin-bottom: 32px !important;
       }
       .proc3-card-container {
-        order: 2 !important;
         height: auto !important;
         flex: none !important;
-        margin-bottom: 24px !important;
       }
       .proc3-card-area {
         height: auto !important;
-        min-height: 340px !important;
+        min-height: 0 !important;
       }
       .proc3-card {
-        padding: 28px 24px 32px !important;
+        position: relative !important;
+        padding: 32px 24px !important;
         height: auto !important;
         justify-content: flex-start !important;
+        overflow: visible !important;
+        max-height: none !important;
+      }
+      .proc3-card-mobile-visual {
+        display: block;
+        width: 100%;
+        height: 280px;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      }
+      .proc3-card-mobile-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
       .proc3-card-title {
-        font-size: 1.35rem !important;
+        font-size: 1.4rem !important;
+        line-height: 1.3 !important;
       }
       .proc3-visual {
-        order: 3 !important;
-        height: 320px !important;
-        border-radius: 16px !important;
-        flex: none !important;
+        display: none !important;
       }
       .proc3-tabs {
-        padding: 8px !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px !important;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+      .proc3-tabs::-webkit-scrollbar {
+        display: none;
       }
       .proc3-tab {
-        padding: 10px 12px !important;
-        border-radius: 10px !important;
+        flex: 0 0 auto !important;
+        width: 180px !important;
+        scroll-snap-align: start;
+        padding: 12px 14px !important;
+        border-radius: 12px !important;
       }
       .proc3-tab-short {
-        font-size: 0.82rem !important;
+        font-size: 0.84rem !important;
       }
       .proc3-tab-progress-bg {
         margin-top: 8px !important;
@@ -476,18 +555,20 @@ export default function ProcessSection() {
       .proc3-card {
         padding: 24px 20px 28px !important;
       }
+      .proc3-card-mobile-visual {
+        height: 200px;
+        margin-bottom: 20px;
+      }
       .proc3-tab {
-        padding: 8px 10px !important;
-        border-radius: 8px !important;
+        width: 155px !important;
+        padding: 10px 12px !important;
+        border-radius: 10px !important;
       }
       .proc3-tab-short {
         font-size: 0.78rem !important;
       }
       .proc3-tab-num {
         font-size: 0.65rem !important;
-      }
-      .proc3-visual {
-        height: 260px !important;
       }
     }
   `;
@@ -620,6 +701,10 @@ export default function ProcessSection() {
                       }}
                       transition={{ duration: 0.32, ease: EASE }}
                     >
+                      <div className="proc3-card-mobile-visual">
+                        <img src={step.image || '/placeholder.svg'} alt={step.title} />
+                        <div className="proc3-texture" />
+                      </div>
                       <span className="proc3-card-eyebrow">{step.number}</span>
                       <h3 className="proc3-card-title">{step.title}</h3>
                       <p className="proc3-card-desc">{step.description}</p>

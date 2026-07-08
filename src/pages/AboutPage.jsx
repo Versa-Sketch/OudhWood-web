@@ -72,6 +72,12 @@ const IconAgreement = () => (
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><line x1="9" y1="13" x2="15" y2="13" /><line x1="9" y1="17" x2="13" y2="17" />
   </svg>
 );
+const IconTrendingUp = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+    <polyline points="17 6 23 6 23 12" />
+  </svg>
+);
 
 const CORE_PRINCIPLES = [
   { title: 'Farmer-First', description: "We lead with the farmer's benefit: upfront income, zero inoculation cost on shared trees, and a clear share of returns.", icon: <IconFarmer /> },
@@ -216,8 +222,11 @@ export default function AboutPage() {
           <p className="contact-eyebrow" style={{ textAlign: 'center' }}>How We Work</p>
           <h2 className="ab-section-heading ab-center">The story behind our model</h2>
           <p className="ab-lead ab-center">
-            Most Agarwood arrangements force a hard choice on farmers: sell outright for a one-time sum, or take on heavy inoculation costs and years of risk. We designed a third way — our mixed commercial acquisition model.
-          </p>
+Most Agarwood arrangements force a hard choice on farmers: sell your land and trees
+outright for a one-time sum, or take on heavy inoculation costs and years of risk with no
+guarantee of return. Neither felt fair. So we designed a third way.
+We call it our mixed commercial acquisition model. It splits a farmer's eligible mature
+Agarwood trees into two parts, balancing immediate income with long-term upside.          </p>
 
           <div className="ab-stepper">
             {MODEL_STEPS.map((step, i) => (
@@ -233,33 +242,9 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
-
-          <h3 className="ab-subsection-heading">What Sets Mrida Apart</h3>
-          <p className="ab-lead ab-center">Plenty of operations talk about Agarwood. Here's what makes our approach genuinely different.</p>
-          <div className="ab-alt-timeline">
-            {APART_CARDS.map((card, i) => (
-              <motion.div
-                className={`ab-alt-row ${i % 2 === 1 ? 'ab-alt-row-reverse' : ''}`}
-                key={card.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.5, ease: EASE }}
-              >
-                <span className="ab-alt-num">{String(i + 1).padStart(2, '0')}</span>
-                <span className="ab-alt-icon">{card.icon}</span>
-                <div className="ab-alt-body">
-                  <h4>{card.title}</h4>
-                  <p>{card.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <p className="ab-lead ab-center" style={{ marginTop: '32px' }}>
-            One proven model. Fair to farmers. Credible for investors. Built to scale across India.
-          </p>
-
-          <h3 className="ab-subsection-heading">Our Core Values</h3>
+   <h3 className="ab-subsection-heading">Our Core Values</h3>
+   <p className='ab-lead ab-center'>Three values guide every decision we make, every site we survey, and every partnership
+we sign.</p>
           <div className="ab-value-strip">
             {CORE_VALUES.map((v) => (
               <motion.div className="ab-value-strip-item" key={v.title} variants={fadeUp}>
@@ -268,6 +253,76 @@ export default function AboutPage() {
                 <p>{v.description}</p>
               </motion.div>
             ))}
+          </div>
+          <h3 className="ab-subsection-heading" style={{ textAlign: 'center' }}>What Sets Mrida Apart</h3>
+          <p className="ab-lead ab-center" style={{ textAlign: 'center' }}>Plenty of operations talk about Agarwood. Here's what makes our approach genuinely different.</p>
+          <div className="ab-apart-grid">
+            {APART_CARDS.map((card, i) => (
+              <motion.div
+                className="ab-apart-card"
+                key={card.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, ease: EASE, delay: i * 0.05 }}
+              >
+                <div className="ab-apart-card-accent" />
+                <div className="ab-apart-card-icon-wrap">
+                  {card.icon}
+                </div>
+                <h4 className="ab-apart-card-title">{card.title}</h4>
+                <p className="ab-apart-card-desc">{card.description}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="ab-lead ab-center" style={{ marginTop: '32px' }}>
+            One proven model. Fair to farmers. Credible for investors. Built to scale across India.
+          </p>
+        </div>
+      </motion.section>
+
+      {/* Why It Works for Investors Too */}
+      <motion.section 
+        className="ab-section ab-investor-section" 
+        initial="hidden" 
+        whileInView="visible" 
+        viewport={{ once: true, amount: 0.2 }} 
+        variants={fadeUp}
+      >
+        <div className="ab-section-inner">
+          <div className="ab-investor-split">
+            <div className="ab-investor-left">
+              <div className="process-badge">
+                <span className="process-badge-dot" />
+                <p className="process-badge-text">For Investors</p>
+              </div>
+              <h2 className="ab-investor-heading">Why It Works for Investors Too</h2>
+              <div className="ab-investor-icon-big">
+                <IconTrendingUp />
+              </div>
+            </div>
+            <div className="ab-investor-right">
+              <div className="ab-investor-card">
+                <div className="ab-investor-card-accent" />
+                <div className="ab-investor-content-block">
+                  <h4 className="ab-investor-card-subtitle">Smart Business &amp; Long-Term Stability</h4>
+                  <p className="ab-investor-text">
+                    A fair farmer partnership isn't only the right thing to do—it's smart business. Because
+                    farmers earn upfront and again at harvest, partnerships stay stable and supply stays
+                    dependable over the long term.
+                  </p>
+                </div>
+                <div className="ab-investor-divider" />
+                <div className="ab-investor-content-block">
+                  <h4 className="ab-investor-card-subtitle">Scalable, Managed &amp; Traceable</h4>
+                  <p className="ab-investor-text">
+                    That gives investors a scalable, managed, and traceable Agarwood cultivation model
+                    rather than a patchwork of moving parts. Fairness at the source is what makes the whole
+                    operation reliable.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </motion.section>

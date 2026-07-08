@@ -237,10 +237,12 @@ export default function ServicePage() {
               Two parts, one partnership
             </h2>
             <p className="contact-section-intro" style={{ maxWidth: '100%', margin: '0 0 28px' }}>
-              Most farmers who own mature Agarwood trees have genuine, significant value — but unlocking 
-              it through professional inoculation takes capital, expertise, and time most landowners 
-              don't have. Mrida's mixed-arrangement model brings that opportunity to your land without 
-              carrying any of that burden.
+              Most farmers who own mature Agarwood trees face the same barrier. The trees hold
+genuine, significant value - but unlocking it through professional inoculation takes
+capital, expertise, and time that most landowners simply can't access. So the value
+stays locked inside the wood, and the opportunity passes.
+Mrida's mixed commercial acquisition model is built to solve that. We split your eligible
+trees into two clearly defined parts, so you earn income now and again at harvestwithout carrying any inoculation cost.
             </p>
             
             <div className="srv-left-paths">

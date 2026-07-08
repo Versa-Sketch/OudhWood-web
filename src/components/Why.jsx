@@ -74,7 +74,7 @@ const COMMITMENTS = [
 const STYLES = `
   /* ─── Section Layout ─────────────────────────────────────────────────── */
   .why-section {
-    padding: 112px 24px 120px;
+    padding: 62px 24px 60px;
     background-color: ${BG};
     width: 100%;
   }
@@ -128,9 +128,6 @@ const STYLES = `
 
   /* ─── Trust Grid Container ───────────────────────────────────────────── */
   .why-grid-layout {
-    display: grid;
-    grid-template-columns: 46fr 54fr;
-    gap: 32px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -243,6 +240,11 @@ const STYLES = `
     grid-template-columns: 1fr 1fr;
     gap: 32px;
     height: 100%;
+    width: 100%;
+  }
+
+  .why-commitments-grid > div {
+    display: flex;
   }
 
   .why-card {
@@ -258,7 +260,7 @@ const STYLES = `
     align-items: flex-start;
     position: relative;
     box-sizing: border-box;
-    min-height: 100%;
+    width: 100%;
     text-decoration: none;
     transition:
       transform        0.28s cubic-bezier(0.16, 1, 0.3, 1),
@@ -345,10 +347,6 @@ const STYLES = `
       gap: 24px;
       margin-bottom: 56px;
     }
-    .why-grid-layout {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
   }
 
   @media (max-width: 768px) {
@@ -421,76 +419,7 @@ export default function Why() {
           <div className="why-grid-layout">
             
             {/* Left Column: Trust Dashboard */}
-            <motion.div className="why-dashboard-wrapper" {...fadeUp(0.15)}>
-              <div className="why-dashboard">
-                {/* 1. Header with description */}
-                <div className="why-db-header">
-                  <div className="why-db-eyebrow">
-                    <span className="why-db-eyebrow-dot" />
-                    Built on Trust
-                  </div>
-                  <p className="why-db-desc">
-                    A credible, farmer-first cultivation model backed by legally binding terms.
-                  </p>
-                </div>
-
-                <div className="why-db-divider" />
-                
-                {/* 2. 2x2 metrics grid */}
-                <div className="why-db-metrics">
-                  <div className="why-metric-item">
-                    <span className="why-metric-value">20%</span>
-                    <span className="why-metric-label">Guaranteed Purchase</span>
-                  </div>
-                  
-                  <div className="why-metric-item">
-                    <span className="why-metric-value">100%</span>
-                    <span className="why-metric-label">Traceable Partnership</span>
-                  </div>
-
-                  <div className="why-metric-item">
-                    <span className="why-metric-value">₹0</span>
-                    <span className="why-metric-label">Inoculation Cost</span>
-                  </div>
-
-                  <div className="why-metric-item">
-                    <span className="why-metric-value">4</span>
-                    <span className="why-metric-label">Written Commitments</span>
-                  </div>
-                </div>
-
-                <div className="why-db-divider" />
-
-                {/* 3. Bottom verification list */}
-                <div className="why-db-verification">
-                  <div className="why-verif-item">
-                    <svg className="why-verif-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Signed Agreements</span>
-                  </div>
-                  <div className="why-verif-item">
-                    <svg className="why-verif-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Transparent Pricing</span>
-                  </div>
-                  <div className="why-verif-item">
-                    <svg className="why-verif-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Zero Hidden Charges</span>
-                  </div>
-                  <div className="why-verif-item">
-                    <svg className="why-verif-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Long-Term Partnership</span>
-                  </div>
-                </div>
-
-              </div>
-            </motion.div>
+            
 
             {/* Right Column: 2x2 Commitment Grid */}
             <div className="why-commitments-grid">

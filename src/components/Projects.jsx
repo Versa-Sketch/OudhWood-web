@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -55,12 +56,12 @@ const PROJECTS = [
 
 const STYLES = `
   .proj-section {
-    padding: 50px 24px;
+    padding: 50px 24px 120px;
     background-color: ${BG};
     width: 100%;
   }
   .proj-inner {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -131,34 +132,31 @@ const STYLES = `
     transform: translateY(-2px);
   }
 
-  /* ─── Featured Grid Showcase ────────────────────────────────────────── */
-  .proj-showcase-row {
+  /* ─── Uniform Grid Layout ───────────────────────────────────────────── */
+  .proj-grid {
     display: grid;
-    grid-template-columns: 65fr 35fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px;
     width: 100%;
-    margin-bottom: 32px;
-  }
-  .proj-showcase-row:last-of-type {
-    margin-bottom: 0;
-  }
-  
-  .proj-secondary-column {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 32px;
+    box-sizing: border-box;
   }
 
-  /* ─── Plantation Cards Common Styling ───────────────────────────────── */
+  /* ─── Plantation Cards Common Styling (Based on MR-TR-002 Format) ───── */
   .proj-card {
     position: relative;
+    height: 280px; /* Matching Site MR-TR-002 height */
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: var(--pw-shadow-md);
+    box-shadow:
+      0 1px 3px rgba(26, 21, 18, 0.02),
+      0 8px 32px -12px rgba(26, 21, 18, 0.06);
     cursor: pointer;
     box-sizing: border-box;
     display: block;
     text-decoration: none;
+    transition:
+      transform        0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow       0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .proj-card-img-wrapper {
     position: absolute;
@@ -179,7 +177,7 @@ const STYLES = `
   .proj-card-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(16, 12, 10, 0.85) 0%, rgba(16, 12, 10, 0.4) 50%, rgba(16, 12, 10, 0.15) 100%);
+    background: linear-gradient(to top, rgba(16, 12, 10, 0.85) 0%, rgba(16, 12, 10, 0.35) 60%, rgba(16, 12, 10, 0.1) 100%);
     padding: 32px;
     display: flex;
     flex-direction: column;
@@ -190,22 +188,14 @@ const STYLES = `
   }
 
   .proj-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: var(--pw-shadow-lg);
   }
   .proj-card:hover .proj-card-img {
     transform: scale(1.05);
   }
 
-  .proj-card-project-id {
-    font-size: clamp(1.5rem, 2.2vw, 2rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 12px 0 6px;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-  .proj-card-secondary-id {
+  .proj-card-title {
     font-size: clamp(1.25rem, 1.8vw, 1.45rem);
     font-weight: 800;
     color: #ffffff;
@@ -217,7 +207,7 @@ const STYLES = `
   .proj-card-detail {
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.75);
-    margin: 0 0 24px;
+    margin: 0 0 20px;
     line-height: 1.4;
   }
   
@@ -225,12 +215,11 @@ const STYLES = `
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 750;
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-top: auto;
   }
   .proj-card-cta span {
     transition: transform 0.25s ease;
@@ -239,7 +228,7 @@ const STYLES = `
     transform: translateX(4px);
   }
 
-  /* ─── Premium Editorial Quote Section (Full Width, No Radius, No Padding) ─ */
+  /* ─── Premium Editorial Quote Section ───────────────────────────────── */
   .proj-quote-section {
     width: 100%;
     margin: 0;
@@ -250,7 +239,7 @@ const STYLES = `
     position: relative;
     width: 100%;
     min-height: 440px;
-    border-radius: 0; /* No border radius */
+    border-radius: 0;
     overflow: hidden;
     box-sizing: border-box;
   }
@@ -285,7 +274,7 @@ const STYLES = `
     z-index: 2;
   }
   .proj-quote-content-wrapper {
-    max-width: 1280px;
+    max-width: 1200px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -338,21 +327,14 @@ const STYLES = `
     .proj-header {
       grid-template-columns: 1fr;
       gap: 32px;
+      margin-bottom: 56px;
     }
-    .proj-showcase-row {
-      grid-template-columns: 1fr;
-      gap: 32px;
+    .proj-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
     }
-    .proj-secondary-column {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr;
-      gap: 32px;
-    }
-    .proj-card.featured {
-      height: 480px;
-    }
-    .proj-card.secondary {
-      height: 280px;
+    .proj-card {
+      height: 260px;
     }
     .proj-quote-overlay {
       padding: 48px 24px;
@@ -363,18 +345,12 @@ const STYLES = `
     .proj-section {
       padding: 56px 16px 64px;
     }
-    .proj-header {
-      margin-bottom: 40px;
-    }
-    .proj-secondary-column {
+    .proj-grid {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 20px;
     }
-    .proj-card.featured {
-      height: 400px;
-    }
-    .proj-card.secondary {
-      height: 250px;
+    .proj-card {
+      height: 240px;
     }
     .proj-quote-border-left {
       padding-left: 20px;
@@ -383,21 +359,110 @@ const STYLES = `
       padding: 40px 16px;
     }
   }
+
+  /* ── Walking Highlight Animation ── */
+  .flow-step {
+    display: inline-block;
+    color: ${TG};
+    transition: color 0.4s ease, transform 0.4s ease;
+    will-change: transform, color;
+  }
+  .flow-arrow {
+    display: inline-block;
+    margin: 0 4px;
+    color: ${TG};
+    opacity: 0.4;
+    transition: color 0.4s ease, opacity 0.4s ease;
+  }
+
+  .proj-desc.animate-flow .flow-step {
+    animation: walkingHighlight 2s ease-in-out forwards;
+  }
+  .proj-desc.animate-flow .flow-arrow {
+    animation: walkingArrow 2s ease-in-out forwards;
+  }
+
+  .proj-desc.animate-flow .flow-step:nth-child(1) { animation-delay: 0s; }
+  .proj-desc.animate-flow .flow-arrow:nth-child(2) { animation-delay: 0.25s; }
+  .proj-desc.animate-flow .flow-step:nth-child(3) { animation-delay: 0.45s; }
+  .proj-desc.animate-flow .flow-arrow:nth-child(4) { animation-delay: 0.7s; }
+  .proj-desc.animate-flow .flow-step:nth-child(5) { animation-delay: 0.9s; }
+  .proj-desc.animate-flow .flow-arrow:nth-child(6) { animation-delay: 1.15s; }
+  .proj-desc.animate-flow .flow-step:nth-child(7) { animation-delay: 1.35s; }
+  .proj-desc.animate-flow .flow-arrow:nth-child(8) { animation-delay: 1.6s; }
+  .proj-desc.animate-flow .flow-step:nth-child(9) { animation-delay: 1.8s; }
+
+  @keyframes walkingHighlight {
+    0% {
+      color: ${TG};
+      transform: scale(1);
+    }
+    15% {
+      color: ${TC};
+      transform: scale(1.06);
+      text-shadow: 0 0 6px rgba(195, 96, 54, 0.2);
+    }
+    30%, 100% {
+      color: ${TC};
+      transform: scale(1);
+      text-shadow: none;
+    }
+  }
+
+  @keyframes walkingArrow {
+    0% {
+      color: ${TG};
+      opacity: 0.4;
+    }
+    15% {
+      color: ${TC};
+      opacity: 1;
+    }
+    30%, 100% {
+      color: ${TC};
+      opacity: 0.7;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-step,
+    .flow-arrow {
+      color: ${TC} !important;
+      opacity: 1 !important;
+      animation: none !important;
+      transform: none !important;
+    }
+  }
 `;
 
 export default function Projects() {
-  const row1Featured = PROJECTS[0];
-  const row1Secondary = [PROJECTS[1], PROJECTS[2]];
+  const sectionRef = useRef(null);
+  const [animateFlow, setAnimateFlow] = useState(false);
 
-  const row2Featured = PROJECTS[3];
-  const row2Secondary = [PROJECTS[4], PROJECTS[5]];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateFlow(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
       <style>{STYLES}</style>
       
       {/* ── Our Projects Section ───────────────────────────────────────── */}
-      <section className="proj-section" id="projects">
+      <section ref={sectionRef} className="proj-section" id="projects">
         <div className="proj-inner">
           
           {/* Two-Column Header */}
@@ -412,11 +477,24 @@ export default function Projects() {
               <motion.h2 className="proj-heading" {...fadeUp(0.05)}>
                 Our Agarwood Plantation Projects: One Proven Workflow Across Every Site in India
               </motion.h2>
+              <motion.p className="proj-desc" {...fadeUp(0.08)} style={{ marginTop: '16px', maxWidth: '580px' }}>
+                Across every active and planned plantation site in India's prime Agarwood-producing belts — including <strong>Karnataka, Kerala, Assam</strong> and <strong>Tripura</strong> — every Mrida project follows the same rigorous, five-stage operational workflow:
+              </motion.p>
             </div>
             
             <motion.div className="proj-header-right" {...fadeUp(0.1)}>
-              <p className="proj-desc">
-                Across every active and planned plantation site in India's prime Agarwood-producing belts — including <strong>Karnataka, Kerala, Assam</strong> and <strong>Tripura</strong> — every Mrida project follows the same rigorous, five-stage operational workflow: <strong>Survey &amp; Assess → Split &amp; Agree → Inoculate → Monitor → Harvest &amp; Settle</strong>. Each stage is managed by our professional team, documented tree by tree, and fully accountable at every step. No shortcuts. No ambiguity. A clean, traceable Agarwood farming operation built on long-term, fair-term partnerships.
+              <p className={`proj-desc ${animateFlow ? 'animate-flow' : ''}`}>
+                <strong>
+                  <span className="flow-step">Survey &amp; Assess</span>
+                  <span className="flow-arrow">→</span>
+                  <span className="flow-step">Split &amp; Agree</span>
+                  <span className="flow-arrow">→</span>
+                  <span className="flow-step">Inoculate</span>
+                  <span className="flow-arrow">→</span>
+                  <span className="flow-step">Monitor</span>
+                  <span className="flow-arrow">→</span>
+                  <span className="flow-step">Harvest &amp; Settle</span>
+                </strong>. Each stage is managed by our professional team, documented tree by tree, and fully accountable at every step. No shortcuts. No ambiguity. A clean, traceable Agarwood farming operation built on long-term, fair-term partnerships.
               </p>
               <Link to="/project" className="proj-header-btn">
                 See our active Agarwood plantation projects →
@@ -424,82 +502,24 @@ export default function Projects() {
             </motion.div>
           </div>
 
-          {/* ROW 1 Grid */}
-          <div className="proj-showcase-row">
-            {/* Featured Project */}
-            <motion.div className="proj-card-wrapper" {...fadeUp(0.15)}>
-              <Link to="/project" className="proj-card featured" style={{ height: '540px' }}>
-                <div className="proj-card-img-wrapper">
-                  <img src={row1Featured.image} alt={row1Featured.id} className="proj-card-img" />
-                </div>
-                <div className="proj-card-overlay">
-                  <h3 className="proj-card-project-id">{row1Featured.id}</h3>
-                  <p className="proj-card-detail">{row1Featured.location}</p>
-                  <div className="proj-card-cta">
-                    Explore Project <span>→</span>
+          {/* Uniform Grid Layout */}
+          <div className="proj-grid">
+            {PROJECTS.map((proj, idx) => (
+              <motion.div key={proj.id} {...fadeUp(0.15 + idx * 0.05)}>
+                <Link to="/project" className="proj-card">
+                  <div className="proj-card-img-wrapper">
+                    <img src={proj.image} alt={proj.id} className="proj-card-img" />
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* Secondary Column */}
-            <div className="proj-secondary-column">
-              {row1Secondary.map((proj, idx) => (
-                <motion.div key={proj.id} {...fadeUp(0.2 + idx * 0.05)}>
-                  <Link to="/project" className="proj-card secondary" style={{ height: '254px' }}>
-                    <div className="proj-card-img-wrapper">
-                      <img src={proj.image} alt={proj.id} className="proj-card-img" />
+                  <div className="proj-card-overlay">
+                    <h3 className="proj-card-title">{proj.id}</h3>
+                    <p className="proj-card-detail">{proj.location} • {proj.status}</p>
+                    <div className="proj-card-cta">
+                      Explore Project <span>→</span>
                     </div>
-                    <div className="proj-card-overlay">
-                      <h4 className="proj-card-secondary-id">{proj.id}</h4>
-                      <p className="proj-card-detail">{proj.location}</p>
-                      <div className="proj-card-cta">
-                        Explore <span>→</span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* ROW 2 Grid */}
-          <div className="proj-showcase-row">
-            {/* Featured Project */}
-            <motion.div className="proj-card-wrapper" {...fadeUp(0.25)}>
-              <Link to="/project" className="proj-card featured" style={{ height: '540px' }}>
-                <div className="proj-card-img-wrapper">
-                  <img src={row2Featured.image} alt={row2Featured.id} className="proj-card-img" />
-                </div>
-                <div className="proj-card-overlay">
-                  <h3 className="proj-card-project-id">{row2Featured.id}</h3>
-                  <p className="proj-card-detail">{row2Featured.location}</p>
-                  <div className="proj-card-cta">
-                    Explore Project <span>→</span>
                   </div>
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* Secondary Column */}
-            <div className="proj-secondary-column">
-              {row2Secondary.map((proj, idx) => (
-                <motion.div key={proj.id} {...fadeUp(0.3 + idx * 0.05)}>
-                  <Link to="/project" className="proj-card secondary" style={{ height: '254px' }}>
-                    <div className="proj-card-img-wrapper">
-                      <img src={proj.image} alt={proj.id} className="proj-card-img" />
-                    </div>
-                    <div className="proj-card-overlay">
-                      <h4 className="proj-card-secondary-id">{proj.id}</h4>
-                      <p className="proj-card-detail">{proj.location}</p>
-                      <div className="proj-card-cta">
-                        Explore <span>→</span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
 
         </div>
