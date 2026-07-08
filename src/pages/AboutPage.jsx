@@ -181,7 +181,7 @@ export default function AboutPage() {
       {/* Mission & Vision — two premium cards */}
       <motion.section className="ab-section ab-section-tint" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }} variants={stagger}>
         <div className="ab-section-inner">
-          <p className="contact-eyebrow" style={{ textAlign: 'center' }}>Mission &amp; Vision</p>
+          {/* <p className="contact-eyebrow" style={{ textAlign: 'center' }}>Mission &amp; Vision</p> */}
           <h2 className="ab-section-heading ab-center">What we're building, and why</h2>
           <div className="ab-mv-grid">
             <motion.div className="ab-mv-card" variants={fadeUp}>
