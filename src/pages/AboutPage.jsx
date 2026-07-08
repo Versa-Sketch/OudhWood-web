@@ -191,8 +191,14 @@ export default function AboutPage() {
             </motion.div>
             <motion.div className="ab-mv-card" variants={fadeUp}>
               <span className="ab-mv-card-tag">Our Vision</span>
-              <p className="ab-mv-card-statement">An India where cultivating Agarwood is a respected, professionally managed path to long-term prosperity.</p>
-              <p className="ab-mv-card-body">For farmers who own the trees and investors who back the harvest alike. As global demand for Agarwood climbs and supply stays scarce, we want managed cultivation to become the credible answer to that gap — a scalable model that grows across India's prime production belts without ever losing the fairness it was built on.</p>
+              <p className="ab-mv-card-statement">We see an India where cultivating Agarwood is a respected, professionally managed
+path to long-term prosperity-for farmers who own the trees and investors who back the
+harvest alike.</p>
+              <p className="ab-mv-card-body">As global demand for Agarwood climbs and supply stays scarce, we want managed
+cultivation to become the credible answer to that gap. Our goal is a scalable model that
+grows across India's prime production belts without ever losing the fairness it was built
+on.
+</p>
             </motion.div>
           </div>
         </div>
